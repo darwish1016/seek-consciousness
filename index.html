@@ -5815,7 +5815,7 @@
      ============================================================ */
   .choose-path-experience{
     position:relative;
-    background:#efe1cb;
+    background:#eadfcb;
     color:#2f2318;
     overflow:clip;
   }
@@ -5826,7 +5826,7 @@
     height:300svh;
     min-height:1900px;
     background:
-      linear-gradient(180deg,#f4eadb 0%,#efdfc9 48%,#ead7bc 100%);
+      linear-gradient(180deg,#eadfcb 0%,#eee2cf 52%,#f2e7d6 100%);
     isolation:isolate;
   }
 
@@ -6063,7 +6063,7 @@
     height:310svh;
     min-height:1950px;
     background:
-      linear-gradient(180deg,#f2e6d5 0%,#eadbc1 50%,#e4d0b1 100%);
+      linear-gradient(180deg,#eadfcb 0%,#eee2cf 52%,#f2e7d6 100%);
     isolation:isolate;
   }
 
@@ -8070,11 +8070,11 @@
   }
 
   .choose-path-intro{
-    background:linear-gradient(180deg,#050403 0%,#0a0806 52%,#070604 100%) !important;
+    background:linear-gradient(180deg,#eadfcb 0%,#eee2cf 52%,#f2e7d6 100%) !important;
   }
 
   .path-destination{
-    background:linear-gradient(180deg,#050403 0%,#0b0805 50%,#100b06 100%) !important;
+    background:linear-gradient(180deg,#eadfcb 0%,#eee2cf 52%,#f2e7d6 100%) !important;
   }
 
   .recognition-headline .recognition-scene-bg::after,
@@ -11907,6 +11907,28 @@
     }
   }
 
+
+
+/* Final correction: only the Choose Your Path intro and destination sections should match the lighter tree-section parchment background. */
+.choose-path-intro,
+.path-destination{
+  background:linear-gradient(180deg,#eadfcb 0%,#eee2cf 52%,#f2e7d6 100%) !important;
+}
+
+.choose-path-intro h2,
+.choose-path-intro-moments > p,
+.path-destination-copy > p,
+.path-destination-final p{
+  color:#2b2118 !important;
+}
+
+.choose-path-intro-moments > p:last-child{
+  color:#5a4633 !important;
+}
+
+.path-destination-final p:last-child{
+  color:#9b6b2f !important;
+}
 </style>
 </head>
 <body id="top">
