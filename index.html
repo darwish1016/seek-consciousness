@@ -5637,7 +5637,7 @@
     height:230svh;
     min-height:1500px;
     overflow:visible;
-    background:#050403;
+    background:#120d08;
     color:#f4e8d6;
     isolation:isolate;
   }
@@ -5648,7 +5648,7 @@
     height:100svh;
     min-height:640px;
     overflow:hidden;
-    background:#050403;
+    background:#120d08;
   }
 
   .path-question-media{
@@ -5665,7 +5665,7 @@
     object-fit:cover;
     object-position:center center;
     transform:translate3d(0,0,0);
-    filter:saturate(.76) sepia(.04) brightness(.58) contrast(1.04);
+    filter:saturate(.82) sepia(.06) brightness(.72) contrast(1.03);
     will-change:transform,filter;
   }
 
@@ -5677,16 +5677,16 @@
     background:
       linear-gradient(
         180deg,
-        rgba(4,3,2,.82) 0%,
-        rgba(4,3,2,.40) 24%,
-        rgba(4,3,2,.34) 62%,
-        rgba(4,3,2,.76) 100%
+        rgba(18,13,8,.44) 0%,
+        rgba(18,13,8,.16) 24%,
+        rgba(18,13,8,.10) 62%,
+        rgba(18,13,8,.30) 100%
       ),
       linear-gradient(
         90deg,
-        rgba(4,3,2,.42),
-        rgba(4,3,2,.12) 50%,
-        rgba(4,3,2,.36)
+        rgba(18,13,8,.14),
+        rgba(18,13,8,0) 50%,
+        rgba(18,13,8,.10)
       );
     opacity:1;
     will-change:opacity;
@@ -13528,20 +13528,22 @@
     }
 
     if (overlay){
+      const overlayHold = 1 - (.28 * phase(progress,.06,.26));
+      const overlayFadeOut = 1 - phase(progress,.42,.62);
       overlay.style.opacity =
-        (1 - (.48 * phase(progress,.18,.86))).toFixed(4);
+        (overlayHold * overlayFadeOut).toFixed(4);
     }
 
     if (image){
       const movement = reducedMotion ? 0 : progress;
-      const translateY = -2.4 + (4.8 * movement);
-      const brightness = .58 + (.20 * phase(progress,.12,.88));
+      const translateY = -2.2 + (4.4 * movement);
+      const brightness = .72 + (.18 * phase(progress,.08,.82));
 
       image.style.transform =
         `translate3d(0,${translateY.toFixed(3)}%,0)`;
       image.style.filter =
-        `saturate(.76) sepia(.04) ` +
-        `brightness(${brightness.toFixed(3)}) contrast(1.04)`;
+        `saturate(.82) sepia(.06) ` +
+        `brightness(${brightness.toFixed(3)}) contrast(1.03)`;
     }
 
     ticking = false;
