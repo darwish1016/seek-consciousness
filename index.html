@@ -11788,6 +11788,148 @@
     }
   }
 
+
+
+  /* ============================================================
+     USER UPDATE — LIGHTER SCATTERED PIECES SECTION
+     Continues the parchment tone from the turning-point section,
+     then becomes subtly lighter and warmer as the experience unfolds.
+     ============================================================ */
+  .scattered-pieces{
+    --pieces-paper:#e9deca;
+    --pieces-paper-light:#f3eadb;
+    --pieces-ink:#2a211a;
+    --pieces-muted:rgba(42,33,26,.72);
+    --pieces-gold:#986823;
+    background:
+      radial-gradient(circle at 50% 36%,rgba(255,255,255,.48),transparent 43%),
+      linear-gradient(
+        180deg,
+        var(--pieces-paper) 0%,
+        #eee3d1 48%,
+        var(--pieces-paper-light) 100%
+      ) !important;
+    border-top:1px solid rgba(63,46,30,.13) !important;
+    border-bottom:1px solid rgba(63,46,30,.13) !important;
+    color:var(--pieces-ink) !important;
+  }
+
+  .scattered-pieces-intro p,
+  .scattered-piece,
+  .scattered-pieces-summary p:first-child,
+  .scattered-pieces-framework .framework-moment,
+  .scattered-pieces-framework .framework-primary{
+    color:var(--pieces-ink) !important;
+  }
+
+  .scattered-pieces-summary p + p{
+    color:var(--pieces-muted) !important;
+  }
+
+  .scattered-pieces-framework .framework-closing{
+    color:var(--pieces-gold) !important;
+  }
+
+
+
+  /* ============================================================
+     USER UPDATE — LIGHTER SHARED TREE SECTION
+     Replaces the black tree container with a warm parchment scene
+     that flows naturally into the “Most approaches…” section.
+     ============================================================ */
+  .tree-bridge.tree-bridge-natural{
+    --tree-paper-deep:#dfcfb4;
+    --tree-paper:#e9deca;
+    --tree-ink:#2a211a;
+    --tree-muted:rgba(42,33,26,.76);
+    --tree-gold:#986823;
+    background:linear-gradient(
+      180deg,
+      var(--tree-paper-deep) 0%,
+      #e4d6bf 48%,
+      var(--tree-paper) 100%
+    ) !important;
+    color:var(--tree-ink) !important;
+  }
+
+  .tree-bridge-natural .tree-bridge-sticky{
+    background:linear-gradient(
+      180deg,
+      var(--tree-paper-deep) 0%,
+      var(--tree-paper) 100%
+    ) !important;
+  }
+
+  .tree-bridge-natural .tree-bridge-media img{
+    filter:saturate(.68) sepia(.18) brightness(.9) contrast(.94) !important;
+  }
+
+  .tree-bridge-natural .tree-bridge-warmth{
+    opacity:.22 !important;
+    background:linear-gradient(
+      180deg,
+      rgba(201,143,28,.08),
+      rgba(233,222,202,.22)
+    ) !important;
+    mix-blend-mode:soft-light !important;
+  }
+
+  .tree-bridge-natural .tree-bridge-shade{
+    opacity:1 !important;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(223,207,180,.98) 0%,
+        rgba(228,214,191,.93) 25%,
+        rgba(233,222,202,.62) 47%,
+        rgba(233,222,202,.18) 72%,
+        rgba(233,222,202,.04) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(223,207,180,.58) 0%,
+        rgba(233,222,202,.08) 26%,
+        rgba(233,222,202,.12) 72%,
+        rgba(233,222,202,.9) 100%
+      ) !important;
+  }
+
+  .tree-bridge-natural .tree-bridge-origin,
+  .tree-bridge-natural .tree-bridge-statement,
+  .tree-bridge-natural .tree-bridge-body,
+  .tree-bridge-natural .tree-bridge-lead,
+  .tree-bridge-natural .tree-bridge-map-step h2{
+    color:var(--tree-ink) !important;
+  }
+
+  .tree-bridge-natural .tree-bridge-path{
+    color:var(--tree-gold) !important;
+  }
+
+  .tree-bridge-natural .tree-bridge-map-step p{
+    color:var(--tree-muted) !important;
+  }
+
+  @media (max-width:660px){
+    .tree-bridge-natural .tree-bridge-shade{
+      background:
+        linear-gradient(
+          90deg,
+          rgba(223,207,180,.97) 0%,
+          rgba(228,214,191,.9) 46%,
+          rgba(233,222,202,.34) 76%,
+          rgba(233,222,202,.08) 100%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(223,207,180,.54) 0%,
+          rgba(233,222,202,.1) 28%,
+          rgba(233,222,202,.2) 70%,
+          rgba(233,222,202,.92) 100%
+        ) !important;
+    }
+  }
+
 </style>
 </head>
 <body id="top">
