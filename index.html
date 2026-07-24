@@ -510,8 +510,8 @@
       opacity:0;
       transform:translate3d(0,14px,0);
       transition:
-        opacity 720ms cubic-bezier(.22,.61,.36,1) var(--reveal-delay,0ms),
-        transform 720ms cubic-bezier(.22,.61,.36,1) var(--reveal-delay,0ms);
+        opacity 420ms cubic-bezier(.22,.61,.36,1) var(--reveal-delay,0ms),
+        transform 420ms cubic-bezier(.22,.61,.36,1) var(--reveal-delay,0ms);
       will-change:opacity,transform;
     }
     .text-reveal.is-visible {
@@ -847,7 +847,7 @@
         const groupItems = selectors.flatMap(selector => Array.from(document.querySelectorAll(selector)));
         groupItems.forEach((element, index) => {
           element.classList.add('text-reveal');
-          element.style.setProperty('--reveal-delay', `${Math.min(index, 5) * 65}ms`);
+          element.style.setProperty('--reveal-delay', `${Math.min(index, 5) * 25}ms`);
           revealItems.push(element);
         });
       });
@@ -862,8 +862,8 @@
             textRevealObserver.unobserve(entry.target);
           });
         }, {
-          threshold:0.12,
-          rootMargin:'0px 0px -8% 0px'
+          threshold:0.05,
+          rootMargin:'0px 0px 8% 0px'
         });
         revealItems.forEach(element => textRevealObserver.observe(element));
       }
