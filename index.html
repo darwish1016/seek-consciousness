@@ -91,8 +91,31 @@
     .nav-toggle.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
 
     .hero { position:relative; height:100svh; min-height:620px; overflow:hidden; background:#000; color:#fff; }
-    .hero-media { position:absolute; inset:0; }
-    .hero-media video { width:100%; height:100%; object-fit:cover; object-position:center; }
+    .hero-media { position:absolute; inset:0; overflow:hidden; background:#000; }
+    .hero-media video {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      /* Shift the crop upward enough to reveal the full eye while retaining the figure below. */
+      object-position:50% 32%;
+    }
+    /* The exported video includes a small mark near the far-right edge.
+       This natural edge vignette conceals it without covering the portal or the subject. */
+    .hero-media::after {
+      content:'';
+      position:absolute;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      background:linear-gradient(90deg,
+        rgba(4,3,2,.76) 0%,
+        rgba(4,3,2,.18) 7%,
+        transparent 14%,
+        transparent 84%,
+        rgba(4,3,2,.24) 90%,
+        rgba(4,3,2,.92) 96%,
+        #040302 100%);
+    }
     .hero::after {
       content:'';
       position:absolute;
@@ -256,6 +279,9 @@
 
       .hero { min-height:620px; }
       .hero-media video { object-position:center center; }
+      .hero-media::after {
+        background:linear-gradient(90deg,rgba(4,3,2,.58),transparent 13%,transparent 87%,rgba(4,3,2,.82));
+      }
       .hero-content { bottom:clamp(56px,9vh,80px); }
       .hero-entry strong { font-size:clamp(1.75rem,8.4vw,2.65rem); }
       .hero-entry span { max-width:17ch; font-size:1.16rem; line-height:1.25; }
