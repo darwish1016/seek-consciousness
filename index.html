@@ -377,30 +377,51 @@
     }
 
     @media (max-width:760px) {
-      :root { --header-height:70px; }
+      :root { --header-height:64px; }
       body { font-size:17px; }
-      .site-header { padding:0 22px; }
-      .site-logo img { width:118px; }
-      .nav-toggle { display:none !important; }
-      .primary-nav {
-        position:static;
-        display:flex;
-        align-items:center;
+      .site-header { padding:0 18px; }
+      .site-logo img { width:90px; }
+      .nav-toggle {
+        position:relative;
+        z-index:2;
+        display:block !important;
+        flex:0 0 auto;
         margin-left:auto;
-        padding:0;
-        background:transparent;
-        border:0;
+      }
+      .primary-nav {
+        position:absolute;
+        top:100%;
+        left:0;
+        right:0;
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        gap:0;
+        margin:0;
+        padding:8px 18px 18px;
+        background:rgba(5,4,3,.96);
+        border-top:1px solid rgba(255,255,255,.06);
+        border-bottom:1px solid rgba(255,255,255,.10);
+        box-shadow:0 16px 32px rgba(0,0,0,.28);
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        transform:translateY(-8px);
+        transition:opacity .25s ease, transform .25s ease, visibility .25s ease;
+      }
+      .primary-nav.open {
         opacity:1;
         visibility:visible;
-        transform:none;
+        pointer-events:auto;
+        transform:translateY(0);
       }
       .primary-nav a {
-        width:auto;
-        padding:0;
-        border:0;
-        font-size:.66rem;
-        letter-spacing:.035em;
-        white-space:nowrap;
+        width:100%;
+        padding:14px 0 10px;
+        border-top:1px solid rgba(255,255,255,.08);
+        font-size:.7rem;
+        letter-spacing:.055em;
+        white-space:normal;
       }
 
       .hero-invitation { min-height:620px; }
@@ -533,6 +554,11 @@
 <body id="top">
   <header class="site-header" id="siteHeader">
     <a class="site-logo" href="#top" aria-label="Seek Consciousness home"><img src="assets/media/seek-consciousness-logo.png" alt="Seek Consciousness"></a>
+    <button class="nav-toggle" type="button" aria-controls="primaryNav" aria-expanded="false" aria-label="Open navigation">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
     <nav class="primary-nav" id="primaryNav" aria-label="Primary navigation">
       <a href="#mission">About Seek Consciousness</a>
     </nav>
@@ -797,6 +823,13 @@
         toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
       });
       nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeMenu();
+      });
+      document.addEventListener('click', event => {
+        if (window.innerWidth > 760 || !nav?.classList.contains('open')) return;
+        if (header && !header.contains(event.target)) closeMenu();
+      });
       window.addEventListener('resize', () => { if (window.innerWidth > 760) closeMenu(); }, {passive:true});
       window.addEventListener('scroll', updateHeader, {passive:true});
       updateHeader();
