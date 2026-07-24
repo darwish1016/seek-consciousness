@@ -96,8 +96,9 @@
       width:100%;
       height:100%;
       object-fit:cover;
-      /* Shift the crop upward enough to reveal the full eye while retaining the figure below. */
-      object-position:50% 32%;
+      /* Anchor the video to its top edge so wide screens crop only the bottom,
+         keeping the complete eye and upper artwork visible. */
+      object-position:50% 0%;
     }
     /* The exported video includes a small mark near the far-right edge.
        This natural edge vignette conceals it without covering the portal or the subject. */
@@ -278,7 +279,7 @@
       .primary-nav a { width:100%; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.08); }
 
       .hero { min-height:620px; }
-      .hero-media video { object-position:center center; }
+      .hero-media video { object-position:center top; }
       .hero-media::after {
         background:linear-gradient(90deg,rgba(4,3,2,.58),transparent 13%,transparent 87%,rgba(4,3,2,.82));
       }
