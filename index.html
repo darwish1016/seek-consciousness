@@ -257,9 +257,7 @@
       padding:100px 7vw;
       text-align:center;
       color:var(--ink);
-      background:
-        radial-gradient(circle at 50% 38%, rgba(255,255,255,.72), transparent 38%),
-        linear-gradient(180deg, #e2d1b5 0%, var(--paper-light) 50%, var(--paper) 100%);
+      background:var(--paper-light);
       border-bottom:1px solid var(--line);
     }
     .reflection::before {
@@ -346,6 +344,10 @@
     .teachings-heading { display:grid; grid-template-columns:minmax(170px,.3fr) minmax(0,1fr); gap:40px; align-items:start; margin-bottom:58px; }
     .teachings-heading h2 { max-width:18ch; font-size:clamp(2.4rem,4vw,4.15rem); color:var(--ink); }
     .teachings-heading p { max-width:35ch; margin-top:22px; font-size:1.22rem; color:var(--muted); }
+    .featured-teaching { margin-bottom:34px; background:var(--paper); border:1px solid var(--line); overflow:hidden; }
+    .featured-teaching-label { display:block; padding:18px 22px 0; font-family:var(--display); font-size:.68rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--ochre); }
+    .featured-teaching-player { position:relative; width:100%; aspect-ratio:16/9; margin-top:16px; background:#0b0805; overflow:hidden; }
+    .featured-teaching-player iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
     .teaching-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
     .teaching-card { display:grid; grid-template-columns:minmax(180px,.82fr) minmax(0,1.18fr); min-height:310px; background:var(--paper); border:1px solid var(--line); overflow:hidden; }
     .teaching-media { position:relative; min-height:100%; overflow:hidden; background:#21170f; }
@@ -715,6 +717,19 @@
             <p>Continue with a practice, a question, or an idea that feels meaningful today.</p>
           </div>
         </div>
+        <article class="featured-teaching" aria-labelledby="featuredTeachingLabel">
+          <span class="featured-teaching-label" id="featuredTeachingLabel">Featured Teaching</span>
+          <div class="featured-teaching-player">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/KzyxaK0nHMw?rel=0"
+              title="Featured Seek Consciousness teaching"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </article>
         <div class="teaching-grid">
           <a class="teaching-card" href="https://www.youtube.com/watch?v=87FSEkIX99I" target="_blank" rel="noopener noreferrer">
             <figure class="teaching-media">
@@ -872,7 +887,7 @@
         ['.practical-copy > h2', '.practical-text > p', '.guidance > p'],
         ['.map-copy > .eyebrow', '.map-copy > h2', '.map-copy > .map-intro', '.map-point', '.map-copy > .map-close'],
         ['.paths-heading > h2', '.paths-heading > p', '.path-card-body > *', '.destination'],
-        ['.teachings-heading > .eyebrow', '.teachings-heading h2', '.teachings-heading p', '.teaching-body > *', '.channel-row > *']
+        ['.teachings-heading > .eyebrow', '.teachings-heading h2', '.teachings-heading p', '.featured-teaching-label', '.teaching-body > *', '.channel-row > *']
       ];
 
       const revealItems = [];
