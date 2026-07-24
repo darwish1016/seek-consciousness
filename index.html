@@ -90,55 +90,107 @@
     .nav-toggle.open span:nth-child(2) { opacity:0; }
     .nav-toggle.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
 
-    .hero { position:relative; height:100svh; min-height:620px; overflow:hidden; background:#000; color:#fff; }
-    .hero-media { position:absolute; inset:0; overflow:hidden; background:#000; }
-    .hero-media video {
+    /* Hero composition matched to seek-consciousness-black-fullscreen-section.html. */
+    .hero-invitation {
+      position:relative;
+      width:100%;
+      height:100svh;
+      min-height:620px;
+      overflow:hidden;
+      isolation:isolate;
+      background:#040301;
+      color:#fff;
+    }
+    .hero-stage {
+      position:relative;
       width:100%;
       height:100%;
-      object-fit:cover;
-      /* Anchor the video to its top edge so wide screens crop only the bottom,
-         keeping the complete eye and upper artwork visible. */
-      object-position:50% 0%;
+      overflow:hidden;
+      background:radial-gradient(circle at 50% 52%,#241606 0%,#0b0703 48%,#040301 82%);
     }
-    /* The exported video includes a small mark near the far-right edge.
-       This natural edge vignette conceals it without covering the portal or the subject. */
-    .hero-media::after {
+    .hero-art {
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      background:#040301;
+    }
+    .hero-art .hero-background-video {
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center center;
+      background:#040301;
+      filter:saturate(.88) contrast(1.04) brightness(.78);
+      pointer-events:none;
+    }
+    .hero-art::after {
       content:'';
       position:absolute;
       inset:0;
       z-index:1;
       pointer-events:none;
-      background:linear-gradient(90deg,
-        rgba(4,3,2,.76) 0%,
-        rgba(4,3,2,.18) 7%,
-        transparent 14%,
-        transparent 84%,
-        rgba(4,3,2,.24) 90%,
-        rgba(4,3,2,.92) 96%,
-        #040302 100%);
+      background:
+        radial-gradient(circle at 100% 100%,#040301 0 66px,rgba(4,3,1,.96) 88px,rgba(4,3,1,.45) 126px,transparent 180px),
+        linear-gradient(90deg,rgba(3,2,1,.70) 0%,rgba(3,2,1,.06) 31%,rgba(3,2,1,.06) 69%,rgba(3,2,1,.70) 100%),
+        linear-gradient(180deg,rgba(0,0,0,.20) 0%,rgba(0,0,0,.02) 34%,rgba(0,0,0,.08) 68%,rgba(0,0,0,.82) 100%);
     }
-    .hero::after {
-      content:'';
+    .hero-panel-entry {
       position:absolute;
       inset:0;
-      background:
-        linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,.04) 35%,rgba(0,0,0,.04) 65%,rgba(0,0,0,.55)),
-        linear-gradient(180deg,rgba(0,0,0,.32),rgba(0,0,0,.04) 50%,rgba(0,0,0,.76));
+      z-index:2;
+      display:block;
+      padding:0;
+      text-align:center;
       pointer-events:none;
     }
-    .hero-content {
+    .hero-panel-entry .hero-panel-inner {
       position:absolute;
-      z-index:2;
       left:50%;
-      bottom:clamp(68px,10vh,108px);
-      width:min(92vw,780px);
+      bottom:clamp(30px,4.5vh,58px);
+      width:min(92vw,760px);
+      padding:0 20px;
       transform:translateX(-50%);
-      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-end;
     }
-    .hero-entry { display:inline-flex; flex-direction:column; align-items:center; gap:10px; }
-    .hero-entry strong { font-family:var(--display); font-size:clamp(2rem,4.2vw,3.9rem); font-weight:500; letter-spacing:.04em; }
-    .hero-entry span { font-size:clamp(1.15rem,2vw,1.65rem); color:rgba(255,241,215,.86); }
-    .scroll-cue { display:block; margin-top:24px; font-family:var(--display); font-size:.62rem; letter-spacing:.17em; text-transform:uppercase; color:rgba(255,255,255,.52); }
+    .hero-panel-entry .hero-entry {
+      display:inline-flex;
+      flex-direction:column;
+      align-items:center;
+      gap:clamp(7px,1vh,12px);
+      padding:8px 18px;
+      color:rgba(255,247,231,.98);
+      text-align:center;
+      pointer-events:auto;
+    }
+    .hero-panel-entry .hero-entry-title {
+      display:block;
+      font-family:var(--display);
+      font-size:clamp(1.8rem,3.2vw,3rem);
+      font-weight:500;
+      line-height:1.04;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+      text-shadow:0 2px 22px rgba(0,0,0,.72);
+    }
+    .hero-panel-entry .hero-entry-subtitle {
+      display:block;
+      color:rgba(255,239,210,.88);
+      font-family:var(--serif);
+      font-size:clamp(1.08rem,1.8vw,1.5rem);
+      font-style:italic;
+      font-weight:500;
+      line-height:1.22;
+      letter-spacing:.025em;
+      white-space:nowrap;
+      text-shadow:0 2px 18px rgba(0,0,0,.78);
+    }
 
     .reflection {
       width:100%;
@@ -278,15 +330,35 @@
       .primary-nav.open { opacity:1; visibility:visible; transform:translateY(0); }
       .primary-nav a { width:100%; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.08); }
 
-      .hero { min-height:620px; }
-      .hero-media video { object-position:center top; }
-      .hero-media::after {
-        background:linear-gradient(90deg,rgba(4,3,2,.58),transparent 13%,transparent 87%,rgba(4,3,2,.82));
+      .hero-invitation { min-height:620px; }
+      .hero-art .hero-background-video {
+        object-fit:cover;
+        object-position:center center;
       }
-      .hero-content { bottom:clamp(56px,9vh,80px); }
-      .hero-entry strong { font-size:clamp(1.75rem,8.4vw,2.65rem); }
-      .hero-entry span { max-width:17ch; font-size:1.16rem; line-height:1.25; }
-      .scroll-cue { margin-top:18px; }
+      .hero-art::after {
+        background:
+          radial-gradient(circle at 100% 100%,#040301 0 54px,rgba(4,3,1,.95) 72px,rgba(4,3,1,.42) 104px,transparent 148px),
+          linear-gradient(90deg,rgba(3,2,1,.42),rgba(3,2,1,.02) 28%,rgba(3,2,1,.02) 72%,rgba(3,2,1,.42)),
+          linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.02) 30%,rgba(0,0,0,.04) 70%,rgba(0,0,0,.84));
+      }
+      .hero-panel-entry .hero-panel-inner {
+        bottom:max(18px,calc(env(safe-area-inset-bottom) + 10px));
+        width:100%;
+        padding:0 16px;
+      }
+      .hero-panel-entry .hero-entry { padding:6px 12px; gap:6px; }
+      .hero-panel-entry .hero-entry-title {
+        font-size:clamp(1.42rem,6.2vw,1.85rem);
+        letter-spacing:.095em;
+      }
+      .hero-panel-entry .hero-entry-subtitle {
+        max-width:19ch;
+        font-size:clamp(.96rem,4.2vw,1.12rem);
+        line-height:1.18;
+        letter-spacing:.015em;
+        white-space:normal;
+        text-wrap:balance;
+      }
 
       .reflection { padding:90px 7vw; }
       .reflection h2 { font-size:clamp(2rem,10vw,3.25rem); }
@@ -362,18 +434,21 @@
   </header>
 
   <main>
-    <section class="hero" id="invitation" aria-labelledby="heroTitle">
-      <div class="hero-media" aria-hidden="true">
-        <video class="hero-background-video" autoplay muted loop playsinline preload="auto" tabindex="-1">
-          <source src="assets/media/hero-background.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="hero-content">
-        <a class="hero-entry" href="#reflection" aria-label="Step inside. What you seek is seeking you.">
-          <strong id="heroTitle">STEP INSIDE</strong>
-          <span>What you seek… is seeking you.</span>
-        </a>
-        <span class="scroll-cue">Scroll to continue</span>
+    <section class="hero-invitation" id="invitation" aria-labelledby="heroTitle">
+      <div class="hero-stage">
+        <div class="hero-art" aria-hidden="true">
+          <video class="hero-background-video" autoplay muted loop playsinline preload="auto" tabindex="-1" disablepictureinpicture aria-hidden="true">
+            <source src="assets/media/hero-background.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="hero-panel-entry">
+          <div class="hero-panel-inner">
+            <a class="hero-entry" href="#reflection" aria-label="Step inside. What you seek is seeking you.">
+              <span id="heroTitle" class="hero-entry-title">STEP INSIDE</span>
+              <span class="hero-entry-subtitle">What you seek… is seeking you.</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
