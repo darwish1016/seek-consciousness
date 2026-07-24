@@ -338,7 +338,7 @@
     <section class="hero" id="invitation" aria-labelledby="heroTitle">
       <div class="hero-media" aria-hidden="true">
         <video class="hero-background-video" autoplay muted loop playsinline preload="auto" tabindex="-1">
-          <source src="assets/media/hero-background.mov" type="video/mp4">
+          <source src="assets/media/hero-background.mp4" type="video/mp4">
         </video>
       </div>
       <div class="hero-content">
@@ -586,7 +586,6 @@
           try { video.currentTime = 0; } catch (_) {}
           return;
         }
-        video.playbackRate = .5;
         video.play().catch(() => {});
       };
       video?.addEventListener('loadedmetadata', syncVideo, {once:true});
