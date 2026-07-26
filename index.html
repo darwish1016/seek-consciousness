@@ -108,6 +108,17 @@
       overflow:hidden;
       background:radial-gradient(circle at 50% 52%,#241606 0%,#0b0703 48%,#040301 82%);
     }
+    .hero-click-zone {
+      position:absolute;
+      inset:0;
+      z-index:2;
+      display:block;
+      cursor:pointer;
+    }
+    .hero-click-zone:focus-visible {
+      outline:1px solid rgba(255,240,211,.8);
+      outline-offset:-10px;
+    }
     .hero-art {
       position:absolute;
       inset:0;
@@ -153,7 +164,7 @@
     .hero-panel-entry {
       position:absolute;
       inset:0;
-      z-index:2;
+      z-index:3;
       display:block;
       padding:0;
       text-align:center;
@@ -209,7 +220,7 @@
       position:absolute;
       left:clamp(22px,4vw,62px);
       bottom:clamp(22px,3.2vh,42px);
-      z-index:3;
+      z-index:4;
       display:inline-flex;
       align-items:center;
       gap:12px;
@@ -586,6 +597,11 @@
             aria-hidden="true"
           ></video>
         </div>
+        <a
+          class="hero-click-zone"
+          href="#reflection"
+          aria-label="Continue to the next section"
+        ></a>
         <div class="hero-panel-entry">
           <div class="hero-panel-inner">
             <a class="hero-entry" href="#reflection" aria-label="Step inside. What you seek is seeking you.">
@@ -594,9 +610,9 @@
             </a>
           </div>
         </div>
-        <a class="journey-cue" href="#reflection" aria-label="Continue into the journey">
-          <span class="journey-cue-desktop">Scroll the journey</span>
-          <span class="journey-cue-mobile">Swipe the journey</span>
+        <a class="journey-cue" href="#reflection" aria-label="Continue to the next section">
+          <span class="journey-cue-desktop">Click to continue</span>
+          <span class="journey-cue-mobile">Tap to continue</span>
           <span class="journey-cue-line" aria-hidden="true"></span>
         </a>
       </div>
