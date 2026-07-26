@@ -427,9 +427,6 @@
       }
 
       .hero-invitation { min-height:620px; }
-
-      /* The mobile source is a portrait 1080x1920 composition, so cover fills
-         the screen without cutting off the left and right statues. */
       .hero-art .hero-background-video {
         object-fit:cover;
         object-position:center center;
@@ -554,8 +551,7 @@
     }
 
   </style>
-  <link rel="preload" href="assets/media/hero-background.mp4" as="video" type="video/mp4" media="(min-width:761px)" fetchpriority="high">
-  <link rel="preload" href="assets/media/hero-background-mobile.mp4" as="video" type="video/mp4" media="(max-width:760px)" fetchpriority="high">
+  <link rel="preload" href="assets/media/hero-background.mp4" as="video" type="video/mp4" fetchpriority="high">
 </head>
 <body id="top">
   <header class="site-header" id="siteHeader">
@@ -576,6 +572,7 @@
         <div class="hero-art" aria-hidden="true">
           <video
             class="hero-background-video"
+            src="assets/media/hero-background.mp4"
             poster="assets/media/hero.png"
             autoplay
             muted
@@ -587,20 +584,7 @@
             tabindex="-1"
             disablepictureinpicture
             aria-hidden="true"
-          >
-            <!-- Portrait mobile composition: keep both statues inside the frame. -->
-            <source
-              src="assets/media/hero-background-mobile.mp4"
-              media="(max-width:760px)"
-              type="video/mp4"
-            >
-
-            <!-- Existing landscape desktop video. -->
-            <source
-              src="assets/media/hero-background.mp4"
-              type="video/mp4"
-            >
-          </video>
+          ></video>
         </div>
         <div class="hero-panel-entry">
           <div class="hero-panel-inner">
@@ -883,27 +867,7 @@
         }
       };
 
-      const mobileHeroMedia = window.matchMedia('(max-width:760px)');
-
-      const updateHeroMedia = () => {
-        if (!video) return;
-
-        video.poster = mobileHeroMedia.matches
-          ? 'assets/media/hero-mobile.jpg'
-          : 'assets/media/hero.png';
-
-        // Re-evaluate the <source media> rules when crossing the breakpoint.
-        video.load();
-        startHeroVideo();
-      };
-
       if (video) {
-        updateHeroMedia();
-        if (typeof mobileHeroMedia.addEventListener === 'function') {
-          mobileHeroMedia.addEventListener('change', updateHeroMedia);
-        } else if (typeof mobileHeroMedia.addListener === 'function') {
-          mobileHeroMedia.addListener(updateHeroMedia);
-        }
         // Native autoplay begins during parsing. This is only a safe fallback.
         startHeroVideo();
         window.addEventListener('pointerdown', startHeroVideo, {
