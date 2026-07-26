@@ -116,6 +116,19 @@
       overflow:hidden;
       background:#040301;
     }
+    .hero-art::before {
+      content:'';
+      position:absolute;
+      inset:-28px;
+      z-index:0;
+      display:none;
+      background-image:url('assets/media/hero.png');
+      background-size:cover;
+      background-position:center center;
+      filter:blur(18px) saturate(.72) brightness(.34);
+      transform:scale(1.08);
+      pointer-events:none;
+    }
     .hero-art .hero-background-video {
       position:absolute;
       inset:0;
@@ -130,13 +143,8 @@
       filter:saturate(.88) contrast(1.04) brightness(.78);
       pointer-events:none;
     }
-    /* Fill the entire hero container with no side bars. Keep the top of the video
-       anchored so the eye remains visible; any necessary crop happens lower down. */
-    @media (max-width:760px) {
-      .hero-art .hero-background-video {
-        object-position:center top;
-      }
-    }
+    /* Desktop keeps the cinematic full-screen crop. Mobile-specific zoom-out
+       is applied in the main mobile media query below. */
 
     .hero-art::after {
       content:'';
@@ -428,11 +436,26 @@
 
       .hero-invitation { min-height:620px; }
 
-      /* The mobile source is a portrait 1080x1920 composition, so cover fills
-         the screen without cutting off the left and right statues. */
+      /* MOBILE HERO ZOOM-OUT
+         The original artwork is landscape. On phones, zoom it out so the two
+         side statues remain visible. The blurred poster behind it fills the
+         portrait screen, preventing empty black bars. */
+      .hero-art::before {
+        display:block;
+      }
+
       .hero-art .hero-background-video {
-        object-fit:cover;
+        inset:auto;
+        left:50%;
+        top:45%;
+        width:145vw;
+        height:auto;
+        max-width:none;
+        aspect-ratio:16 / 9;
+        object-fit:contain;
         object-position:center center;
+        transform:translate(-50%,-50%);
+        background:transparent;
       }
       .hero-art::after {
         background:
@@ -553,9 +576,58 @@
       }
     }
 
+
+    /* =========================================================
+       FINAL MOBILE HERO OVERRIDE
+       Keep this block at the very end of the CSS.
+       It zooms out only on mobile so both side statues are visible.
+       ========================================================= */
+    @media (max-width:760px) {
+      .hero-art {
+        background:#040301 !important;
+      }
+
+      /* Full-screen fallback behind the zoomed-out landscape media. */
+      .hero-art::before {
+        content:'' !important;
+        position:absolute !important;
+        inset:-32px !important;
+        z-index:0 !important;
+        display:block !important;
+        background-image:url('assets/media/hero.png') !important;
+        background-repeat:no-repeat !important;
+        background-position:center center !important;
+        background-size:cover !important;
+        filter:blur(20px) saturate(.72) brightness(.34) !important;
+        transform:scale(1.10) !important;
+        pointer-events:none !important;
+      }
+
+      /* Zoom out the actual poster/video. Change 145vw to 135vw for
+         more zoom-out, or 155vw for a slightly closer view. */
+      .hero-art .hero-background-video {
+        position:absolute !important;
+        inset:auto !important;
+        left:50% !important;
+        right:auto !important;
+        top:45% !important;
+        bottom:auto !important;
+        width:145vw !important;
+        height:auto !important;
+        min-width:0 !important;
+        max-width:none !important;
+        min-height:0 !important;
+        aspect-ratio:16 / 9 !important;
+        object-fit:contain !important;
+        object-position:center center !important;
+        transform:translate(-50%,-50%) !important;
+        transform-origin:center center !important;
+        background:transparent !important;
+      }
+    }
+
   </style>
-  <link rel="preload" href="assets/media/hero-background.mp4" as="video" type="video/mp4" media="(min-width:761px)" fetchpriority="high">
-  <link rel="preload" href="assets/media/hero-background-mobile.mp4" as="video" type="video/mp4" media="(max-width:760px)" fetchpriority="high">
+  <link rel="preload" href="assets/media/hero-background.mp4" as="video" type="video/mp4" fetchpriority="high">
 </head>
 <body id="top">
   <header class="site-header" id="siteHeader">
@@ -576,6 +648,7 @@
         <div class="hero-art" aria-hidden="true">
           <video
             class="hero-background-video"
+            src="assets/media/hero-background.mp4"
             poster="assets/media/hero.png"
             autoplay
             muted
@@ -587,20 +660,7 @@
             tabindex="-1"
             disablepictureinpicture
             aria-hidden="true"
-          >
-            <!-- Portrait mobile composition: keep both statues inside the frame. -->
-            <source
-              src="assets/media/hero-background-mobile.mp4"
-              media="(max-width:760px)"
-              type="video/mp4"
-            >
-
-            <!-- Existing landscape desktop video. -->
-            <source
-              src="assets/media/hero-background.mp4"
-              type="video/mp4"
-            >
-          </video>
+          ></video>
         </div>
         <div class="hero-panel-entry">
           <div class="hero-panel-inner">
@@ -883,27 +943,7 @@
         }
       };
 
-      const mobileHeroMedia = window.matchMedia('(max-width:760px)');
-
-      const updateHeroMedia = () => {
-        if (!video) return;
-
-        video.poster = mobileHeroMedia.matches
-          ? 'assets/media/hero-mobile.jpg'
-          : 'assets/media/hero.png';
-
-        // Re-evaluate the <source media> rules when crossing the breakpoint.
-        video.load();
-        startHeroVideo();
-      };
-
       if (video) {
-        updateHeroMedia();
-        if (typeof mobileHeroMedia.addEventListener === 'function') {
-          mobileHeroMedia.addEventListener('change', updateHeroMedia);
-        } else if (typeof mobileHeroMedia.addListener === 'function') {
-          mobileHeroMedia.addListener(updateHeroMedia);
-        }
         // Native autoplay begins during parsing. This is only a safe fallback.
         startHeroVideo();
         window.addEventListener('pointerdown', startHeroVideo, {
