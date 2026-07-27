@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Explorer — Seek Consciousness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  /* ============ TOKENS ============ */
+  :root{
+    --bg: #0b0d0a;
+    --bg-panel: #12140f;
+    --bg-panel-2: #171a13;
+    --ink: #ede6d4;
+    --ink-dim: #b3ab93;
+    --gold: #c9a227;
+    --gold-bright: #e0bf4f;
+    --gold-deep: #7d631c;
+    --moss: #4b5c46;
+    --moss-dim: #2c3529;
+    --line: rgba(201,162,39,0.32);
+    --line-soft: rgba(237,230,212,0.1);
+    --shadow: rgba(0,0,0,0.55);
+
+    --display: 'Fraunces', serif;
+    --body: 'Spectral', serif;
+    --ui: 'Inter', sans-serif;
+
+    --gutter: clamp(20px, 6vw, 96px);
+    --measure: 62ch;
+  }
+  ::selection{ background: var(--gold); color: #12140f; }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color: inherit; }
+
+  h1,h2,h3{
+    font-family: var(--display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--ink);
+  }
+  .eyebrow{
+    font-family: var(--ui);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ============ PATH LINE (signature element) ============ */
+  .path-rail{
+    position: fixed;
+    top:0; left: 50%;
+    width:1px;
+    height: 100vh;
+    z-index: 30;
+    pointer-events: none;
+    transform: translateX(-50%);
+    display: none;
+  }
+  @media(min-width: 900px){ .path-rail{ display:block; } }
+  .path-rail::before{
+    content:"";
+    position: absolute;
+    top:0; left:0;
+    width:1px;
+    height:100%;
+    background: var(--line-soft);
+  }
+  .path-rail__fill{
+    position:absolute;
+    top:0; left:0;
+    width:1px;
+    height: 0%;
+    background: linear-gradient(var(--gold-deep), var(--gold-bright));
+    box-shadow: 0 0 8px rgba(201,162,39,0.5);
+    transition: height 0.1s linear;
+  }
+  .path-rail__marker{
+    position:absolute;
+    left:50%;
+    width:7px; height:7px;
+    border-radius:50%;
+    background: var(--gold-bright);
+    transform: translate(-50%,-50%);
+    box-shadow: 0 0 10px rgba(224,191,79,0.8);
+  }
+
+  /* ============ NAV ============ */
+  .nav{
+    position: fixed; top:0; left:0; right:0; z-index: 40;
+    display:flex; align-items:center; justify-content: space-between;
+    padding: 20px var(--gutter);
+    font-family: var(--ui);
+    background: linear-gradient(to bottom, rgba(11,13,10,0.85), transparent);
+  }
+  .nav__brand{ display:flex; align-items:center; gap:12px; }
+  .nav__brand img{ height: 26px; width:auto; opacity:0.92; }
+  .nav__brand span{ font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-dim); }
+  .nav__path{
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid var(--line); padding: 7px 16px; border-radius: 999px;
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    position: relative;
+    height: 100svh;
+    display:flex; align-items: flex-end;
+    overflow:hidden;
+    background: #000;
+  }
+  .hero video, .hero__poster{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit: cover;
+    filter: brightness(0.55) saturate(0.9);
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(to bottom, rgba(11,13,10,0.15) 0%, rgba(11,13,10,0.15) 45%, rgba(11,13,10,0.92) 100%);
+  }
+  .hero__content{
+    position:relative; z-index:2;
+    padding: 0 var(--gutter) 8vh;
+    max-width: 1100px;
+  }
+  .hero__eyebrow{ margin-bottom: 22px; }
+  .hero h1{
+    font-size: clamp(3.2rem, 9vw, 7.2rem);
+    line-height: 0.95;
+    font-weight: 300;
+  }
+  .hero h1 em{ font-style: italic; font-weight: 400; color: var(--gold-bright); }
+  .hero__sub{
+    margin-top: 26px;
+    font-family: var(--body);
+    font-style: italic;
+    font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+    color: var(--ink-dim);
+    max-width: 46ch;
+  }
+  .hero__scroll{
+    position:absolute; bottom: 30px; left: var(--gutter);
+    z-index:2;
+    font-family: var(--ui); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-dim);
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero__scroll::before{
+    content:""; width:1px; height:34px; background: var(--gold);
+    animation: pulse-line 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse-line{ 0%,100%{ opacity:0.3; } 50%{ opacity:1; } }
+
+  /* ============ SECTION SCAFFOLDING ============ */
+  section{ position: relative; }
+  .editorial{
+    padding: clamp(80px,12vw,160px) var(--gutter);
+    background: var(--bg);
+  }
+  .editorial--panel{ background: var(--bg-panel); }
+  .col{
+    max-width: var(--measure);
+    margin: 0 auto;
+  }
+  .col--wide{ max-width: 1200px; }
+
+  .reveal{ opacity:0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s ease; }
+  .reveal.is-visible{ opacity:1; transform:none; }
+
+  /* Intro / drop cap */
+  .intro h2{
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    font-weight: 300;
+    margin-bottom: 34px;
+    max-width: 20ch;
+  }
+  .intro p{ font-size: 1.14rem; color: var(--ink-dim); }
+  .dropcap::first-letter{
+    font-family: var(--display);
+    font-size: 4.6em;
+    float: left;
+    line-height: 0.78;
+    padding: 0.05em 0.09em 0 0;
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  /* ============ PARALLAX BREAK ============ */
+  .break{
+    height: 92vh;
+    min-height: 480px;
+    position: relative;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    display:flex; align-items:flex-end;
+  }
+  @media (max-width: 900px){
+    .break{ background-attachment: scroll; height: 70vh; }
+  }
+  .break::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(to top, rgba(11,13,10,0.88) 0%, rgba(11,13,10,0.15) 55%, rgba(11,13,10,0.05) 100%);
+  }
+  .break__caption{
+    position: relative; z-index:2;
+    margin: 0 auto clamp(40px,7vw,80px);
+    max-width: 720px;
+    padding: 0 var(--gutter);
+    width:100%;
+  }
+  .break__caption .eyebrow{ display:block; margin-bottom: 14px; }
+  .break__caption p{
+    font-family: var(--body);
+    font-style: italic;
+    font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+    color: var(--ink);
+    max-width: 18ch;
+  }
+
+  /* ============ QUALITIES (resonance list) ============ */
+  .qualities{ list-style:none; margin: 40px 0 0; padding:0; }
+  .qualities li{
+    padding: 30px 0;
+    border-top: 1px solid var(--line-soft);
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .qualities li:last-child{ border-bottom: 1px solid var(--line-soft); }
+  .qualities h3{
+    font-size: 1.3rem; font-weight: 400; font-style: italic;
+  }
+  .qualities p{ color: var(--ink-dim); margin:0; font-size:1.02rem; }
+
+  /* ============ KURT NOTE ============ */
+  .kurt{
+    display:grid;
+    grid-template-columns: 240px 1fr;
+    gap: clamp(30px,5vw,80px);
+    align-items: start;
+  }
+  @media(max-width: 760px){ .kurt{ grid-template-columns: 1fr; } }
+  .kurt__portrait{
+    border-radius: 4px;
+    filter: grayscale(0.15) sepia(0.08);
+    border: 1px solid var(--line);
+  }
+  .kurt__signature{
+    margin-top: 18px;
+    font-family: var(--display);
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1.1rem;
+  }
+  .kurt__note{
+    position: relative;
+    padding: clamp(30px,4vw,54px);
+    background-image: linear-gradient(rgba(11,13,10,0.94), rgba(11,13,10,0.94)), var(--note-img, none);
+    background-size: cover;
+    background-position: center;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .kurt__note p{ font-size: 1.16rem; font-style: italic; color: var(--ink); }
+  .kurt__note p + p{ margin-top: 1.1em; }
+
+  /* ============ RECOGNITION ============ */
+  .recognition{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(30px,6vw,90px);
+    align-items:start;
+  }
+  @media(max-width:860px){ .recognition{ grid-template-columns: 1fr; } }
+  .recognition__stack img{ border-radius: 4px; margin-bottom: 18px; border: 1px solid var(--line-soft); }
+  .checklist{
+    list-style:none; margin: 30px 0 0; padding: clamp(24px,3vw,36px);
+    background: linear-gradient(rgba(18,20,15,0.93), rgba(18,20,15,0.93)), var(--checklist-img, none);
+    background-size: cover; background-position: center;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .checklist li{
+    display:flex; gap: 14px; align-items:flex-start;
+    padding: 14px 0;
+    border-top: 1px solid var(--line-soft);
+    font-size: 1.02rem;
+  }
+  .checklist li:first-child{ border-top:none; }
+  .checklist li::before{
+    content:"";
+    flex: 0 0 auto;
+    width: 14px; height:14px;
+    margin-top: 4px;
+    border: 1px solid var(--gold);
+    border-radius: 3px;
+  }
+
+  /* ============ VIDEO ============ */
+  .video-wrap{
+    position: relative;
+    width:100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow:hidden;
+  }
+  .video-wrap iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .video-note{
+    margin-top: 14px;
+    font-family: var(--ui);
+    font-size: 0.78rem;
+    color: var(--ink-dim);
+  }
+  .video-note code{ color: var(--gold); }
+
+  /* ============ PATH COMPARISON ============ */
+  .paths{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--line-soft);
+    border: 1px solid var(--line-soft);
+  }
+  @media(max-width:860px){ .paths{ grid-template-columns: 1fr; } }
+  .path-card{
+    position:relative;
+    background: var(--bg);
+    aspect-ratio: 3/4;
+    overflow:hidden;
+    display:flex; align-items:flex-end;
+    text-decoration:none;
+  }
+  .path-card img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    transition: opacity 0.5s ease, transform 0.6s ease;
+  }
+  .path-card__hover{ opacity:0; }
+  .path-card:hover .path-card__hover{ opacity:1; }
+  .path-card:hover .path-card__base{ transform: scale(1.04); }
+  .path-card::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(to top, rgba(11,13,10,0.92), transparent 60%);
+  }
+  .path-card__label{
+    position:relative; z-index:2; padding: 24px;
+  }
+  .path-card__label .eyebrow{ display:block; margin-bottom: 6px; }
+  .path-card__label h3{ font-size:1.4rem; font-weight:400; font-style:italic; }
+  .path-card--active{ outline: 1px solid var(--gold); outline-offset:-1px; }
+
+  /* ============ CTA / FOOTER ============ */
+  .cta{
+    text-align:center;
+    padding: clamp(100px,14vw,180px) var(--gutter);
+    background: radial-gradient(ellipse at center, var(--bg-panel-2), var(--bg));
+  }
+  .cta h2{
+    font-size: clamp(2.2rem,5vw,3.6rem);
+    font-weight:300;
+    max-width: 16ch;
+    margin: 0 auto 34px;
+  }
+  .cta h2 em{ color: var(--gold-bright); font-style:italic; }
+  .btn{
+    display:inline-block;
+    font-family: var(--ui);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--gold-bright);
+    padding: 18px 42px;
+    border-radius: 999px;
+    text-decoration:none;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  .btn:hover{ background: var(--gold); transform: translateY(-2px); }
+
+  footer{
+    padding: 40px var(--gutter) 60px;
+    display:flex; justify-content:space-between; align-items:center;
+    font-family: var(--ui); font-size:0.72rem; color: var(--ink-dim);
+    border-top: 1px solid var(--line-soft);
+    flex-wrap: wrap; gap: 16px;
+  }
+  footer img{ height:20px; opacity:0.7; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .break{ background-attachment: scroll; }
+    .hero__scroll::before{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="path-rail" aria-hidden="true">
+  <div class="path-rail__fill" id="railFill"></div>
+</div>
+
+<nav class="nav">
+  <div class="nav__brand">
+    <img src="assets/media/seek-consciousness-logo.png" alt="Seek Consciousness">
+    <span>Seek Consciousness</span>
+  </div>
+  <div class="nav__path">Path — Explorer</div>
+</nav>
+
+<section class="hero">
+  <video autoplay muted loop playsinline poster="assets/media/hero-poster.jpg">
+    <source src="assets/media/hero-background.mp4" type="video/mp4">
+  </video>
+  <img class="hero__poster" src="assets/media/hero.png" alt="" style="display:none;">
+  <div class="hero__content">
+    <div class="eyebrow hero__eyebrow">One of three paths</div>
+    <h1>The<br><em>Explorer</em></h1>
+    <p class="hero__sub">You don't take the map for granted. You want to feel the ground yourself, one honest step at a time.</p>
+  </div>
+  <div class="hero__scroll">Begin reading</div>
+</section>
+
+<section class="editorial intro reveal">
+  <div class="col">
+    <div class="eyebrow" style="margin-bottom:20px;">Who this path is for</div>
+    <h2>Not everyone arrives at stillness the same way.</h2>
+    <p class="dropcap">Some people are handed a teaching and simply try it on. The Explorer isn't built that way. You test claims against your own experience before you let them settle in. You'd rather sit with an open question for a year than swallow someone else's answer for comfort. That instinct isn't a barrier to this work — it's exactly the instrument the work needs.</p>
+  </div>
+</section>
+
+<div class="break" style="background-image:url('assets/media/path-explorer.jpg');">
+  <div class="break__caption reveal">
+    <div class="eyebrow">Fig. 01 — The Explorer's ground</div>
+    <p>&ldquo;Curiosity, followed all the way down, becomes its own kind of devotion.&rdquo;</p>
+  </div>
+</div>
+
+<section class="editorial editorial--panel reveal">
+  <div class="col">
+    <div class="eyebrow" style="margin-bottom:20px;">What we've noticed</div>
+    <h2 style="font-size:clamp(1.7rem,3vw,2.2rem); max-width:26ch;">Three things Explorers tend to share</h2>
+    <ul class="qualities">
+      <li>
+        <h3>A working distrust of certainty</h3>
+        <p>You've watched confident answers age poorly before. You give new ideas room, but you don't hand over your judgment for free.</p>
+      </li>
+      <li>
+        <h3>A pull toward direct experience</h3>
+        <p>Reading about a breath practice was never going to be enough. You want to know what it does in your own chest, tonight.</p>
+      </li>
+      <li>
+        <h3>Patience with not knowing yet</h3>
+        <p>An unresolved question doesn't unsettle you the way it does most people. You can carry it a while before you need it closed.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<div class="break" style="background-image:url('assets/media/living-map-tree.jpg');">
+  <div class="break__caption reveal">
+    <div class="eyebrow">Fig. 02 — The living map</div>
+    <p>&ldquo;Every path we teach was walked by someone before it was drawn.&rdquo;</p>
+  </div>
+</div>
+
+<section class="editorial reveal">
+  <div class="col col--wide kurt">
+    <div>
+      <img class="kurt__portrait" src="assets/media/kurt-portrait.png" alt="Kurt">
+      <div class="kurt__signature">— Kurt</div>
+    </div>
+    <div class="kurt__note" style="--note-img: url('assets/media/kurt-note.jpg');">
+      <div class="eyebrow" style="margin-bottom:18px;">A note, for Explorers specifically</div>
+      <p>I built this path last, and on purpose. Explorers ask the hardest questions in any room I've taught in, and for years I didn't have a good answer for what to do with that.</p>
+      <p>What I've learned since: your questions aren't an obstacle to guide around. They're the whole method. This path doesn't ask you to believe anything on my word. It asks you to try a small thing, honestly, and see what's actually there.</p>
+    </div>
+  </div>
+</section>
+
+<div class="break" style="background-image:url('assets/media/direct-experience.jpg');">
+  <div class="break__caption reveal">
+    <div class="eyebrow">Fig. 03 — Direct experience</div>
+    <p>&ldquo;Not what I told you. What you noticed.&rdquo;</p>
+  </div>
+</div>
+
+<section class="editorial editorial--panel reveal">
+  <div class="col col--wide recognition">
+    <div class="recognition__stack">
+      <img src="assets/media/recognition-intro.jpg" alt="">
+      <div class="eyebrow" style="margin-bottom:16px;">Recognizing yourself here</div>
+      <h2 style="font-size:clamp(1.6rem,2.8vw,2.1rem); max-width:20ch;">A quiet way to check if this is your path</h2>
+      <p style="color:var(--ink-dim); margin-top:18px;">None of this is a test you can fail. It's just a mirror. If most of these land, the Explorer path was probably always going to be yours.</p>
+      <img src="assets/media/recognition-question.jpg" alt="" style="margin-top:22px;">
+    </div>
+    <div>
+      <img src="assets/media/recognition-looking-for.jpg" alt="" style="margin-bottom:22px;">
+      <ul class="checklist" style="--checklist-img: url('assets/media/recognition-checklist.jpg');">
+        <li>You ask <em>how do you know that</em> more often than <em>what should I believe</em>.</li>
+        <li>You've quietly tried a practice before committing to the philosophy behind it.</li>
+        <li>You trust a small result you felt over a large claim you were told.</li>
+        <li>You'd rather be corrected by your own experience than agree too quickly.</li>
+        <li>Certainty from other people makes you a little more cautious, not less.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="editorial reveal">
+  <div class="col">
+    <div class="eyebrow" style="margin-bottom:20px;">Watch before you begin</div>
+    <h2 style="font-size:clamp(1.6rem,2.8vw,2.1rem); margin-bottom:28px;">An introduction to the Explorer path</h2>
+    <div class="video-wrap">
+      <!-- Replace VIDEO_ID_HERE with your actual YouTube video ID -->
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" title="The Explorer path — introduction" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <p class="video-note">Swap <code>VIDEO_ID_HERE</code> for your YouTube video ID once it's ready. Add further sections the same way for additional videos.</p>
+  </div>
+</section>
+
+<section class="editorial editorial--panel reveal">
+  <div class="col col--wide">
+    <div class="eyebrow" style="margin-bottom:20px; text-align:center;">Three paths in, one door</div>
+    <h2 style="text-align:center; font-size:clamp(1.7rem,3vw,2.3rem); margin-bottom:44px;">If Explorer isn't quite it</h2>
+    <div class="paths">
+      <a class="path-card path-card--active" href="#">
+        <img class="path-card__base" src="assets/media/path-explorer.jpg" alt="">
+        <img class="path-card__hover" src="assets/media/path-explorer-hover.png" alt="">
+        <div class="path-card__label">
+          <div class="eyebrow">Path 01</div>
+          <h3>Explorer</h3>
+        </div>
+      </a>
+      <a class="path-card" href="#">
+        <img class="path-card__base" src="assets/media/path-seeker.jpg" alt="">
+        <div class="path-card__label">
+          <div class="eyebrow">Path 02</div>
+          <h3>Seeker</h3>
+        </div>
+      </a>
+      <a class="path-card" href="#">
+        <img class="path-card__base" src="assets/media/path-pathfinder.jpg" alt="">
+        <div class="path-card__label">
+          <div class="eyebrow">Path 03</div>
+          <h3>Pathfinder</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cta reveal">
+  <div class="eyebrow" style="margin-bottom:22px;">Ready when you are</div>
+  <h2>Begin the <em>Explorer</em> path</h2>
+  <a class="btn" href="#">Start Here</a>
+</section>
+
+<footer>
+  <div>© Seek Consciousness</div>
+  <img src="assets/media/seek-consciousness-logo.png" alt="Seek Consciousness">
+</footer>
+
+<script>
+  // Scroll-linked path rail
+  (function(){
+    var fill = document.getElementById('railFill');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function update(){
+      var doc = document.documentElement;
+      var scrollTop = doc.scrollTop || document.body.scrollTop;
+      var height = doc.scrollHeight - doc.clientHeight;
+      var pct = height > 0 ? (scrollTop / height) * 100 : 0;
+      if(fill) fill.style.height = pct + '%';
+    }
+    if(!reduced){
+      window.addEventListener('scroll', update, { passive: true });
+    }
+    update();
+  })();
+
+  // Reveal on scroll
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){
+      els.forEach(function(el){ el.classList.add('is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+
+  // Video fallback: swap hero video for poster image if video fails to load
+  (function(){
+    var video = document.querySelector('.hero video');
+    var poster = document.querySelector('.hero__poster');
+    if(video){
+      video.addEventListener('error', function(){
+        video.style.display = 'none';
+        if(poster) poster.style.display = 'block';
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
