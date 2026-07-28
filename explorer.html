@@ -120,27 +120,30 @@
     .nav-toggle.open span:nth-child(2) { opacity:0; }
     .nav-toggle.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
 
-    /* ===== Hero — full-bleed editorial masthead, no glass card ===== */
+    /* ===== Hero — flat editorial plate anchored on the photo ===== */
     .exp-hero {
       position:relative; height:100svh; min-height:660px;
       display:flex; align-items:flex-end; overflow:hidden; isolation:isolate;
       background-image:url('assets/media/path-explorer-hover.png');
       background-size:cover; background-position:center 60%;
     }
-    .exp-hero::before {
-      content:''; position:absolute; inset:0;
-      background:
-        linear-gradient(180deg, rgba(244,236,222,0) 34%, rgba(244,236,222,.32) 62%, rgba(244,236,222,.62) 100%),
-        linear-gradient(100deg, rgba(244,236,222,.48) 0%, rgba(244,236,222,.2) 44%, rgba(244,236,222,0) 66%);
+    .exp-hero-content { position:relative; z-index:2; width:100%; padding:0 clamp(22px,6vw,92px) clamp(56px,8vw,96px); }
+    .exp-hero-panel {
+      position:relative; display:inline-block; max-width:min(660px,88vw);
+      padding:clamp(30px,4vw,48px) clamp(28px,4vw,46px);
+      background:var(--paper-light);
+      box-shadow:0 30px 60px rgba(36,27,20,.22);
     }
-    .exp-hero-content { position:relative; z-index:2; width:100%; padding:0 clamp(22px,6vw,92px) clamp(64px,9vw,108px); }
+    .exp-hero-panel::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:3px;
+      background:linear-gradient(90deg, var(--ochre) 0%, var(--ochre) 64px, transparent 64px);
+    }
     .exp-breadcrumb {
       display:flex; align-items:center; gap:8px; margin-bottom:22px;
       font-family:var(--display); font-size:.64rem; letter-spacing:.1em; text-transform:uppercase;
-      color:rgba(36,27,20,.68);
-      text-shadow:0 1px 14px rgba(244,236,222,.7);
+      color:rgba(36,27,20,.62);
     }
-    .exp-breadcrumb a { position:relative; color:rgba(36,27,20,.68); transition:color .25s ease; }
+    .exp-breadcrumb a { position:relative; color:rgba(36,27,20,.62); transition:color .25s ease; }
     .exp-breadcrumb a::after {
       content:''; position:absolute; left:0; right:100%; bottom:-3px; height:1px;
       background:var(--ochre); transition:right .3s var(--ease);
@@ -149,22 +152,20 @@
     .exp-breadcrumb a:hover::after { right:0; }
     .exp-breadcrumb-sep { color:var(--ochre); }
     .exp-breadcrumb-current { color:var(--ink); }
-    .exp-hero-eyebrow { color:var(--ochre); text-shadow:0 1px 14px rgba(244,236,222,.7); }
+    .exp-hero-eyebrow { color:var(--ochre); letter-spacing:.13em; }
     .exp-hero h1 {
-      font-size:clamp(3.4rem,8vw,6.4rem); color:var(--ink); text-transform:uppercase; letter-spacing:.01em;
-      margin-bottom:26px; text-wrap:balance; text-shadow:0 4px 26px rgba(244,236,222,.6);
+      font-size:clamp(2.3rem,5.2vw,3.9rem); color:var(--ink); text-transform:uppercase; letter-spacing:.005em;
+      margin-bottom:22px; text-wrap:balance;
     }
-    .exp-hero-text { max-width:52ch; font-size:clamp(1.18rem,1.6vw,1.42rem); color:rgba(36,27,20,.92); line-height:1.55; text-shadow:0 2px 16px rgba(244,236,222,.6); }
+    .exp-hero-text { max-width:52ch; font-size:clamp(1.18rem,1.6vw,1.42rem); color:rgba(36,27,20,.9); line-height:1.55; }
     .exp-hero-text p + p { margin-top:.5rem; }
-    .exp-hero-close { display:block; margin-top:1.2rem; padding-top:1.1rem; border-top:1px solid rgba(61,43,25,.32); color:var(--ochre); font-style:italic; text-shadow:0 2px 16px rgba(244,236,222,.6); }
+    .exp-hero-close { display:block; margin-top:1.2rem; padding-top:1.1rem; border-top:1px solid var(--line); color:var(--ochre); font-style:italic; }
     .exp-hero-scroll {
       position:absolute; bottom:28px; right:clamp(22px,6vw,92px); z-index:2;
       display:flex; align-items:center; gap:10px;
       padding:10px 16px;
-      background:rgba(244,236,222,.88);
-      border:1px solid rgba(255,255,255,.5);
+      background:var(--paper-light);
       box-shadow:0 12px 26px rgba(36,27,20,.16);
-      backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
       font-family:var(--display); font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ink);
     }
     .exp-hero-scroll::after { content:''; width:1px; height:18px; background:var(--ochre); animation:scrollPulse 2.4s ease-in-out infinite; }
@@ -383,21 +384,23 @@
   </header>
 
   <main>
-    <!-- 1. OPENING — full-bleed editorial masthead -->
+    <!-- 1. OPENING -->
     <section class="exp-hero" id="explorerHero" aria-labelledby="explorerTitle">
       <div class="exp-hero-content">
-        <nav class="exp-breadcrumb text-reveal" aria-label="Breadcrumb">
-          <a href="index.html">Home</a>
-          <span class="exp-breadcrumb-sep" aria-hidden="true">/</span>
-          <span class="exp-breadcrumb-current" aria-current="page">Explorer</span>
-        </nav>
-        <span class="eyebrow exp-hero-eyebrow text-reveal">Everyone Begins Somewhere</span>
-        <h1 id="explorerTitle" class="text-reveal">The Explorer</h1>
-        <div class="exp-hero-text text-reveal">
-          <p>You don't need to know exactly what you believe.</p>
-          <p>You don't need to understand where this path will lead.</p>
-          <p>You only need to meet yourself honestly where you are today.</p>
-          <p class="exp-hero-close">Sometimes the first step is not finding another answer.<br>It is slowing down long enough to hear your own.</p>
+        <div class="exp-hero-panel">
+          <nav class="exp-breadcrumb text-reveal" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="exp-breadcrumb-sep" aria-hidden="true">/</span>
+            <span class="exp-breadcrumb-current" aria-current="page">Explorer</span>
+          </nav>
+          <span class="eyebrow exp-hero-eyebrow text-reveal">Everyone Begins Somewhere</span>
+          <h1 id="explorerTitle" class="text-reveal">The Explorer</h1>
+          <div class="exp-hero-text text-reveal">
+            <p>You don't need to know exactly what you believe.</p>
+            <p>You don't need to understand where this path will lead.</p>
+            <p>You only need to meet yourself honestly where you are today.</p>
+            <p class="exp-hero-close">Sometimes the first step is not finding another answer.<br>It is slowing down long enough to hear your own.</p>
+          </div>
         </div>
       </div>
       <div class="exp-hero-scroll" aria-hidden="true">Begin Reading</div>
