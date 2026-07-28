@@ -124,8 +124,13 @@
     .exp-hero {
       position:relative; height:100svh; min-height:660px;
       display:flex; align-items:flex-end; overflow:hidden; isolation:isolate;
-      background-image:url('assets/media/path-explorer-hover.png');
-      background-size:cover; background-position:center 60%;
+      background:#040301;
+    }
+    .exp-hero-video {
+      position:absolute; inset:0; z-index:1;
+      width:100%; height:100%;
+      object-fit:cover; object-position:center 60%;
+      pointer-events:none;
     }
     .exp-hero-content { position:relative; z-index:2; width:100%; padding:0 clamp(22px,6vw,92px) clamp(56px,8vw,96px); }
     .exp-hero-panel {
@@ -172,7 +177,8 @@
     @keyframes scrollPulse { 0%,100% { opacity:.3; } 50% { opacity:1; } }
 
     @media (max-width:760px) {
-      .exp-hero { min-height:560px; background-position:center 66%; }
+      .exp-hero { min-height:560px; }
+      .exp-hero-video { object-position:center 66%; }
       .exp-hero-scroll { display:none; }
     }
 
@@ -386,6 +392,20 @@
   <main>
     <!-- 1. OPENING -->
     <section class="exp-hero" id="explorerHero" aria-labelledby="explorerTitle">
+      <video
+        class="exp-hero-video"
+        src="assets/media/explorer-hero.mp4"
+        poster="assets/media/path-explorer-hover.png"
+        autoplay
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        preload="auto"
+        tabindex="-1"
+        disablepictureinpicture
+        aria-hidden="true"
+      ></video>
       <div class="exp-hero-content">
         <div class="exp-hero-panel">
           <nav class="exp-breadcrumb text-reveal" aria-label="Breadcrumb">
