@@ -57,16 +57,36 @@
       padding:16px 30px; border:1px solid var(--ink);
       font-family:var(--display); font-size:.7rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase;
       color:var(--ink); background:transparent;
-      transition:background .3s var(--ease), color .3s var(--ease), border-color .3s ease, transform .3s var(--ease), box-shadow .3s var(--ease);
+      transition:background .3s var(--ease), color .3s var(--ease), border-color .3s ease, transform .16s ease-out, box-shadow .3s var(--ease);
     }
-    .exp-btn:hover { background:var(--ink); color:var(--paper-light); transform:translateY(-2px); box-shadow:0 14px 26px rgba(36,27,20,.16); }
     .exp-btn--primary { border-color:var(--ochre); color:var(--ochre); }
-    .exp-btn--primary:hover { background:var(--ochre); color:#fff; }
+    @media (hover:hover) and (pointer:fine) {
+      .exp-btn:hover { background:var(--ink); color:var(--paper-light); transform:translateY(-2px); box-shadow:0 14px 26px rgba(36,27,20,.16); }
+      .exp-btn--primary:hover { background:var(--ochre); color:#fff; }
+    }
+    .exp-btn:active { transform:scale(.97); }
     .exp-btn[aria-disabled="true"] { opacity:.55; cursor:default; pointer-events:none; border-style:dashed; }
     .exp-btn-row { display:flex; flex-wrap:wrap; align-items:center; gap:16px 22px; }
     .exp-badge {
       display:inline-block; padding:4px 11px; font-family:var(--display); font-size:.58rem; letter-spacing:.1em; text-transform:uppercase;
       color:var(--ochre); border:1px solid rgba(149,102,44,.4); border-radius:20px; white-space:nowrap;
+    }
+    .exp-soon-section { max-width:680px; margin:0 auto; text-align:center; }
+    .exp-soon-section h2 { margin-top:16px; font-size:clamp(2.3rem,4vw,4rem); color:var(--ink); }
+    .exp-soon-section > p { margin:20px auto 0; max-width:52ch; font-size:1.18rem; color:rgba(36,27,20,.72); line-height:1.55; }
+    .exp-soon-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:44px auto 0; }
+    .exp-soon-tile {
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+      aspect-ratio:16/9; padding:16px;
+      border:1px dashed rgba(149,102,44,.4); color:rgba(36,27,20,.42);
+      font-family:var(--display); font-size:.64rem; letter-spacing:.14em; text-transform:uppercase;
+    }
+    .exp-soon-icon { width:26px; height:26px; color:var(--ochre); opacity:.7; }
+    .exp-soon-icon svg { width:100%; height:100%; }
+    @media (max-width:760px) {
+      .exp-soon-grid { grid-template-columns:1fr; gap:12px; margin-top:32px; }
+      .exp-soon-tile { aspect-ratio:auto; flex-direction:row; padding:16px 18px; }
+      .exp-soon-section > p { font-size:1.06rem; }
     }
 
     /* Scroll reveal */
@@ -132,54 +152,78 @@
       object-fit:cover; object-position:center 60%;
       pointer-events:none;
     }
-    .exp-hero-content { position:relative; z-index:2; width:100%; padding:0 clamp(22px,6vw,92px) clamp(56px,8vw,96px); }
-    .exp-hero-panel {
-      position:relative; display:inline-block; max-width:min(660px,88vw);
-      padding:clamp(30px,4vw,48px) clamp(28px,4vw,46px);
-      background:var(--paper-light);
-      box-shadow:0 30px 60px rgba(36,27,20,.22);
+    .exp-hero-scrim {
+      position:absolute; inset:0; z-index:2; pointer-events:none;
+      background:
+        linear-gradient(180deg, rgba(4,3,1,0) 0%, rgba(4,3,1,.28) 42%, rgba(4,3,1,.86) 100%),
+        linear-gradient(90deg, rgba(4,3,1,.72) 0%, rgba(4,3,1,.32) 38%, rgba(4,3,1,0) 68%);
     }
-    .exp-hero-panel::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:3px;
-      background:linear-gradient(90deg, var(--ochre) 0%, var(--ochre) 64px, transparent 64px);
-    }
+    .exp-hero-content { position:relative; z-index:3; width:100%; padding:0 clamp(22px,6vw,92px) clamp(56px,8vw,96px); }
+    .exp-hero-copy { position:relative; max-width:min(640px,88vw); }
     .exp-breadcrumb {
-      display:flex; align-items:center; gap:8px; margin-bottom:22px;
+      display:flex; align-items:center; gap:8px; margin-bottom:20px;
       font-family:var(--display); font-size:.64rem; letter-spacing:.1em; text-transform:uppercase;
-      color:rgba(36,27,20,.62);
+      color:rgba(255,247,231,.68);
     }
-    .exp-breadcrumb a { position:relative; color:rgba(36,27,20,.62); transition:color .25s ease; }
+    .exp-breadcrumb a { position:relative; color:rgba(255,247,231,.68); transition:color .25s ease; }
     .exp-breadcrumb a::after {
       content:''; position:absolute; left:0; right:100%; bottom:-3px; height:1px;
-      background:var(--ochre); transition:right .3s var(--ease);
+      background:var(--ochre-light); transition:right .3s var(--ease);
     }
-    .exp-breadcrumb a:hover { color:var(--ink); }
+    .exp-breadcrumb a:hover { color:#fff; }
     .exp-breadcrumb a:hover::after { right:0; }
-    .exp-breadcrumb-sep { color:var(--ochre); }
-    .exp-breadcrumb-current { color:var(--ink); }
-    .exp-hero-eyebrow { color:var(--ochre); letter-spacing:.13em; }
+    .exp-breadcrumb-sep { color:var(--ochre-light); }
+    .exp-breadcrumb-current { color:rgba(255,247,231,.92); }
+    .exp-hero-eyebrow { color:var(--ochre-light); letter-spacing:.13em; text-shadow:0 2px 16px rgba(0,0,0,.5); }
     .exp-hero h1 {
-      font-size:clamp(2.3rem,5.2vw,3.9rem); color:var(--ink); text-transform:uppercase; letter-spacing:.005em;
-      margin-bottom:22px; text-wrap:balance;
+      font-size:clamp(2.3rem,5.2vw,3.9rem); color:#fff; text-transform:uppercase; letter-spacing:.005em;
+      margin-bottom:22px; text-wrap:balance; text-shadow:0 4px 26px rgba(0,0,0,.55);
     }
-    .exp-hero-text { max-width:52ch; font-size:clamp(1.18rem,1.6vw,1.42rem); color:rgba(36,27,20,.9); line-height:1.55; }
+    .exp-hero-text { max-width:52ch; font-size:clamp(1.18rem,1.6vw,1.42rem); color:rgba(255,247,231,.92); line-height:1.55; text-shadow:0 2px 18px rgba(0,0,0,.5); }
     .exp-hero-text p + p { margin-top:.5rem; }
-    .exp-hero-close { display:block; margin-top:1.2rem; padding-top:1.1rem; border-top:1px solid var(--line); color:var(--ochre); font-style:italic; }
+    .exp-hero-close { display:block; margin-top:1.2rem; padding-top:1.1rem; border-top:1px solid rgba(255,247,231,.28); color:var(--ochre-light); font-style:italic; }
     .exp-hero-scroll {
-      position:absolute; bottom:28px; right:clamp(22px,6vw,92px); z-index:2;
+      position:absolute; bottom:28px; right:clamp(22px,6vw,92px); z-index:3;
       display:flex; align-items:center; gap:10px;
       padding:10px 16px;
-      background:var(--paper-light);
-      box-shadow:0 12px 26px rgba(36,27,20,.16);
-      font-family:var(--display); font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ink);
+      font-family:var(--display); font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,247,231,.85);
     }
-    .exp-hero-scroll::after { content:''; width:1px; height:18px; background:var(--ochre); animation:scrollPulse 2.4s ease-in-out infinite; }
+    .exp-hero-scroll::after { content:''; width:1px; height:18px; background:var(--ochre-light); animation:scrollPulse 2.4s ease-in-out infinite; }
     @keyframes scrollPulse { 0%,100% { opacity:.3; } 50% { opacity:1; } }
 
     @media (max-width:760px) {
-      .exp-hero { min-height:560px; }
-      .exp-hero-video { object-position:center 66%; }
+      .exp-hero { height:100svh; min-height:620px; align-items:center; }
+      .exp-hero-video { object-position:85% 58%; }
+      .exp-hero-scrim {
+        background:
+          linear-gradient(180deg, rgba(4,3,1,.35) 0%, rgba(4,3,1,.5) 42%, rgba(4,3,1,.5) 62%, rgba(4,3,1,.35) 100%),
+          linear-gradient(90deg, rgba(4,3,1,.5) 0%, rgba(4,3,1,0) 85%);
+      }
+      .exp-hero-content { padding:0 20px; display:flex; justify-content:center; }
+      .exp-hero-copy { max-width:min(480px,92vw); margin:0 auto; }
+      .exp-breadcrumb { margin-bottom:12px; font-size:.6rem; }
+      .exp-hero-eyebrow { margin-bottom:12px; }
+      .exp-hero h1 { font-size:clamp(1.9rem,9vw,2.6rem); margin-bottom:14px; }
+      .exp-hero-text { font-size:1rem; line-height:1.5; }
+      .exp-hero-text p + p { margin-top:.4rem; }
+      .exp-hero-close { margin-top:.9rem; padding-top:.8rem; }
       .exp-hero-scroll { display:none; }
+    }
+
+    @media (max-width:400px) {
+      .exp-hero { height:96svh; min-height:560px; }
+      .exp-hero h1 { font-size:clamp(1.7rem,9vw,2.2rem); }
+      .exp-hero-text { font-size:.94rem; }
+      .exp-heading h2 { font-size:clamp(1.7rem,9vw,2.2rem); }
+      #reflectTitle, #introTitle, #blueprintTitle, #readyTitle { font-size:clamp(1.7rem,9vw,2.2rem) !important; }
+      .exp-heading p,
+      .exp-reflect-intro,
+      .exp-question p,
+      .exp-reflection-close,
+      .exp-option p,
+      .exp-privacy,
+      .exp-video-copy p, .exp-blueprint-copy p, .exp-closing-copy p,
+      .exp-card-body p { font-size:.94rem !important; }
     }
 
     /* ===== Generic section shell ===== */
@@ -202,17 +246,20 @@
     .exp-question { display:grid; grid-template-columns:52px minmax(0,1fr); gap:16px; padding:22px 0; }
     .exp-question-num { font-family:var(--display); font-size:1.7rem; font-weight:500; color:rgba(149,102,44,.28); line-height:1; padding-top:.05rem; }
     .exp-question p { font-size:1.14rem; color:var(--ink); line-height:1.48; margin:0; }
-    .exp-question-follow { display:block; margin-top:.4rem !important; font-size:1rem !important; font-style:italic; color:var(--muted) !important; }
     .exp-reflection-close { max-width:60ch; margin:0 0 40px; font-size:1.16rem; color:rgba(36,27,20,.85); }
     .exp-reflection-close p + p { margin-top:.5rem; }
     .exp-reflection-options { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-bottom:34px; }
     .exp-option {
       display:flex; flex-direction:column; align-items:flex-start; gap:9px; padding:24px 22px;
       background:rgba(255,255,255,.4); border:1px solid var(--line); text-align:left;
-      transition:background .3s var(--ease), border-color .3s ease;
+      transition:background .3s var(--ease), border-color .3s ease, transform .16s ease-out;
     }
-    .exp-option:hover { background:rgba(255,255,255,.68); border-color:rgba(149,102,44,.45); }
-    .exp-option-icon { width:32px; height:32px; display:grid; place-items:center; border:1px solid var(--ochre); border-radius:50%; color:var(--ochre); font-family:var(--display); font-size:.85rem; }
+    @media (hover:hover) and (pointer:fine) {
+      .exp-option:hover { background:rgba(255,255,255,.68); border-color:rgba(149,102,44,.45); }
+    }
+    .exp-option:active { transform:scale(.98); }
+    .exp-option-text { display:contents; }
+    .exp-option-icon { order:-1; width:32px; height:32px; flex:0 0 auto; display:grid; place-items:center; border:1px solid var(--ochre); border-radius:50%; color:var(--ochre); font-family:var(--display); font-size:.85rem; }
     .exp-option h3 { font-size:1.12rem; color:var(--ink); }
     .exp-option p { font-size:.94rem; color:var(--muted); line-height:1.44; }
     .exp-privacy {
@@ -221,8 +268,16 @@
     }
     .exp-reflection-aside { position:sticky; top:calc(var(--header-height) + var(--toc-height) + 26px); }
     .exp-reflection-aside figure { border:1px solid var(--line); padding:10px; background:rgba(255,255,255,.5); box-shadow:0 20px 40px rgba(36,27,20,.1); }
-    .exp-reflection-aside img { aspect-ratio:4/5; object-fit:cover; }
+    .exp-reflection-aside img { aspect-ratio:4/3; object-fit:cover; object-position:92% center; }
     .exp-reflection-aside figcaption { margin-top:12px; font-family:var(--serif); font-style:italic; font-size:1.05rem; color:var(--muted); text-align:center; }
+
+    .exp-heading-symbol-wrap { display:flex; align-items:flex-start; gap:18px; }
+    .exp-heading-symbol {
+      flex:0 0 auto; width:44px; height:44px; margin-top:.2em;
+      display:grid; place-items:center;
+      border:1px solid rgba(149,102,44,.4); border-radius:50%; color:var(--ochre);
+    }
+    .exp-heading-symbol svg { width:22px; height:22px; }
 
     @media (max-width:980px) {
       .exp-reflection-layout { grid-template-columns:1fr; }
@@ -241,11 +296,15 @@
     .exp-video-box {
       position:relative; aspect-ratio:16/9; overflow:hidden; background:var(--paper-deep);
       border:1px solid var(--line); box-shadow:0 26px 50px rgba(36,27,20,.14); cursor:pointer;
-      transition:box-shadow .4s var(--ease), transform .4s var(--ease);
+      transition:box-shadow .4s var(--ease), transform .3s ease-out;
     }
-    .exp-video-box:hover { transform:translateY(-4px); box-shadow:0 34px 64px rgba(36,27,20,.2); }
+    @media (hover:hover) and (pointer:fine) {
+      .exp-video-box:hover { transform:translateY(-4px); box-shadow:0 34px 64px rgba(36,27,20,.2); }
+      .exp-video-box:hover img { transform:scale(1.04); filter:saturate(.92) brightness(.94); }
+      .exp-video-box:hover .exp-play { transform:scale(1.08); background:#fff; }
+    }
+    .exp-video-box:active { transform:scale(.98); }
     .exp-video-box img { transition:transform .6s var(--ease), filter .4s ease; filter:saturate(.82) sepia(.06) brightness(.86) contrast(1.02); }
-    .exp-video-box:hover img { transform:scale(1.04); filter:saturate(.92) brightness(.94); }
     .exp-video-frame { position:absolute; inset:0; width:100%; height:100%; border:0; }
     .exp-play {
       position:absolute; inset:0; margin:auto; width:74px; height:74px; border-radius:50%;
@@ -254,7 +313,7 @@
       animation:playPulse 2.6s ease-in-out infinite;
     }
     .exp-play::after { content:''; width:0; height:0; margin-left:5px; border-style:solid; border-width:11px 0 11px 18px; border-color:transparent transparent transparent var(--ochre); }
-    .exp-video-box:hover .exp-play, .exp-video-box:focus-visible .exp-play { transform:scale(1.08); background:#fff; }
+    .exp-video-box:focus-visible .exp-play { transform:scale(1.08); background:#fff; }
     @keyframes playPulse {
       0%,100% { box-shadow:0 14px 30px rgba(36,27,20,.25), 0 0 0 0 rgba(149,102,44,0); }
       50% { box-shadow:0 14px 30px rgba(36,27,20,.25), 0 0 0 14px rgba(149,102,44,.12); }
@@ -267,24 +326,28 @@
       position:relative; display:flex; flex-direction:column; min-height:100%; background:var(--paper-light); border:1px solid var(--line);
       overflow:hidden; transition:border-color .4s ease;
     }
-    .exp-card:hover { border-color:rgba(149,102,44,.55); }
     .exp-card-media { position:relative; aspect-ratio:16/9; overflow:hidden; background:var(--paper-deep); }
     .exp-card-media img { transition:transform .6s var(--ease), filter .4s ease; filter:saturate(.82) sepia(.06) brightness(.88) contrast(1.02); }
-    .exp-card:hover .exp-card-media img { transform:scale(1.045); filter:saturate(.92) brightness(.95); }
     .exp-card-media .exp-play { width:56px; height:56px; }
     .exp-card-media .exp-play::after { border-width:8px 0 8px 13px; margin-left:3px; }
-    .exp-card:hover .exp-play, .exp-card:focus-visible .exp-play { transform:scale(1.08); background:#fff; }
+    .exp-card:focus-visible .exp-play { transform:scale(1.08); background:#fff; }
     .exp-card-body { display:flex; flex:1; flex-direction:column; gap:8px; padding:22px 22px 26px; }
     .exp-card-body h3 { font-size:1.24rem; color:var(--ink); line-height:1.28; transition:color .3s ease; }
-    .exp-card:hover .exp-card-body h3 { color:var(--ochre); }
+    @media (hover:hover) and (pointer:fine) {
+      .exp-card:hover { border-color:rgba(149,102,44,.55); }
+      .exp-card:hover .exp-card-media img { transform:scale(1.045); filter:saturate(.92) brightness(.95); }
+      .exp-card:hover .exp-play { transform:scale(1.08); background:#fff; }
+      .exp-card:hover .exp-card-body h3 { color:var(--ochre); }
+    }
     .exp-card-body p { font-size:.98rem; color:var(--muted); line-height:1.46; }
     .exp-card-body .text-link { margin-top:auto; padding-top:16px; }
     .exp-card--soon { cursor:default; }
     .exp-card--soon .exp-card-media { filter:grayscale(.35) brightness(.94); }
     .exp-card--soon .exp-card-media img { opacity:.55; }
-    .exp-card--soon:hover { border-color:var(--line); }
-    .exp-card--soon:hover .exp-card-body h3 { color:var(--ink); }
-    .exp-card--jump { cursor:pointer; }
+    @media (hover:hover) and (pointer:fine) {
+      .exp-card--soon:hover { border-color:var(--line); }
+      .exp-card--soon:hover .exp-card-body h3 { color:var(--ink); }
+    }
     @media (max-width:980px) { .exp-card-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media (max-width:620px) { .exp-card-grid { grid-template-columns:1fr; } }
 
@@ -370,9 +433,46 @@
       }
       .primary-nav.open { opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0); }
       .primary-nav a { width:100%; padding:14px 0 10px; border-top:1px solid var(--line); font-size:.7rem; letter-spacing:.055em; }
-      .exp-section { padding:70px 7vw 84px; }
-      .footer-inner { align-items:flex-start; flex-direction:column; }
+      .exp-section { padding:56px 6vw 68px; }
+      .exp-heading { margin-bottom:32px; }
+      .exp-heading h2 { font-size:clamp(1.9rem,9vw,2.6rem); }
+      .exp-heading p { font-size:1rem; }
+      #reflectTitle, #introTitle, #blueprintTitle, #readyTitle { font-size:clamp(1.9rem,9vw,2.6rem) !important; }
+      .exp-heading-symbol-wrap { gap:12px; }
+      .exp-heading-symbol { width:34px; height:34px; }
+      .exp-heading-symbol svg { width:17px; height:17px; }
+      .exp-reflect-intro { font-size:1rem !important; }
+      .exp-btn-row { gap:12px 16px; }
+      .exp-btn { padding:14px 24px; width:100%; justify-content:center; }
+      .exp-question { grid-template-columns:36px minmax(0,1fr); gap:12px; padding:6px 0; }
+      .exp-question-num { font-size:1.3rem; }
+      .exp-question p { font-size:1rem; }
+      .exp-reflection-close { font-size:1rem; }
+      .exp-reflection-options { gap:10px; }
+      .exp-option { flex-direction:row; align-items:center; gap:14px; padding:14px 16px; }
+      .exp-option-text { display:flex; flex-direction:column; gap:2px; order:0; min-width:0; flex:1; }
+      .exp-option-icon { order:1; width:26px; height:26px; font-size:.72rem; }
+      .exp-option h3 { font-size:1rem; }
+      .exp-option p { font-size:.88rem; line-height:1.4; }
+      .exp-privacy { padding:16px 18px; font-size:1rem; }
+      .exp-video-layout, .exp-blueprint-layout, .exp-closing-layout { gap:28px; }
+      .exp-video-copy p, .exp-blueprint-copy p, .exp-closing-copy p { font-size:1rem; }
+      .exp-card-grid, .exp-rotating-grid { gap:16px; }
+      .exp-card-body { padding:18px 18px 22px; }
+      .exp-card-body p { font-size:1rem; }
+      .exp-tabs { gap:8px; margin-bottom:26px; }
+      .exp-tab { padding:10px 16px; font-size:.64rem; }
+      .exp-tree-frame { padding:10px; }
+      .exp-tree-frame::before, .exp-tree-frame::after { width:30px; height:30px; }
+      .site-footer { padding:48px 6vw 24px; }
+      .footer-inner { align-items:flex-start; flex-direction:column; gap:22px; }
       .footer-logo img { width:230px; }
+      .footer-nav { gap:16px 20px; }
+    }
+
+    @media (max-width:480px) {
+      .exp-reflection-aside { max-width:240px; }
+      .exp-btn { padding:14px 20px; font-size:.66rem; }
     }
   </style>
 </head>
@@ -407,8 +507,9 @@
         disablepictureinpicture
         aria-hidden="true"
       ></video>
+      <div class="exp-hero-scrim" aria-hidden="true"></div>
       <div class="exp-hero-content">
-        <div class="exp-hero-panel">
+        <div class="exp-hero-copy">
           <nav class="exp-breadcrumb text-reveal" aria-label="Breadcrumb">
             <a href="index.html">Home</a>
             <span class="exp-breadcrumb-sep" aria-hidden="true">/</span>
@@ -432,9 +533,19 @@
       <div class="exp-inner exp-reflection-layout">
         <div>
           <div class="eyebrow text-reveal">Before You Go Further</div>
-          <h2 id="reflectTitle" class="text-reveal" style="font-size:clamp(2.2rem,3.8vw,3.8rem); color:var(--ink); margin-bottom:20px;">Where are you right now?</h2>
-          <p class="text-reveal" style="font-size:1.2rem; color:var(--muted); max-width:56ch;">Before taking in more information, take a few minutes to pause, look within, and notice what feels true for you today.</p>
-          <p class="text-reveal" style="font-size:1.2rem; color:var(--muted); max-width:56ch;">There are no correct answers. Don't write what you think you are supposed to believe. Write what genuinely feels true.</p>
+          <h2 id="reflectTitle" class="text-reveal exp-heading-symbol-wrap" style="font-size:clamp(2.2rem,3.8vw,3.8rem); color:var(--ink); margin-bottom:20px;">
+            <span>Where are you right now?</span>
+            <span class="exp-heading-symbol" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18.5 4.5c-4 0-9 2-11.5 7.5C5.5 15 5 18 5 19c1 0 4-.5 7-2.5C17.5 13 19.5 8.5 19.5 5.5c0-.4-.1-.7-1-1z"/>
+                <path d="M18 5 6 17"/>
+                <path d="M13.2 9.8 9.5 13.5"/>
+                <path d="M15.7 7.3 12 11"/>
+              </svg>
+            </span>
+          </h2>
+          <p class="exp-reflect-intro text-reveal" style="font-size:1.2rem; color:var(--muted); max-width:56ch;">Before taking in more information, take a few minutes to pause, look within, and notice what feels true for you today.</p>
+          <p class="exp-reflect-intro text-reveal" style="font-size:1.2rem; color:var(--muted); max-width:56ch;">There are no correct answers. Don't write what you think you are supposed to believe. Write what genuinely feels true.</p>
 
           <ol class="exp-questions" id="reflectionQuestions">
             <li class="exp-question text-reveal"><span class="exp-question-num">01</span><p>What brought me here?</p></li>
@@ -445,7 +556,7 @@
             <li class="exp-question text-reveal"><span class="exp-question-num">06</span><p>What am I most curious about?</p></li>
             <li class="exp-question text-reveal"><span class="exp-question-num">07</span><p>How would I describe what spirit actually is?</p></li>
             <li class="exp-question text-reveal"><span class="exp-question-num">08</span><p>What do I believe about who—or what—I am beneath my thoughts, roles, and identity?</p></li>
-            <li class="exp-question text-reveal"><span class="exp-question-num">09</span><p>Have I ever felt connected to something greater than myself?<span class="exp-question-follow">What was that experience like?</span></p></li>
+            <li class="exp-question text-reveal"><span class="exp-question-num">09</span><p>Have I ever felt connected to something greater than myself? What was that experience like?</p></li>
             <li class="exp-question text-reveal"><span class="exp-question-num">10</span><p>What part of myself have I been neglecting?</p></li>
             <li class="exp-question text-reveal"><span class="exp-question-num">11</span><p>What kind of change feels possible for me right now?</p></li>
             <li class="exp-question text-reveal"><span class="exp-question-num">12</span><p>What would a more conscious life look and feel like for me?</p></li>
@@ -459,19 +570,25 @@
 
           <div class="exp-reflection-options text-reveal">
             <button class="exp-option" id="expDownloadReflection" type="button">
+              <span class="exp-option-text">
+                <h3>Download the Reflection</h3>
+                <p>An editable Word document — type your answers directly and save it to your own device.</p>
+              </span>
               <span class="exp-option-icon" aria-hidden="true">&#8595;</span>
-              <h3>Download the Reflection</h3>
-              <p>An editable Word document — type your answers directly and save it to your own device.</p>
             </button>
             <button class="exp-option" id="expPrintReflection" type="button">
+              <span class="exp-option-text">
+                <h3>Print the Reflection</h3>
+                <p>A printable worksheet with room to write, straight from your browser.</p>
+              </span>
               <span class="exp-option-icon" aria-hidden="true">&#128438;</span>
-              <h3>Print the Reflection</h3>
-              <p>A printable worksheet with room to write, straight from your browser.</p>
             </button>
             <a class="exp-option" href="#reflectionQuestions">
+              <span class="exp-option-text">
+                <h3>Use Your Own Journal</h3>
+                <p>Keep the questions visible here while you write on paper.</p>
+              </span>
               <span class="exp-option-icon" aria-hidden="true">&#9998;</span>
-              <h3>Use Your Own Journal</h3>
-              <p>Keep the questions visible here while you write on paper.</p>
             </a>
           </div>
 
@@ -492,7 +609,17 @@
       <div class="exp-inner exp-video-layout">
         <div class="exp-video-copy">
           <span class="eyebrow text-reveal">Start Here</span>
-          <h2 class="text-reveal" style="font-size:clamp(2.2rem,3.6vw,3.4rem); color:var(--ink); margin-bottom:22px;" id="introTitle">Start with the introduction</h2>
+          <h2 class="text-reveal exp-heading-symbol-wrap" style="font-size:clamp(2.2rem,3.6vw,3.4rem); color:var(--ink); margin-bottom:22px;" id="introTitle">
+            <span>Start with the introduction</span>
+            <span class="exp-heading-symbol" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18.5 4.5c-4 0-9 2-11.5 7.5C5.5 15 5 18 5 19c1 0 4-.5 7-2.5C17.5 13 19.5 8.5 19.5 5.5c0-.4-.1-.7-1-1z"/>
+                <path d="M18 5 6 17"/>
+                <path d="M13.2 9.8 9.5 13.5"/>
+                <path d="M15.7 7.3 12 11"/>
+              </svg>
+            </span>
+          </h2>
           <div class="text-reveal">
             <p>Before exploring the individual teachings, begin here.</p>
             <p>This video will orient you to Seek Consciousness—what the project is, how the different pieces connect, and how this work can support your own path.</p>
@@ -526,26 +653,11 @@
         </div>
 
         <div class="exp-card-grid">
-          <a class="exp-card exp-card--jump text-reveal" href="#introduction">
-            <div class="exp-card-media"><img src="https://img.youtube.com/vi/17spdVgtWjw/hqdefault.jpg" alt="" loading="lazy"></div>
-            <div class="exp-card-body">
-              <h3>Welcome to Seek Consciousness</h3>
-              <p>Featured above as the introduction — start there first.</p>
-              <span class="text-link">Watch Above <span aria-hidden="true">&#8593;</span></span>
-            </div>
-          </a>
           <div class="exp-card text-reveal" tabindex="0" role="button" aria-label="Play: Return to Yourself — What Consciousness Really Is" data-youtube="87FSEkIX99I" data-title="Return to Yourself — What Consciousness Really Is" style="cursor:pointer;">
             <div class="exp-card-media"><img src="https://img.youtube.com/vi/87FSEkIX99I/hqdefault.jpg" alt="" loading="lazy"><span class="exp-play" aria-hidden="true"></span></div>
             <div class="exp-card-body">
               <h3>Return to Yourself — What Consciousness Really Is</h3>
               <p>Notice when attention drifts, return to the present, and let clarity guide more aligned choices.</p>
-            </div>
-          </div>
-          <div class="exp-card text-reveal" tabindex="0" role="button" aria-label="Play: Create More, Consume Less" data-youtube="tOCFbcy5IUk" data-title="Create More, Consume Less" style="cursor:pointer;">
-            <div class="exp-card-media"><img src="https://img.youtube.com/vi/tOCFbcy5IUk/hqdefault.jpg" alt="" loading="lazy"><span class="exp-play" aria-hidden="true"></span></div>
-            <div class="exp-card-body">
-              <h3>Create More / Consume Less</h3>
-              <p>Shift from passive consumption into small acts of intentional creation that reconnect you with flow and aliveness.</p>
             </div>
           </div>
           <div class="exp-card text-reveal" tabindex="0" role="button" aria-label="Play: How Constant Stimulation Disconnects You From Your Inner Voice. Let's Reconnect!" data-youtube="B_ZtHN6-xnA" data-title="How Constant Stimulation Disconnects You From Your Inner Voice. Let's Reconnect!" style="cursor:pointer;">
@@ -560,6 +672,13 @@
             <div class="exp-card-body">
               <h3>IQ vs. Wisdom</h3>
               <p>Use intelligence as the engine that moves you forward and wisdom as the compass that keeps you aligned.</p>
+            </div>
+          </div>
+          <div class="exp-card text-reveal" tabindex="0" role="button" aria-label="Play: Get Back Into Your Life" data-youtube="qUqEZ34kZ8s" data-title="Get Back Into Your Life" style="cursor:pointer;">
+            <div class="exp-card-media"><img src="https://img.youtube.com/vi/qUqEZ34kZ8s/hqdefault.jpg" alt="" loading="lazy"><span class="exp-play" aria-hidden="true"></span></div>
+            <div class="exp-card-body">
+              <h3>Get Back Into Your Life</h3>
+              <p>Step out of passive waiting and back into your own life — presence isn't found later, it's chosen now.</p>
             </div>
           </div>
         </div>
@@ -584,6 +703,46 @@
         <div class="exp-rotating-grid" id="rotatingGrid"></div>
 
         <button class="text-link exp-shuffle" id="shuffleBtn" type="button">Show Me Something Different <span aria-hidden="true">&#8635;</span></button>
+      </div>
+    </section>
+
+    <!-- 5b. SPIRITUAL TRAINING REGIMEN — coming soon -->
+    <section class="exp-section exp-section--deep" id="training-regimen" aria-labelledby="trainingRegimenTitle">
+      <div class="exp-inner exp-soon-section">
+        <span class="exp-badge text-reveal">Coming Soon</span>
+        <h2 id="trainingRegimenTitle" class="text-reveal">Spiritual Training Regimen</h2>
+        <p class="text-reveal">A structured practice for building presence, discipline, and inner steadiness — the way you'd train a muscle. This section is taking shape as a series of guided videos and posts.</p>
+        <div class="exp-soon-grid text-reveal">
+          <div class="exp-soon-tile">
+            <span class="exp-soon-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M10 8.5l6 3.5-6 3.5z" fill="currentColor" stroke="none"/>
+              </svg>
+            </span>
+            <span>Video</span>
+          </div>
+          <div class="exp-soon-tile">
+            <span class="exp-soon-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 3h7l4 4v14H7z"/>
+                <path d="M14 3v4h4"/>
+                <path d="M9.5 12h5M9.5 15h5M9.5 18h3"/>
+              </svg>
+            </span>
+            <span>Post</span>
+          </div>
+          <div class="exp-soon-tile">
+            <span class="exp-soon-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 3h7l4 4v14H7z"/>
+                <path d="M14 3v4h4"/>
+                <path d="M9.5 12h5M9.5 15h5M9.5 18h3"/>
+              </svg>
+            </span>
+            <span>Post</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -767,9 +926,13 @@
       /* Rotating teaching pools — illustrative dataset; swap for WordPress-tagged feed later */
       const pools = {
         mind: [
-          { type:'video', id:'QW28c9C86FM', title:'5-MeO-DMT Reactivations: What Is Actually Happening?', desc:'Why altered-state sensations may briefly return, and how calm breathing and awareness support integration.' },
-          { type:'soon', title:'Observing the Mind', desc:'A closer look at thought, attention, and awareness.', img:'assets/media/path-question.jpg' },
-          { type:'soon', title:'Working With Inner Criticism', desc:'Meeting the inner critic with presence instead of resistance.', img:'assets/media/recognition-question.jpg' }
+          { type:'video', id:'k0TA52HUjbs', title:'Cat & Mouse Method', desc:'Stop chasing intrusive thoughts and let them lose interest instead.' },
+          { type:'video', id:'0isBXHY7R6I', title:'Replacement Loop', desc:'Interrupt a negative thought pattern by swapping it for one that serves you.' },
+          { type:'video', id:'0sZLafQc3xM', title:'Single Point Focus', desc:'Quiet mental noise by training attention on a single point.' },
+          { type:'video', id:'LUgaGi08B8E', title:'Flow State', desc:'Enter peak performance and understand why it changes everything.' },
+          { type:'video', id:'iYIyFlRidfI', title:'Staying in Flow', desc:'Stop breaking your own focus and stay in flow state longer.' },
+          { type:'video', id:'Jkt0aRNtlEQ', title:'Turn What You Know Into How You Live', desc:'Move understanding out of your head and into the way you actually live day to day.' },
+          { type:'video', id:'B_ZtHN6-xnA', title:"Why Constant Stimulation Disconnects You (Why You Can't Hear Yourself Anymore)", desc:'Constant stimulation and endless information can quietly disconnect us from our inner voice.' }
         ],
         life: [
           { type:'soon', title:'Creativity as a Practice', desc:'Reconnecting with flow through small acts of creation.', img:'assets/media/direct-experience.jpg' },
