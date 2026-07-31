@@ -41,6 +41,13 @@
     img { display:block; width:100%; height:100%; object-fit:cover; }
     a { color:inherit; text-decoration:none; }
     button { font:inherit; cursor:pointer; }
+    a:focus-visible,
+    button:focus-visible,
+    [tabindex]:focus-visible {
+      outline:2px solid var(--ochre);
+      outline-offset:3px;
+      border-radius:2px;
+    }
     h1,h2,h3 { font-family:var(--display); font-weight:500; line-height:1.1; letter-spacing:.01em; }
     p + p { margin-top:.55rem; }
     ::selection { background:var(--ochre); color:#fff; }
@@ -134,7 +141,7 @@
     }
     .primary-nav a:hover { color:var(--ink); }
     .primary-nav a:hover::after { right:0; }
-    .nav-toggle { display:none; width:42px; height:42px; border:0; background:transparent; cursor:pointer; }
+    .nav-toggle { display:none; width:44px; height:44px; border:0; background:transparent; cursor:pointer; }
     .nav-toggle span { display:block; width:24px; height:1px; margin:6px auto; background:var(--ink); transition:.25s ease; }
     .nav-toggle.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
     .nav-toggle.open span:nth-child(2) { opacity:0; }
@@ -234,6 +241,7 @@
     .exp-heading { max-width:820px; margin-bottom:clamp(40px,5vw,64px); }
     .exp-heading h2 { font-size:clamp(2.3rem,4.2vw,4.2rem); color:var(--ink); margin-bottom:20px; text-wrap:balance; }
     .exp-heading p { font-size:1.24rem; color:var(--muted); max-width:52ch; }
+    .exp-section--deep .exp-heading p { color:#61564a; }
     .exp-heading p + p { margin-top:.4rem; }
 
     /* ===== Reflection ===== */
@@ -259,6 +267,7 @@
     .exp-option:active { transform:scale(.98); }
     .exp-option-text { display:contents; }
     .exp-option-icon { order:-1; width:32px; height:32px; flex:0 0 auto; display:grid; place-items:center; border:1px solid var(--ochre); border-radius:50%; color:var(--ochre); font-family:var(--display); font-size:.85rem; }
+    .exp-option-icon svg { width:16px; height:16px; }
     .exp-option h3 { font-size:1.12rem; color:var(--ink); }
     .exp-option p { font-size:.94rem; color:var(--muted); line-height:1.44; }
     .exp-privacy {
@@ -402,7 +411,7 @@
 
     @media print {
       .site-header, .site-footer, .exp-hero,
-      #introduction, #foundation, #explore-more, #blueprint, #ready,
+      #introduction, #foundation, #explore-more, #training-regimen, #blueprint, #ready,
       .exp-reflection-options, .exp-privacy, .exp-reflection-aside { display:none !important; }
       .text-reveal { opacity:1 !important; transform:none !important; }
       body { background:#fff; }
@@ -412,6 +421,13 @@
       .exp-question { display:block; break-inside:avoid; page-break-inside:avoid; padding:18px 0 30px; border-bottom:1px solid #ccc; }
       .exp-question-num { display:inline; margin-right:8px; }
       .exp-question p { display:inline; font-size:13pt; }
+      .exp-question::after {
+        content:'';
+        display:block;
+        margin-top:16px;
+        height:84px;
+        background-image:repeating-linear-gradient(to bottom, transparent, transparent 27px, #ccc 27px, #ccc 28px);
+      }
     }
 
     @media (max-width:760px) {
@@ -580,7 +596,13 @@
                 <h3>Print the Reflection</h3>
                 <p>A printable worksheet with room to write, straight from your browser.</p>
               </span>
-              <span class="exp-option-icon" aria-hidden="true">&#128438;</span>
+              <span class="exp-option-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 9V3h12v6"/>
+                  <path d="M6 18H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2"/>
+                  <path d="M6 14h12v7H6z"/>
+                </svg>
+              </span>
             </button>
             <a class="exp-option" href="#reflectionQuestions">
               <span class="exp-option-text">
