@@ -228,7 +228,7 @@
       .exp-question p,
       .exp-reflection-close,
       .exp-privacy,
-      .exp-video-copy p, .exp-blueprint-copy p, .exp-closing-copy p,
+      .exp-video-copy p, .exp-blueprint-intro p, .exp-closing-copy p,
       .exp-card-body p { font-size:1.05rem !important; }
     }
 
@@ -377,16 +377,73 @@
     @media (max-width:620px) { .exp-rotating-grid { grid-template-columns:1fr; } }
 
     /* ===== Blueprint ===== */
-    .exp-blueprint-layout { display:grid; grid-template-columns:minmax(0,.9fr) minmax(320px,1.1fr); gap:clamp(40px,6vw,90px); align-items:center; }
-    .exp-blueprint-copy p { font-size:1.22rem; color:rgba(36,27,20,.86); }
-    .exp-blueprint-copy p + p { margin-top:.6rem; }
-    .exp-blueprint-copy .exp-btn-row { margin-top:34px; }
-    .exp-tree-frame { position:relative; padding:14px; background:rgba(255,255,255,.5); border:1px solid var(--line); box-shadow:0 26px 50px rgba(36,27,20,.12); }
-    .exp-tree-frame::before, .exp-tree-frame::after { content:''; position:absolute; z-index:2; width:46px; height:46px; pointer-events:none; }
-    .exp-tree-frame::before { top:-8px; left:-8px; border-top:1px solid var(--ochre); border-left:1px solid var(--ochre); }
-    .exp-tree-frame::after { right:-8px; bottom:-8px; border-right:1px solid var(--ochre); border-bottom:1px solid var(--ochre); }
-    .exp-tree-frame img { aspect-ratio:5/4; object-fit:contain; background:var(--paper); }
-    @media (max-width:900px) { .exp-blueprint-layout { grid-template-columns:1fr; } }
+    .exp-blueprint-intro { max-width:760px; margin:0 auto clamp(48px,6vw,76px); text-align:center; }
+    .exp-blueprint-intro p { font-size:1.22rem; color:rgba(36,27,20,.86); }
+    .exp-blueprint-intro p + p { margin-top:.6rem; }
+    .exp-blueprint-intro .exp-btn-row { margin-top:34px; justify-content:center; }
+
+    /* ---- Full-width tree diagram ---- */
+    .exp-tree-full { position:relative; width:100%; margin:0; line-height:0; }
+    .exp-tree-full img { width:100%; height:auto; display:block; }
+    .exp-tree-overlay { position:absolute; inset:0; }
+    .exp-tree-band { position:absolute; left:0; right:0; transform:translateY(-50%); display:flex; flex-direction:column; align-items:center; gap:clamp(10px,1.6vw,20px); padding:0 clamp(14px,4vw,40px); }
+    .exp-tree-band-title { font-family:var(--display); font-weight:500; text-transform:uppercase; letter-spacing:.14em; color:#f8f0dd; font-size:clamp(1rem,2.6vw,2.1rem); text-shadow:0 3px 16px rgba(5,4,3,.6); }
+    .exp-tree-band-title::after { content:''; display:block; width:34px; height:1px; margin:8px auto 0; background:var(--ochre-light); }
+    .exp-tree-row { display:flex; flex-wrap:nowrap; justify-content:space-between; width:min(1360px,88%); }
+    .exp-tree-row--roots { width:min(920px,64%); }
+    .exp-tree-node {
+      display:flex; flex-direction:column; align-items:center; gap:clamp(6px,.8vw,10px);
+      width:clamp(64px,9vw,140px); color:#f8f0dd; text-align:center;
+      background:none; border:0; padding:0; font:inherit;
+    }
+    .exp-tree-node-icon {
+      width:clamp(30px,4.2vw,58px); height:clamp(30px,4.2vw,58px); border-radius:50%;
+      display:grid; place-items:center; border:1px solid var(--ochre-light);
+      background:rgba(5,4,3,.32); backdrop-filter:blur(2px); -webkit-backdrop-filter:blur(2px);
+      transition:background .3s var(--ease), border-color .3s ease, transform .25s var(--ease);
+    }
+    .exp-tree-node-icon svg { width:54%; height:54%; }
+    .exp-tree-node-label { font-family:var(--display); font-size:clamp(.54rem,1vw,.82rem); letter-spacing:.02em; line-height:1.28; text-shadow:0 2px 10px rgba(5,4,3,.65); }
+    @media (hover:hover) and (pointer:fine) {
+      .exp-tree-node:hover .exp-tree-node-icon { background:var(--ochre); border-color:var(--ochre); transform:translateY(-3px) scale(1.06); }
+    }
+    .exp-tree-node:active .exp-tree-node-icon { transform:scale(.94); }
+    .exp-tree-node:focus-visible .exp-tree-node-icon { outline:2px solid var(--ochre-light); outline-offset:3px; }
+    .exp-tree-trunk-list { list-style:none; font-family:var(--serif); font-weight:500; color:#f8f0dd; font-size:clamp(.72rem,1.3vw,1.08rem); line-height:1.7; text-align:center; text-shadow:0 2px 10px rgba(5,4,3,.6); }
+    .exp-tree-trunk-list li::before { content:'\2022  '; color:var(--ochre-light); }
+
+    /* ---- Tree node popup: embedded video + text ---- */
+    .exp-tree-modal {
+      position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center;
+      padding:24px; opacity:0; visibility:hidden; pointer-events:none;
+      transition:opacity .35s var(--ease), visibility .35s var(--ease);
+    }
+    .exp-tree-modal.is-open { opacity:1; visibility:visible; pointer-events:auto; }
+    .exp-tree-modal-backdrop { position:absolute; inset:0; background:rgba(5,4,3,.82); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); }
+    .exp-tree-modal-dialog {
+      position:relative; z-index:1; width:min(880px,100%); max-height:90vh; overflow-y:auto;
+      background:var(--paper-light); border:1px solid var(--line); box-shadow:0 40px 90px rgba(5,4,3,.5);
+      transform:translateY(18px) scale(.98); opacity:0; transition:transform .4s var(--ease), opacity .4s var(--ease);
+    }
+    .exp-tree-modal.is-open .exp-tree-modal-dialog { transform:translateY(0) scale(1); opacity:1; }
+    .exp-tree-modal-close {
+      position:absolute; top:24px; right:24px; z-index:3; width:40px; height:40px; border-radius:50%;
+      display:grid; place-items:center; background:rgba(5,4,3,.7); color:#f8f0dd; border:1px solid rgba(248,240,221,.3);
+      opacity:0; visibility:hidden; transition:background .25s ease, transform .25s ease, opacity .3s ease, visibility .3s ease;
+    }
+    .exp-tree-modal.is-open .exp-tree-modal-close { opacity:1; visibility:visible; }
+    .exp-tree-modal-close:hover { background:var(--ochre); transform:rotate(90deg); }
+    .exp-tree-modal-close svg { width:16px; height:16px; }
+    .exp-tree-modal-media { position:relative; aspect-ratio:16/9; background:#000; }
+    .exp-tree-modal-media iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .exp-tree-modal-body { padding:clamp(24px,4vw,42px); }
+    .exp-tree-modal-eyebrow { display:block; margin-bottom:10px; font-family:var(--display); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ochre); }
+    .exp-tree-modal-title { font-size:clamp(1.5rem,3vw,2.1rem); color:var(--ink); margin-bottom:14px; }
+    .exp-tree-modal-desc { font-size:1.14rem; color:rgba(36,27,20,.82); line-height:1.55; }
+    @media (max-width:600px) {
+      .exp-tree-modal { padding:0; }
+      .exp-tree-modal-dialog { width:100%; max-height:100vh; height:100%; border:0; }
+    }
 
     /* ===== Closing CTA ===== */
     .exp-closing-layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,.75fr); gap:clamp(36px,5vw,70px); align-items:center; }
@@ -473,15 +530,21 @@
       .exp-option h3 { font-size:1rem; }
       .exp-option p { font-size:.88rem; line-height:1.4; }
       .exp-privacy { padding:16px 18px; font-size:1.16rem; }
-      .exp-video-layout, .exp-blueprint-layout, .exp-closing-layout { gap:28px; }
-      .exp-video-copy p, .exp-blueprint-copy p, .exp-closing-copy p { font-size:1.16rem; }
+      .exp-video-layout, .exp-closing-layout { gap:28px; }
+      .exp-video-copy p, .exp-blueprint-intro p, .exp-closing-copy p { font-size:1.16rem; }
+      .exp-blueprint-intro { margin-bottom:36px; }
       .exp-card-grid, .exp-rotating-grid { gap:16px; }
       .exp-card-body { padding:18px 18px 22px; }
       .exp-card-body p { font-size:1.16rem; }
       .exp-tabs { gap:8px; margin-bottom:26px; }
       .exp-tab { padding:10px 16px; font-size:.64rem; }
-      .exp-tree-frame { padding:10px; }
-      .exp-tree-frame::before, .exp-tree-frame::after { width:30px; height:30px; }
+      .exp-tree-overlay {
+        position:static; display:flex; flex-direction:column; gap:32px;
+        padding:34px 6vw 38px; background:linear-gradient(180deg, rgba(20,15,10,.94), rgba(20,15,10,.88));
+      }
+      .exp-tree-band { position:static; transform:none; padding:0; gap:16px; }
+      .exp-tree-row, .exp-tree-row--roots { width:100%; flex-wrap:wrap; justify-content:center; gap:20px 16px; }
+      .exp-tree-node { width:calc(33.333% - 12px); }
       .site-footer { padding:48px 6vw 24px; }
       .footer-inner { align-items:flex-start; flex-direction:column; gap:22px; }
       .footer-logo img { width:230px; }
@@ -771,9 +834,9 @@
     </section>
 
     <!-- 6. BLUEPRINT — full-bleed break in the layout rhythm -->
-    <section class="exp-section exp-section--paper" id="blueprint" aria-labelledby="blueprintTitle">
-      <div class="exp-inner exp-blueprint-layout">
-        <div class="exp-blueprint-copy">
+    <section class="exp-section exp-section--paper" id="blueprint" aria-labelledby="blueprintTitle" style="padding-left:0; padding-right:0;">
+      <div class="exp-inner" style="padding:0 6vw;">
+        <div class="exp-blueprint-intro">
           <span class="eyebrow text-reveal">The Bigger Picture</span>
           <h2 class="text-reveal" style="font-size:clamp(2.3rem,4vw,4rem); color:var(--ink); margin-bottom:22px;" id="blueprintTitle">See how it all connects</h2>
           <div class="text-reveal">
@@ -786,10 +849,75 @@
             <a class="exp-btn" href="#blueprint">Explore It Piece by Piece</a>
           </div>
         </div>
-        <figure class="exp-tree-frame text-reveal">
-          <img src="assets/media/tree-of-consciousness.png" alt="An illustrated tree with an equally expansive root system, representing the Seek Consciousness Blueprint" loading="lazy">
-        </figure>
       </div>
+
+      <figure class="exp-tree-full text-reveal">
+        <img src="assets/media/tree.png" alt="An illustrated tree with an equally expansive root system: Ancient Wisdom, Mind &amp; Nervous System, Catalysts &amp; Expanded States, Living the Practice, Nature Sound &amp; Environment, and Identity &amp; Purpose in the branches; Breath, Awareness, Writing &amp; Reflection, and Body Integration in the trunk; Inner Authority, Direct Experience, Daily Practice, and Love &amp; Truth in the roots." loading="lazy">
+
+        <div class="exp-tree-overlay">
+          <div class="exp-tree-band exp-tree-band--branches" style="top:16%;">
+            <span class="exp-tree-band-title">Branches</span>
+            <div class="exp-tree-row exp-tree-row--branches">
+              <a class="exp-tree-node" href="#blueprint">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3 2-5 5-5 8a5 5 0 0 0 10 0c0-3-2-6-5-8z"/><path d="M12 13v8"/><path d="M9 21h6"/></svg></span>
+                <span class="exp-tree-node-label">Ancient Wisdom</span>
+              </a>
+              <a class="exp-tree-node" href="#blueprint">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4.5A2.5 2.5 0 0 0 6.5 7 2.5 2.5 0 0 0 5 11.5 2.7 2.7 0 0 0 6 16.3 2.5 2.5 0 0 0 9 19.5z"/><path d="M15 4.5A2.5 2.5 0 0 1 17.5 7 2.5 2.5 0 0 1 19 11.5 2.7 2.7 0 0 1 18 16.3a2.5 2.5 0 0 1-3 3.2z"/><path d="M9 8.5h2M9 12h2.5M9 15.5h2M13 8.5h2M12.5 12H15M13 15.5h2"/></svg></span>
+                <span class="exp-tree-node-label">Mind &amp; Nervous System</span>
+              </a>
+              <a class="exp-tree-node" href="#blueprint">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="3.4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></span>
+                <span class="exp-tree-node-label">Catalysts &amp; Expanded States</span>
+              </a>
+              <a class="exp-tree-node" href="#blueprint">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5.5" r="1.8"/><path d="M12 9v3.5"/><path d="M12 9c-2 1.6-3.2 2-5 2M12 9c2 1.6 3.2 2 5 2"/><path d="M12 12.5c-2.5 1-4 3-4 5.5h8c0-2.5-1.5-4.5-4-5.5z"/></svg></span>
+                <span class="exp-tree-node-label">Living the Practice</span>
+              </a>
+              <a class="exp-tree-node" href="#blueprint">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 12v0M7 9v6M10 6v12M13 4v16M16 8v8M19 10.5v3"/></svg></span>
+                <span class="exp-tree-node-label">Nature, Sound &amp; Environment</span>
+              </a>
+              <a class="exp-tree-node" href="#blueprint">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 3 5 6 5 9a5 5 0 0 1-10 0c0-1.2.4-2.2 1-3 .2 1 .8 1.6 1.5 1.8C9 8.5 10.5 6 12 3z"/></svg></span>
+                <span class="exp-tree-node-label">Identity &amp; Purpose</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="exp-tree-band exp-tree-band--trunk" style="top:47%;">
+            <span class="exp-tree-band-title">Trunk</span>
+            <ul class="exp-tree-trunk-list">
+              <li>Breath</li>
+              <li>Awareness</li>
+              <li>Writing &amp; Reflection</li>
+              <li>Body Integration</li>
+            </ul>
+          </div>
+
+          <div class="exp-tree-band exp-tree-band--roots" style="top:83%;">
+            <span class="exp-tree-band-title">Roots</span>
+            <div class="exp-tree-row exp-tree-row--roots">
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="77" data-eyebrow="Root 01" data-title="Inner Authority" data-desc="Following your own path. Strengthening inner vision and discernment.">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5 13 12 12 20.5 11 12z"/><path d="M3.5 12 12 13 20.5 12 12 11z"/></svg></span>
+                <span class="exp-tree-node-label">Inner Authority</span>
+              </button>
+              <a class="exp-tree-node" href="#blueprint">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/></svg></span>
+                <span class="exp-tree-node-label">Direct Experience</span>
+              </a>
+              <a class="exp-tree-node" href="#blueprint">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3.5"/><path d="M5 13a7 7 0 0 1 14 0"/><path d="M2.5 13h19"/><path d="M4.6 8.6l1.6 1.6M19.4 8.6l-1.6 1.6"/></svg></span>
+                <span class="exp-tree-node-label">Daily Practice</span>
+              </a>
+              <a class="exp-tree-node" href="#blueprint">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.7-9C.7 7.5 2.7 4 6.3 4c2 0 3.6 1.1 4.7 2.7C12.1 5.1 13.7 4 15.7 4c3.6 0 5.6 3.5 4 7-2.2 4.4-9.7 9-9.7 9z"/></svg></span>
+                <span class="exp-tree-node-label">Love &amp; Truth</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </figure>
     </section>
 
     <!-- 7. TRANSITION TO PATHFINDER -->
@@ -823,6 +951,21 @@
     </div>
     <p class="copyright">&copy; <span id="year"></span> Seek Consciousness. All rights reserved.</p>
   </footer>
+
+  <div class="exp-tree-modal" id="treeModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="treeModalTitle">
+    <div class="exp-tree-modal-backdrop" data-modal-dismiss></div>
+    <button type="button" class="exp-tree-modal-close" aria-label="Close" data-modal-dismiss>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="exp-tree-modal-dialog">
+      <div class="exp-tree-modal-media"></div>
+      <div class="exp-tree-modal-body">
+        <span class="exp-tree-modal-eyebrow"></span>
+        <h3 class="exp-tree-modal-title" id="treeModalTitle"></h3>
+        <p class="exp-tree-modal-desc"></p>
+      </div>
+    </div>
+  </div>
 
   <script>
     (() => {
@@ -888,12 +1031,63 @@
         media.innerHTML = '';
         media.appendChild(iframe);
       };
-      document.querySelectorAll('[data-youtube]').forEach(box => {
+      document.querySelectorAll('[data-youtube]:not(.exp-tree-node)').forEach(box => {
         box.addEventListener('click', () => playFacade(box));
         box.addEventListener('keydown', e => {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); playFacade(box); }
         });
       });
+
+      /* Tree node popup: embedded video + text, opened from Branches/Trunk/Roots icons */
+      const treeModal = document.getElementById('treeModal');
+      if (treeModal) {
+        const modalMedia = treeModal.querySelector('.exp-tree-modal-media');
+        const modalEyebrow = treeModal.querySelector('.exp-tree-modal-eyebrow');
+        const modalTitle = treeModal.querySelector('.exp-tree-modal-title');
+        const modalDesc = treeModal.querySelector('.exp-tree-modal-desc');
+        let lastTreeTrigger = null;
+
+        const openTreeModal = (trigger) => {
+          const id = trigger.dataset.youtube;
+          if (!id) return;
+          lastTreeTrigger = trigger;
+          const start = trigger.dataset.start ? `&start=${trigger.dataset.start}` : '';
+          const iframe = document.createElement('iframe');
+          iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&autoplay=1${start}`;
+          iframe.title = trigger.dataset.title || 'Seek Consciousness video';
+          iframe.loading = 'lazy';
+          iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+          iframe.allowFullscreen = true;
+          modalMedia.innerHTML = '';
+          modalMedia.appendChild(iframe);
+          modalEyebrow.textContent = trigger.dataset.eyebrow || '';
+          modalEyebrow.style.display = trigger.dataset.eyebrow ? '' : 'none';
+          modalTitle.textContent = trigger.dataset.title || '';
+          modalDesc.textContent = trigger.dataset.desc || '';
+          treeModal.classList.add('is-open');
+          treeModal.setAttribute('aria-hidden','false');
+          document.body.style.overflow = 'hidden';
+          treeModal.querySelector('.exp-tree-modal-close').focus();
+        };
+
+        const closeTreeModal = () => {
+          if (!treeModal.classList.contains('is-open')) return;
+          treeModal.classList.remove('is-open');
+          treeModal.setAttribute('aria-hidden','true');
+          document.body.style.overflow = '';
+          modalMedia.innerHTML = '';
+          lastTreeTrigger?.focus();
+        };
+
+        document.querySelectorAll('.exp-tree-node[data-youtube]').forEach(node => {
+          node.addEventListener('click', () => openTreeModal(node));
+        });
+        treeModal.querySelectorAll('[data-modal-dismiss]').forEach(el => el.addEventListener('click', closeTreeModal));
+        document.addEventListener('keydown', e => {
+          if (e.key === 'Escape') closeTreeModal();
+        });
+      }
 
       /* Reflection: download as an editable Word document (RTF opens natively in Word, Pages, Google Docs) */
       const getQuestions = () => Array.from(document.querySelectorAll('#reflectionQuestions .exp-question p'))
