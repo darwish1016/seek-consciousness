@@ -397,7 +397,7 @@
       background:none; border:0; padding:0; font:inherit;
     }
     .exp-tree-node-icon {
-      width:clamp(30px,4.2vw,58px); height:clamp(30px,4.2vw,58px); border-radius:50%;
+      width:clamp(44px,4.2vw,58px); height:clamp(44px,4.2vw,58px); border-radius:50%;
       display:grid; place-items:center; border:1px solid var(--ochre-light);
       background:rgba(5,4,3,.32); backdrop-filter:blur(2px); -webkit-backdrop-filter:blur(2px);
       transition:background .3s var(--ease), border-color .3s ease, transform .25s var(--ease);
@@ -435,6 +435,9 @@
     .exp-tree-modal-close:hover { background:var(--ochre); transform:rotate(90deg); }
     .exp-tree-modal-close svg { width:16px; height:16px; }
     .exp-tree-modal-media { position:relative; aspect-ratio:16/9; background:#000; }
+    @supports not (aspect-ratio:16/9) {
+      .exp-tree-modal-media { height:0; padding-top:56.25%; }
+    }
     .exp-tree-modal-media iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
     .exp-tree-modal-body { padding:clamp(24px,4vw,42px); }
     .exp-tree-modal-eyebrow { display:block; margin-bottom:10px; font-family:var(--display); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ochre); }
@@ -1072,7 +1075,6 @@
         iframe.className = 'exp-video-frame';
         iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&autoplay=1`;
         iframe.title = box.dataset.title || 'Seek Consciousness video';
-        iframe.loading = 'lazy';
         iframe.referrerPolicy = 'strict-origin-when-cross-origin';
         iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
         iframe.allowFullscreen = true;
@@ -1095,6 +1097,22 @@
         const modalTitle = treeModal.querySelector('.exp-tree-modal-title');
         const modalDesc = treeModal.querySelector('.exp-tree-modal-desc');
         let lastTreeTrigger = null;
+        let lockedScrollY = 0;
+
+        const lockBodyScroll = () => {
+          lockedScrollY = window.scrollY;
+          document.body.style.position = 'fixed';
+          document.body.style.top = `-${lockedScrollY}px`;
+          document.body.style.left = '0';
+          document.body.style.right = '0';
+        };
+        const unlockBodyScroll = () => {
+          document.body.style.position = '';
+          document.body.style.top = '';
+          document.body.style.left = '';
+          document.body.style.right = '';
+          window.scrollTo(0, lockedScrollY);
+        };
 
         const openTreeModal = (trigger) => {
           const id = trigger.dataset.youtube;
@@ -1104,7 +1122,6 @@
           const iframe = document.createElement('iframe');
           iframe.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&autoplay=1${start}`;
           iframe.title = trigger.dataset.title || 'Seek Consciousness video';
-          iframe.loading = 'lazy';
           iframe.referrerPolicy = 'strict-origin-when-cross-origin';
           iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
           iframe.allowFullscreen = true;
@@ -1131,7 +1148,7 @@
           }
           treeModal.classList.add('is-open');
           treeModal.setAttribute('aria-hidden','false');
-          document.body.style.overflow = 'hidden';
+          lockBodyScroll();
           treeModal.querySelector('.exp-tree-modal-close').focus();
         };
 
@@ -1139,7 +1156,7 @@
           if (!treeModal.classList.contains('is-open')) return;
           treeModal.classList.remove('is-open');
           treeModal.setAttribute('aria-hidden','true');
-          document.body.style.overflow = '';
+          unlockBodyScroll();
           modalMedia.innerHTML = '';
           lastTreeTrigger?.focus();
         };
