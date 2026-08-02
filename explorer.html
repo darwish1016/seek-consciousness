@@ -440,6 +440,15 @@
     .exp-tree-modal-eyebrow { display:block; margin-bottom:10px; font-family:var(--display); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ochre); }
     .exp-tree-modal-title { font-size:clamp(1.5rem,3vw,2.1rem); color:var(--ink); margin-bottom:14px; }
     .exp-tree-modal-desc { font-size:1.14rem; color:rgba(36,27,20,.82); line-height:1.55; }
+    .exp-tree-modal-desc p + p { margin-top:.9em; }
+    .exp-tree-modal-desc h4 {
+      margin-top:1.6em; margin-bottom:.5em; font-family:var(--display); font-weight:600;
+      font-size:.98rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ochre);
+    }
+    .exp-tree-modal-desc h4:first-child { margin-top:0; }
+    .exp-tree-modal-desc ol { margin:.9em 0 0; padding-left:1.25em; display:flex; flex-direction:column; gap:.6em; }
+    .exp-tree-modal-desc li { padding-left:.15em; }
+    .exp-tree-modal-desc ol + p { margin-top:.9em; }
     @media (max-width:600px) {
       .exp-tree-modal { padding:0; }
       .exp-tree-modal-dialog { width:100%; max-height:100vh; height:100%; border:0; }
@@ -858,35 +867,38 @@
           <div class="exp-tree-band exp-tree-band--branches" style="top:16%;">
             <span class="exp-tree-band-title">Branches</span>
             <div class="exp-tree-row exp-tree-row--branches">
-              <a class="exp-tree-node" href="#blueprint">
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="760" data-eyebrow="Branch 01" data-title="Ancient Wisdom" data-desc="The maps of consciousness preserved through the Yoga Sutras, Buddhist teachings, contemplative mysticism, nonduality, Daoism, Sufism, hermetic philosophy, indigenous and earth-based traditions, meditation lineages, and other forms of spiritual inquiry.||The traditions should not be flattened into one identical teaching. Their histories and differences matter.||Study widely. Experience directly. Keep what proves true and useful in lived practice.">
                 <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3 2-5 5-5 8a5 5 0 0 0 10 0c0-3-2-6-5-8z"/><path d="M12 13v8"/><path d="M9 21h6"/></svg></span>
                 <span class="exp-tree-node-label">Ancient Wisdom</span>
-              </a>
-              <a class="exp-tree-node" href="#blueprint">
+              </button>
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="902" data-eyebrow="Branch 02" data-title="Mind &amp; Nervous System" data-desc="Psychology, attention, emotional loops, habits, brain states, trauma literacy, focus, flow, regulation, and the relationship among body, mind, and awareness.||Modern research can offer useful language, mechanisms, and corrective evidence. It should not be used as decoration or as a way to make every spiritual claim sound scientifically proven.">
                 <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4.5A2.5 2.5 0 0 0 6.5 7 2.5 2.5 0 0 0 5 11.5 2.7 2.7 0 0 0 6 16.3 2.5 2.5 0 0 0 9 19.5z"/><path d="M15 4.5A2.5 2.5 0 0 1 17.5 7 2.5 2.5 0 0 1 19 11.5 2.7 2.7 0 0 1 18 16.3a2.5 2.5 0 0 1-3 3.2z"/><path d="M9 8.5h2M9 12h2.5M9 15.5h2M13 8.5h2M12.5 12H15M13 15.5h2"/></svg></span>
                 <span class="exp-tree-node-label">Mind &amp; Nervous System</span>
-              </a>
-              <a class="exp-tree-node" href="#blueprint">
+              </button>
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="1000" data-eyebrow="Branch 03" data-title="Catalysts &amp; Expanded States" data-desc="Plant medicines, psychedelics, breath-induced states, deep contemplative states, ego dissolution, shadow material, the dark night of the soul, tantric depth practices, and integration.||Catalysts can open awareness and reveal patterns. They are not the destination, not required, and not proof of spiritual maturity.">
                 <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="3.4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></span>
                 <span class="exp-tree-node-label">Catalysts &amp; Expanded States</span>
-              </a>
-              <a class="exp-tree-node" href="#blueprint">
+              </button>
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="668" data-eyebrow="Branch 04" data-title="Living the Practice" data-desc="The place where insight is tested in relationships, work, time, decisions, conflict, creativity, family, leadership, sexuality, boundaries, repair, compassion, integrity, and ordinary behavior.||The shift does not happen only in what a person learns. It happens in what they use.">
                 <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5.5" r="1.8"/><path d="M12 9v3.5"/><path d="M12 9c-2 1.6-3.2 2-5 2M12 9c2 1.6 3.2 2 5 2"/><path d="M12 12.5c-2.5 1-4 3-4 5.5h8c0-2.5-1.5-4.5-4-5.5z"/></svg></span>
                 <span class="exp-tree-node-label">Living the Practice</span>
-              </a>
-              <a class="exp-tree-node" href="#blueprint">
+              </button>
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="1317" data-eyebrow="Branch 05" data-title="Nature, Sound &amp; Environment" data-desc="Nature as teacher, sacred space, music, sound, travel, new environments, and the intentional design of spaces that support consciousness.||The practical inquiry is direct: What happens within you in different environments? What calms you, opens you, agitates you, or helps you hear yourself more clearly?">
                 <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 12v0M7 9v6M10 6v12M13 4v16M16 8v8M19 10.5v3"/></svg></span>
                 <span class="exp-tree-node-label">Nature, Sound &amp; Environment</span>
-              </a>
-              <a class="exp-tree-node" href="#blueprint">
+              </button>
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="1144" data-eyebrow="Branch 06" data-title="Identity &amp; Purpose" data-desc="Identity, ego, shadow, dreams, the subconscious, community, relationships, vocation, and the question of who a person is becoming.||Identity is not fixed. The ego is not simply an enemy to destroy; it can be understood and brought into service of something deeper. Purpose may be uncovered, created, and revealed over time.||Who are you becoming?||If you do not like the answer, you may be moving in the wrong direction. The question is not shame. It is orientation.">
                 <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 3 5 6 5 9a5 5 0 0 1-10 0c0-1.2.4-2.2 1-3 .2 1 .8 1.6 1.5 1.8C9 8.5 10.5 6 12 3z"/></svg></span>
                 <span class="exp-tree-node-label">Identity &amp; Purpose</span>
-              </a>
+              </button>
             </div>
           </div>
 
           <div class="exp-tree-band exp-tree-band--trunk" style="top:47%;">
             <span class="exp-tree-band-title">Trunk</span>
+            <button type="button" class="exp-tree-node exp-tree-trunk-node" aria-label="Play: Trunk" data-youtube="vFnXQ0wqT1U" data-start="311" data-eyebrow="The Trunk" data-title="Trunk" data-template="tmplTrunk">
+              <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><path d="M10 8.3l6 3.7-6 3.7z" fill="currentColor" stroke="none"/></svg></span>
+            </button>
             <ul class="exp-tree-trunk-list">
               <li>Breath</li>
               <li>Awareness</li>
@@ -898,22 +910,22 @@
           <div class="exp-tree-band exp-tree-band--roots" style="top:83%;">
             <span class="exp-tree-band-title">Roots</span>
             <div class="exp-tree-row exp-tree-row--roots">
-              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="77" data-eyebrow="Root 01" data-title="Inner Authority" data-desc="Following your own path. Strengthening inner vision and discernment.">
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="77" data-eyebrow="Root 01" data-title="Inner Authority" data-desc="Follow your own path while strengthening self-trust, discernment, and responsibility. Teachers and traditions can help, but none should replace a person&rsquo;s direct relationship with their own experience and inner guidance.">
                 <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5 13 12 12 20.5 11 12z"/><path d="M3.5 12 12 13 20.5 12 12 11z"/></svg></span>
                 <span class="exp-tree-node-label">Inner Authority</span>
               </button>
-              <a class="exp-tree-node" href="#blueprint">
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="132" data-eyebrow="Root 02" data-title="Direct Experience" data-desc="Approach truth through lived experience rather than belief or borrowed stories. Practice the teaching. Observe it. See what changes. Remain humble about the meaning assigned to the experience.">
                 <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/></svg></span>
                 <span class="exp-tree-node-label">Direct Experience</span>
-              </a>
-              <a class="exp-tree-node" href="#blueprint">
+              </button>
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="177" data-eyebrow="Root 03" data-title="Daily Practice" data-desc="Consistency creates change. Practice turns an idea into a capacity and an insight into a way of being. The Blueprint is not meant to be consumed as information alone.">
                 <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3.5"/><path d="M5 13a7 7 0 0 1 14 0"/><path d="M2.5 13h19"/><path d="M4.6 8.6l1.6 1.6M19.4 8.6l-1.6 1.6"/></svg></span>
                 <span class="exp-tree-node-label">Daily Practice</span>
-              </a>
-              <a class="exp-tree-node" href="#blueprint">
+              </button>
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="218" data-eyebrow="Root 04" data-title="Love &amp; Truth" data-desc="Compassion and honesty keep the path aligned. Love protects truth from becoming cruelty. Truth protects love from becoming avoidance or spiritual bypassing.">
                 <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.7-9C.7 7.5 2.7 4 6.3 4c2 0 3.6 1.1 4.7 2.7C12.1 5.1 13.7 4 15.7 4c3.6 0 5.6 3.5 4 7-2.2 4.4-9.7 9-9.7 9z"/></svg></span>
                 <span class="exp-tree-node-label">Love &amp; Truth</span>
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -962,10 +974,47 @@
       <div class="exp-tree-modal-body">
         <span class="exp-tree-modal-eyebrow"></span>
         <h3 class="exp-tree-modal-title" id="treeModalTitle"></h3>
-        <p class="exp-tree-modal-desc"></p>
+        <div class="exp-tree-modal-desc"></div>
       </div>
     </div>
   </div>
+
+  <template id="tmplTrunk">
+    <p>The full trunk contains four categories. People do not need to begin all four at once.</p>
+    <p>Breath is the default first practice. Vision Writing is the second major anchor. Awareness and Body Integration deepen gradually.</p>
+
+    <h4>Breath</h4>
+    <p>Breath is one of the most immediate ways to influence inner state. It is embodied, accessible, and requires no belief.</p>
+    <p>Within Seek Consciousness, breath functions as a morning foundation, a reset, a way to interrupt automatic reactivity, a grounding practice before the phone or noise, a doorway into meditation, and a direct return to the body and present moment.</p>
+    <p>Core practices include foundational breathwork, 90 Seconds to Nirvana, reset breathing, and practices intended to support greater steadiness and regulation.</p>
+    <p>Specific physiological or medical claims must be researched before publication. The strongest teaching often begins with what a person can directly feel and observe.</p>
+
+    <h4>Awareness</h4>
+    <p>Awareness is the ability to notice what is happening without being completely controlled by it.</p>
+    <p>It includes thoughts, emotional reactions, triggers, bodily tension, impulses, attention being pulled, and patterns running beneath behavior. Once a pattern can be seen clearly, a different relationship with it becomes possible.</p>
+    <p>The Five Mind Tools are:</p>
+    <ol>
+      <li>Cat &amp; Mouse Method — noticing thoughts as they appear rather than remaining unconsciously captured by them.</li>
+      <li>Replacement Loop — interrupting an unhelpful mental loop by consciously replacing it rather than only fighting it.</li>
+      <li>Single Point Focus — training the ability to place and sustain attention deliberately.</li>
+      <li>Flow State — entering deep engagement where attention, ability, challenge, and action come together.</li>
+      <li>Staying in Flow — recognizing what breaks attention and learning how to protect, extend, and return to flow.</li>
+    </ol>
+    <p>The purpose is not to fight every thought. It is to become aware enough to choose a different relationship with it.</p>
+
+    <h4>Writing &amp; Reflection</h4>
+    <p>Writing &amp; Reflection is the trunk category. Vision Writing is its primary practice.</p>
+    <p>Vision Writing helps a person clarify direction, recognize patterns, explore questions, connect present experience with future vision, and bring thoughts out of the head into a form that can be examined.</p>
+    <p>Kurt&rsquo;s personal practice is generally at least 500 freely written words without polishing or trying to sound a certain way. It may include relationships, work, fear, purpose, contradiction, dreams, questions, fragments, and emerging vision. The original writing is saved. Over time, repeated entries reveal what is becoming clear, what remains unresolved, and what may be asking for action.</p>
+    <p>It is more than journaling and more than planning. It is partly reflection and partly manifestation: what a person repeatedly envisions, examines, and returns to begins shaping attention, decisions, and the life being created.</p>
+    <p>AI reflection is optional and remains a mirror, never an authority.</p>
+
+    <h4>Body Integration</h4>
+    <p>The body is not separate from consciousness work. It is part of the path.</p>
+    <p>Movement, yoga, stretching, strength, sleep, rest, nutrition, physical care, and releasing tension all affect how a person experiences life. The body is not merely a shell or something to transcend. It is the instrument through which human life is lived.</p>
+    <p>Body care should fit into ordinary life: stretch while watching something, walk instead of scrolling, practice five minutes rather than zero, build strength gradually, and protect sleep.</p>
+    <p>Presence is not something you visit. It is something you practice living.</p>
+  </template>
 
   <script>
     (() => {
@@ -1064,7 +1113,22 @@
           modalEyebrow.textContent = trigger.dataset.eyebrow || '';
           modalEyebrow.style.display = trigger.dataset.eyebrow ? '' : 'none';
           modalTitle.textContent = trigger.dataset.title || '';
-          modalDesc.textContent = trigger.dataset.desc || '';
+          modalDesc.innerHTML = '';
+          const templateId = trigger.dataset.template;
+          const template = templateId ? document.getElementById(templateId) : null;
+          if (template) {
+            modalDesc.appendChild(template.content.cloneNode(true));
+            modalDesc.style.display = '';
+          } else if (trigger.dataset.desc) {
+            trigger.dataset.desc.split('||').forEach(part => {
+              const p = document.createElement('p');
+              p.textContent = part.trim();
+              modalDesc.appendChild(p);
+            });
+            modalDesc.style.display = '';
+          } else {
+            modalDesc.style.display = 'none';
+          }
           treeModal.classList.add('is-open');
           treeModal.setAttribute('aria-hidden','false');
           document.body.style.overflow = 'hidden';
