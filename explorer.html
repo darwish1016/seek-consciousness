@@ -1111,7 +1111,7 @@
           document.body.style.top = '';
           document.body.style.left = '';
           document.body.style.right = '';
-          window.scrollTo(0, lockedScrollY);
+          window.scrollTo({ top:lockedScrollY, left:0, behavior:'instant' });
         };
 
         const openTreeModal = (trigger) => {
