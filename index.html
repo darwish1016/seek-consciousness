@@ -805,7 +805,7 @@
         text-wrap:balance;
       }
 
-      .reflection { padding:90px 7vw; }
+      .reflection { padding:90px 7vw; background:var(--paper); }
       .reflection h2 { font-size:clamp(2rem,9.5vw,3.2rem); }
 
       .practical { min-height:0; }
@@ -1282,7 +1282,7 @@
       line-height:1.6;
     }
 
-    /* Guiding text: below the portrait on desktop, last on mobile. */
+    /* Guiding text: below the portrait on desktop and mobile. */
     .guidance {
       width:100%;
       margin:0;
@@ -1333,8 +1333,8 @@
         grid-template-columns:1fr;
         grid-template-areas:
           "portrait"
-          "story"
-          "guidance";
+          "guidance"
+          "story";
         row-gap:30px;
         margin-top:48px;
       }
