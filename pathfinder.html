@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Pathfinder — Seek Consciousness</title>
-  <meta name="description" content="Turn insight into practice. Begin with one thing, build with breath, and discover what happens when you return to something consistently.">
+  <title>The Explorer — Seek Consciousness</title>
+  <meta name="description" content="Everyone begins somewhere. Pause, reflect, and explore the foundational teachings of Seek Consciousness at your own pace.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet">
@@ -73,10 +73,43 @@
       .exp-btn--primary:hover { background:var(--ochre); color:#fff; }
     }
     .exp-btn:active { transform:scale(.97); }
+    .exp-btn[aria-disabled="true"] { opacity:.55; cursor:default; pointer-events:none; border-style:dashed; }
     .exp-btn-row { display:flex; flex-wrap:wrap; align-items:center; gap:16px 22px; }
     .exp-badge {
       display:inline-block; padding:4px 11px; font-family:var(--display); font-size:.58rem; letter-spacing:.1em; text-transform:uppercase;
       color:var(--ochre); border:1px solid rgba(149,102,44,.4); border-radius:20px; white-space:nowrap;
+    }
+    .exp-soon-section { max-width:680px; margin:0 auto; text-align:center; }
+    .exp-soon-section h2 { margin-top:16px; font-size:clamp(2.3rem,4vw,4rem); color:var(--ink); }
+    .exp-soon-section > p { margin:20px auto 0; max-width:52ch; font-size:1.18rem; color:rgba(36,27,20,.72); line-height:1.55; }
+    .exp-soon-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:44px auto 0; }
+    .exp-soon-tile {
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+      aspect-ratio:16/9; padding:16px;
+      border:1px dashed rgba(149,102,44,.4); color:rgba(36,27,20,.42);
+      font-family:var(--display); font-size:.64rem; letter-spacing:.14em; text-transform:uppercase;
+    }
+    .exp-soon-icon { width:26px; height:26px; color:var(--ochre); opacity:.7; }
+    .exp-soon-icon svg { width:100%; height:100%; }
+    /* ===== Training Regimen — full-bleed cinematic banner ===== */
+    .exp-training {
+      position:relative; isolation:isolate; overflow:hidden;
+      background:#0d0a07 center/cover no-repeat;
+    }
+    .exp-training-scrim {
+      position:absolute; inset:0; z-index:0; pointer-events:none;
+      background:linear-gradient(180deg, rgba(8,6,4,.32) 0%, rgba(8,6,4,.66) 55%, rgba(8,6,4,.9) 100%);
+    }
+    .exp-training .exp-inner { position:relative; z-index:1; }
+    .exp-training .exp-badge { color:var(--ochre-light); border-color:rgba(217,168,105,.45); }
+    .exp-training .exp-soon-section h2 { color:#f8f0dd; text-shadow:0 4px 22px rgba(0,0,0,.55); }
+    .exp-training .exp-soon-section > p { color:rgba(248,240,221,.82); }
+    .exp-training .exp-soon-tile { color:rgba(248,240,221,.62); border-color:rgba(217,168,105,.35); }
+    .exp-training .exp-soon-icon { color:var(--ochre-light); opacity:.9; }
+    @media (max-width:760px) {
+      .exp-soon-grid { grid-template-columns:1fr; gap:12px; margin-top:32px; }
+      .exp-soon-tile { aspect-ratio:auto; flex-direction:row; padding:16px 18px; }
+      .exp-soon-section > p { font-size:1.16rem; }
     }
 
     /* Scroll reveal */
@@ -86,13 +119,14 @@
       will-change:opacity,transform;
     }
     .text-reveal.is-visible { opacity:1; transform:translate3d(0,0,0); }
+
     @media (prefers-reduced-motion:reduce) {
       html { scroll-behavior:auto; }
       *,*::before,*::after { animation-duration:.001ms !important; transition-duration:.001ms !important; }
       .text-reveal { opacity:1 !important; transform:none !important; }
     }
 
-    /* ===== Header / Footer (identical component across the site) ===== */
+    /* ===== Header (identical component to index.html) ===== */
     .site-header {
       position:fixed; inset:0 0 auto; z-index:100; height:var(--header-height);
       display:flex; align-items:center; justify-content:space-between;
@@ -103,6 +137,7 @@
       box-shadow:0 12px 30px rgba(36,27,20,.06);
       backdrop-filter:blur(14px);
       -webkit-backdrop-filter:blur(14px);
+      opacity:1; visibility:visible; transform:translateY(0);
     }
     .site-logo { display:block; line-height:0; }
     .site-logo img {
@@ -128,23 +163,22 @@
     .nav-toggle.open span:nth-child(2) { opacity:0; }
     .nav-toggle.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
 
-    /* ===== Hero ===== */
+    /* ===== Hero — flat editorial plate anchored on the photo ===== */
     .exp-hero {
       position:relative; height:100svh; min-height:660px;
       display:flex; align-items:flex-end; overflow:hidden; isolation:isolate;
       background:#040301;
     }
-    .exp-hero-media {
+    .exp-hero-video {
       position:absolute; inset:0; z-index:1;
       width:100%; height:100%;
-      object-fit:cover; object-position:center 38%;
-      filter:saturate(.9) contrast(1.03) brightness(.78);
+      object-fit:cover; object-position:center 60%;
       pointer-events:none;
     }
     .exp-hero-scrim {
       position:absolute; inset:0; z-index:2; pointer-events:none;
       background:
-        linear-gradient(180deg, rgba(4,3,1,0) 0%, rgba(4,3,1,.3) 42%, rgba(4,3,1,.88) 100%),
+        linear-gradient(180deg, rgba(4,3,1,0) 0%, rgba(4,3,1,.28) 42%, rgba(4,3,1,.86) 100%),
         linear-gradient(90deg, rgba(4,3,1,.72) 0%, rgba(4,3,1,.32) 38%, rgba(4,3,1,0) 68%);
     }
     .exp-hero-content { position:relative; z-index:3; width:100%; padding:0 clamp(22px,6vw,92px) clamp(56px,8vw,96px); }
@@ -170,6 +204,7 @@
     }
     .exp-hero-text { max-width:52ch; font-size:clamp(1.18rem,1.6vw,1.42rem); color:rgba(255,247,231,.92); line-height:1.55; text-shadow:0 2px 18px rgba(0,0,0,.5); }
     .exp-hero-text p + p { margin-top:.5rem; }
+    .exp-hero-close { display:block; margin-top:1.2rem; padding-top:1.1rem; border-top:1px solid rgba(255,247,231,.28); color:var(--ochre-light); font-style:italic; }
     .exp-hero-scroll {
       position:absolute; bottom:28px; right:clamp(22px,6vw,92px); z-index:3;
       display:flex; align-items:center; gap:10px;
@@ -181,7 +216,7 @@
 
     @media (max-width:760px) {
       .exp-hero { height:100svh; min-height:620px; align-items:center; }
-      .exp-hero-media { object-position:62% 42%; }
+      .exp-hero-video { object-position:65% 64%; }
       .exp-hero-scrim {
         background:
           linear-gradient(180deg, rgba(4,3,1,.35) 0%, rgba(4,3,1,.5) 42%, rgba(4,3,1,.5) 62%, rgba(4,3,1,.35) 100%),
@@ -189,10 +224,28 @@
       }
       .exp-hero-content { padding:0 20px; display:flex; justify-content:center; }
       .exp-hero-copy { max-width:min(480px,92vw); margin:0 auto; }
+      .exp-breadcrumb { margin-bottom:12px; font-size:.6rem; }
+      .exp-hero-eyebrow { margin-bottom:12px; }
       .exp-hero h1 { font-size:clamp(2.1rem,9vw,3.15rem); margin-bottom:14px; }
       .exp-hero-text { font-size:1.16rem; line-height:1.5; }
       .exp-hero-text p + p { margin-top:.4rem; }
+      .exp-hero-close { margin-top:.9rem; padding-top:.8rem; }
       .exp-hero-scroll { display:none; }
+    }
+
+    @media (max-width:400px) {
+      .exp-hero { height:96svh; min-height:560px; }
+      .exp-hero h1 { font-size:clamp(1.9rem,9vw,2.7rem); }
+      .exp-hero-text { font-size:1.05rem; }
+      .exp-heading h2 { font-size:clamp(1.9rem,9vw,2.7rem); }
+      #reflectTitle, #blueprintTitle, #readyTitle { font-size:clamp(1.9rem,9vw,2.7rem) !important; }
+      .exp-heading p,
+      .exp-reflect-intro,
+      .exp-question p,
+      .exp-reflection-close,
+      .exp-privacy,
+      .exp-video-copy p, .exp-blueprint-intro p, .exp-closing-copy p,
+      .exp-card-body p { font-size:1.05rem !important; }
     }
 
     /* ===== Generic section shell ===== */
@@ -203,25 +256,21 @@
     .exp-inner { width:min(1280px,100%); margin:0 auto; }
     .exp-heading { max-width:820px; margin-bottom:clamp(40px,5vw,64px); }
     .exp-heading h2 { font-size:clamp(2.3rem,4.2vw,4.2rem); color:var(--ink); margin-bottom:20px; text-wrap:balance; }
-    .exp-heading p { font-size:1.24rem; color:var(--muted); max-width:56ch; }
+    .exp-heading p { font-size:1.24rem; color:var(--muted); max-width:52ch; }
     .exp-section--deep .exp-heading p { color:#61564a; }
     .exp-heading p + p { margin-top:.4rem; }
-    .exp-heading--center { max-width:760px; margin-left:auto; margin-right:auto; text-align:center; }
     .exp-divider { height:1px; margin:0 0 clamp(40px,5vw,64px); background:linear-gradient(90deg, transparent, rgba(149,102,44,.5) 50%, transparent); }
 
-    /* ===== Reflection-style question list ===== */
+    /* ===== Reflection ===== */
+    .exp-reflection-layout { display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:clamp(30px,4vw,60px); align-items:start; }
     .exp-questions {
       display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px 48px;
-      margin:14px 0 40px; padding-top:28px; border-top:1px solid var(--line);
+      margin:14px 0 48px; padding-top:28px; border-top:1px solid var(--line);
     }
     .exp-question { display:grid; grid-template-columns:52px minmax(0,1fr); gap:16px; padding:22px 0; }
     .exp-question-num { font-family:var(--display); font-size:1.7rem; font-weight:500; color:rgba(149,102,44,.28); line-height:1; padding-top:.05rem; }
     .exp-question p { font-size:1.14rem; color:var(--ink); line-height:1.48; margin:0; }
-    .exp-privacy {
-      max-width:640px; padding:20px 22px; border-left:2px solid var(--ochre); background:rgba(255,255,255,.3);
-      font-size:1rem; color:rgba(36,27,20,.8); font-style:italic; line-height:1.5;
-    }
-    .exp-reflection-close { max-width:60ch; margin:0 0 34px; font-size:1.16rem; color:rgba(36,27,20,.85); }
+    .exp-reflection-close { max-width:60ch; margin:0 0 40px; font-size:1.16rem; color:rgba(36,27,20,.85); }
     .exp-reflection-close p + p { margin-top:.5rem; }
     .exp-reflection-options { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-bottom:34px; }
     .exp-option {
@@ -229,45 +278,39 @@
       background:rgba(255,255,255,.4); border:1px solid var(--line); text-align:left;
       transition:background .3s var(--ease), border-color .3s ease, transform .16s ease-out;
     }
-    @media (hover:hover) and (pointer:fine) { .exp-option:hover { background:rgba(255,255,255,.68); border-color:rgba(149,102,44,.45); } }
+    @media (hover:hover) and (pointer:fine) {
+      .exp-option:hover { background:rgba(255,255,255,.68); border-color:rgba(149,102,44,.45); }
+    }
     .exp-option:active { transform:scale(.98); }
     .exp-option-text { display:contents; }
     .exp-option-icon { order:-1; width:32px; height:32px; flex:0 0 auto; display:grid; place-items:center; border:1px solid var(--ochre); border-radius:50%; color:var(--ochre); font-family:var(--display); font-size:.85rem; }
     .exp-option-icon svg { width:16px; height:16px; }
     .exp-option h3 { font-size:1.12rem; color:var(--ink); }
     .exp-option p { font-size:.94rem; color:var(--muted); line-height:1.44; }
+    .exp-privacy {
+      max-width:640px; padding:20px 22px; border-left:2px solid var(--ochre); background:rgba(255,255,255,.3);
+      font-size:1rem; color:rgba(36,27,20,.8); font-style:italic; line-height:1.5;
+    }
+    .exp-reflection-aside { position:sticky; top:calc(var(--header-height) + var(--toc-height) + 26px); }
+    .exp-reflection-aside figure { border:1px solid var(--line); padding:10px; background:rgba(255,255,255,.5); box-shadow:0 20px 40px rgba(36,27,20,.1); }
+    .exp-reflection-aside img { aspect-ratio:4/3; object-fit:cover; object-position:92% center; }
+    .exp-reflection-aside figcaption { margin-top:12px; font-family:var(--serif); font-style:italic; font-size:1.05rem; color:var(--muted); text-align:center; }
+
+    .exp-heading-symbol-wrap { display:flex; align-items:flex-start; gap:18px; }
+    .exp-heading-symbol {
+      flex:0 0 auto; width:44px; height:44px; margin-top:.2em;
+      display:grid; place-items:center;
+      border:1px solid rgba(149,102,44,.4); border-radius:50%; color:var(--ochre);
+    }
+    .exp-heading-symbol svg { width:22px; height:22px; }
+
+    @media (max-width:980px) {
+      .exp-reflection-layout { grid-template-columns:1fr; }
+      .exp-reflection-aside { position:static; max-width:320px; margin:0 auto; }
+    }
     @media (max-width:760px) {
       .exp-questions { grid-template-columns:1fr; }
-      .exp-reflection-options { grid-template-columns:1fr; gap:10px; }
-      .exp-option { flex-direction:row; align-items:center; gap:14px; padding:14px 16px; }
-      .exp-option-text { display:flex; flex-direction:column; gap:2px; order:0; min-width:0; flex:1; }
-      .exp-option-icon { order:1; width:26px; height:26px; font-size:.72rem; }
-      .exp-option h3 { font-size:1rem; }
-      .exp-option p { font-size:.88rem; line-height:1.4; }
-    }
-
-    @media print {
-      .site-header, .site-footer,
-      #pathfinderHero, #what-it-opens, #insight, #one-thing, #breath, #practice-grow,
-      #mind-tools, #tune-in, #teachings, #blueprint, #new-here, #ready,
-      .exp-reflection-options, .exp-privacy { display:none !important; }
-      .text-reveal { opacity:1 !important; transform:none !important; }
-      body { background:#fff; }
-      #where-you-are { padding:24px 6vw; background:#fff; }
-      .exp-questions { display:block; }
-      .exp-question { display:block; break-inside:avoid; page-break-inside:avoid; padding:18px 0 30px; border-bottom:1px solid #ccc; }
-      .exp-question-num { display:inline; margin-right:8px; }
-      .exp-question p { display:inline; font-size:13pt; }
-      .exp-question::after {
-        content:'';
-        display:block;
-        margin-top:16px;
-        height:84px;
-        background:
-          linear-gradient(#ccc,#ccc) 0 27px/100% 1px no-repeat,
-          linear-gradient(#ccc,#ccc) 0 55px/100% 1px no-repeat,
-          linear-gradient(#ccc,#ccc) 0 83px/100% 1px no-repeat;
-      }
+      .exp-reflection-options { grid-template-columns:1fr; }
     }
 
     /* ===== Video sections ===== */
@@ -287,8 +330,6 @@
     }
     .exp-video-box:active { transform:scale(.98); }
     .exp-video-box img { transition:transform .6s var(--ease), filter .4s ease; filter:saturate(.82) sepia(.06) brightness(.86) contrast(1.02); }
-    .exp-video-box--soon { cursor:default; }
-    .exp-video-box--soon img { filter:grayscale(.4) brightness(.88); opacity:.6; }
     .exp-video-frame { position:absolute; inset:0; width:100%; height:100%; border:0; }
     .exp-play {
       position:absolute; inset:0; margin:auto; width:74px; height:74px; border-radius:50%;
@@ -302,42 +343,45 @@
       0%,100% { box-shadow:0 14px 30px rgba(36,27,20,.25), 0 0 0 0 rgba(149,102,44,0); }
       50% { box-shadow:0 14px 30px rgba(36,27,20,.25), 0 0 0 14px rgba(149,102,44,.12); }
     }
-    .exp-video-badge { position:absolute; top:16px; left:16px; z-index:2; background:var(--paper-light); }
     @media (max-width:900px) { .exp-video-layout { grid-template-columns:1fr; } }
 
-    /* ===== Toggle / details pattern (Introduction, Pranayama context) ===== */
-    .exp-toggle { border:1px solid var(--line); background:rgba(255,255,255,.4); }
-    .exp-toggle-summary {
+    /* ===== Introduction toggle (collapsed by default — full intro now lives on the homepage) ===== */
+    .exp-intro-toggle { border:1px solid var(--line); background:rgba(255,255,255,.4); }
+    .exp-intro-summary {
       display:flex; align-items:center; justify-content:space-between; gap:24px; list-style:none;
-      padding:24px clamp(20px,4vw,36px); cursor:pointer;
+      padding:28px clamp(22px,4vw,42px); cursor:pointer;
     }
-    .exp-toggle-summary::-webkit-details-marker { display:none; }
-    .exp-toggle-summary::marker { content:''; }
-    .exp-toggle-summary-text { display:flex; flex-direction:column; gap:6px; }
-    .exp-toggle-summary-line { font-size:1.1rem; color:var(--ink); line-height:1.5; }
-    .exp-toggle-summary-line strong { font-family:var(--display); font-weight:600; font-size:.9em; letter-spacing:.01em; }
-    .exp-toggle-summary-line.is-muted { color:var(--muted); }
-    .exp-toggle-icon {
-      flex:0 0 auto; width:32px; height:32px; border-radius:50%; border:1px solid rgba(149,102,44,.4);
+    .exp-intro-summary::-webkit-details-marker { display:none; }
+    .exp-intro-summary::marker { content:''; }
+    .exp-intro-summary-text { display:flex; flex-direction:column; gap:6px; }
+    .exp-intro-summary-line { font-size:1.12rem; color:var(--ink); line-height:1.5; }
+    .exp-intro-summary-line strong { font-family:var(--display); font-weight:600; font-size:.92em; letter-spacing:.01em; }
+    .exp-intro-summary-line.is-muted { color:var(--muted); }
+    .exp-intro-toggle-icon {
+      flex:0 0 auto; width:34px; height:34px; border-radius:50%; border:1px solid rgba(149,102,44,.4);
       display:grid; place-items:center; color:var(--ochre); transition:transform .3s var(--ease), background .3s ease;
     }
-    .exp-toggle-icon svg { width:15px; height:15px; }
-    .exp-toggle[open] .exp-toggle-icon { transform:rotate(180deg); }
-    @media (hover:hover) and (pointer:fine) { .exp-toggle-summary:hover .exp-toggle-icon { border-color:var(--ochre); } }
-    .exp-toggle-panel { padding:0 clamp(20px,4vw,36px) clamp(28px,4vw,40px); }
-    @media (min-width:901px) { .exp-toggle-panel .exp-video-layout { grid-template-columns:minmax(0,1fr) minmax(280px,.9fr); } }
-    .exp-toggle-panel p { font-size:1.08rem; color:rgba(36,27,20,.86); }
-    .exp-toggle-panel p + p { margin-top:.55rem; }
-    @keyframes togglePanelIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
-    .exp-toggle[open] .exp-toggle-panel { animation:togglePanelIn .35s var(--ease); }
+    .exp-intro-toggle-icon svg { width:16px; height:16px; }
+    .exp-intro-toggle[open] .exp-intro-toggle-icon { transform:rotate(180deg); }
+    @media (hover:hover) and (pointer:fine) {
+      .exp-intro-summary:hover .exp-intro-toggle-icon { border-color:var(--ochre); }
+    }
+    .exp-intro-panel { padding:0 clamp(22px,4vw,42px) clamp(32px,4vw,46px); }
+    @media (min-width:901px) {
+      .exp-intro-panel .exp-video-layout { grid-template-columns:minmax(0,1fr) minmax(280px,.9fr); }
+    }
+    .exp-intro-panel p { font-size:1.1rem; color:rgba(36,27,20,.86); }
+    .exp-intro-panel p + p { margin-top:.55rem; }
+    @keyframes introPanelIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+    .exp-intro-toggle[open] .exp-intro-panel { animation:introPanelIn .35s var(--ease); }
     @media (max-width:760px) {
-      .exp-toggle-summary { padding:20px 18px; gap:14px; }
-      .exp-toggle-panel { padding:0 18px 26px; }
+      .exp-intro-summary { padding:22px 20px; gap:16px; }
+      .exp-intro-summary-line { font-size:1.16rem; }
+      .exp-intro-panel { padding:0 20px 30px; }
     }
 
-    /* ===== Cards ===== */
+    /* ===== Cards (foundation + rotating) — quiet hover: no lift, tone and border shift only ===== */
     .exp-card-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; }
-    .exp-card-grid--2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
     .exp-card {
       position:relative; display:flex; flex-direction:column; min-height:100%; background:var(--paper-light); border:1px solid var(--line);
       overflow:hidden; transition:border-color .4s ease;
@@ -364,10 +408,10 @@
       .exp-card--soon:hover { border-color:var(--line); }
       .exp-card--soon:hover .exp-card-body h3 { color:var(--ink); }
     }
-    @media (max-width:980px) { .exp-card-grid, .exp-card-grid--2 { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-    @media (max-width:620px) { .exp-card-grid, .exp-card-grid--2 { grid-template-columns:1fr; } }
+    @media (max-width:980px) { .exp-card-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:620px) { .exp-card-grid { grid-template-columns:1fr; } }
 
-    /* ===== Tabs + rotating grid ===== */
+    /* ===== Rotating tabs ===== */
     .exp-tabs { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:34px; }
     .exp-tab {
       padding:12px 22px; border:1px solid var(--line); background:transparent;
@@ -384,7 +428,7 @@
     @media (max-width:980px) { .exp-rotating-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media (max-width:620px) { .exp-rotating-grid { grid-template-columns:1fr; } }
 
-    /* ===== Blueprint / Tree (identical to explorer.html) ===== */
+    /* ===== Blueprint ===== */
     .exp-blueprint-intro { max-width:760px; margin:0 auto clamp(48px,6vw,76px); text-align:center; }
     .exp-blueprint-intro p { font-size:1.22rem; color:rgba(36,27,20,.86); }
     .exp-blueprint-intro p + p { margin-top:.6rem; }
@@ -396,6 +440,8 @@
     }
     .exp-tree-hint-icon { display:inline-block; width:15px; height:15px; margin-right:7px; vertical-align:-3px; }
     .exp-tree-hint-icon svg { width:100%; height:100%; display:block; }
+
+    /* ---- Full-width tree diagram ---- */
     #treeBlueprint { scroll-margin-top:calc(var(--header-height) + var(--toc-height) + 14px); }
     .exp-tree-full { position:relative; width:100%; margin:0; line-height:0; }
     .exp-tree-full img, .exp-tree-full video { width:100%; height:auto; display:block; }
@@ -447,7 +493,7 @@
     .exp-tree-trunk-list { list-style:none; font-family:var(--serif); font-weight:500; color:#f8f0dd; font-size:clamp(.72rem,1.3vw,1.08rem); line-height:1.7; text-align:center; text-shadow:0 2px 10px rgba(5,4,3,.6); }
     .exp-tree-trunk-list li::before { content:'\2022  '; color:var(--ochre-light); }
 
-    /* ---- Video/tree node modal ---- */
+    /* ---- Tree node popup: embedded video + text ---- */
     .exp-tree-modal {
       position:fixed; inset:0; z-index:200; display:flex; align-items:center; justify-content:center;
       padding:24px; opacity:0; visibility:hidden; pointer-events:none;
@@ -470,12 +516,23 @@
     .exp-tree-modal-close:hover { background:var(--ochre); transform:rotate(90deg); }
     .exp-tree-modal-close svg { width:16px; height:16px; }
     .exp-tree-modal-media { position:relative; aspect-ratio:16/9; background:#000; }
+    @supports not (aspect-ratio:16/9) {
+      .exp-tree-modal-media { height:0; padding-top:56.25%; }
+    }
     .exp-tree-modal-media iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
     .exp-tree-modal-body { padding:clamp(24px,4vw,42px); }
     .exp-tree-modal-eyebrow { display:block; margin-bottom:10px; font-family:var(--display); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ochre); }
     .exp-tree-modal-title { font-size:clamp(1.5rem,3vw,2.1rem); color:var(--ink); margin-bottom:14px; }
     .exp-tree-modal-desc { font-size:1.14rem; color:rgba(36,27,20,.82); line-height:1.55; }
     .exp-tree-modal-desc p + p { margin-top:.9em; }
+    .exp-tree-modal-desc h4 {
+      margin-top:1.6em; margin-bottom:.5em; font-family:var(--display); font-weight:600;
+      font-size:.98rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ochre);
+    }
+    .exp-tree-modal-desc h4:first-child { margin-top:0; }
+    .exp-tree-modal-desc ol { margin:.9em 0 0; padding-left:1.25em; display:flex; flex-direction:column; gap:.6em; }
+    .exp-tree-modal-desc li { padding-left:.15em; }
+    .exp-tree-modal-desc ol + p { margin-top:.9em; }
     @media (max-width:600px) {
       .exp-tree-modal { padding:0; }
       .exp-tree-modal-dialog { width:100%; max-height:100vh; height:100%; border:0; }
@@ -490,7 +547,7 @@
     .exp-closing-media::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(244,236,222,0) 55%, rgba(36,27,20,.28) 100%); }
     @media (max-width:900px) { .exp-closing-layout { grid-template-columns:1fr; } .exp-closing-media { aspect-ratio:16/9; } }
 
-    /* ===== Footer ===== */
+    /* ===== Footer (identical component to index.html) ===== */
     .site-footer { position:relative; padding:64px 6vw 30px; background:var(--paper-deep); color:rgba(36,27,20,.7); border-top:1px solid var(--line); }
     .site-footer::before { content:''; position:absolute; top:-1px; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--ochre) 50%,transparent); }
     .footer-inner { width:min(1380px,100%); margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:35px; flex-wrap:wrap; }
@@ -502,166 +559,29 @@
     .footer-nav a:hover::after { right:0; }
     .copyright { margin-top:28px; text-align:center; font-size:.82rem; color:rgba(36,27,20,.45); }
 
-    /* ===================================================== */
-    /* ===== New Pathfinder-specific components (pf-*) ===== */
-    /* ===================================================== */
-
-    /* ===== Parallax photo sections — fixed background creates the scroll parallax ===== */
-    .pf-parallax {
-      position:relative; isolation:isolate; overflow:hidden;
-      background-color:#0d0a07; background-size:cover; background-position:center; background-attachment:fixed;
+    @media print {
+      .site-header, .site-footer, .exp-hero,
+      #introduction, #foundation, #explore-more, #training-regimen, #blueprint, #ready,
+      .exp-reflection-options, .exp-privacy, .exp-reflection-aside { display:none !important; }
+      .text-reveal { opacity:1 !important; transform:none !important; }
+      body { background:#fff; }
+      #reflect { padding:24px 6vw; background:#fff; }
+      .exp-reflection-layout { display:block; }
+      .exp-questions { display:block; }
+      .exp-question { display:block; break-inside:avoid; page-break-inside:avoid; padding:18px 0 30px; border-bottom:1px solid #ccc; }
+      .exp-question-num { display:inline; margin-right:8px; }
+      .exp-question p { display:inline; font-size:13pt; }
+      .exp-question::after {
+        content:'';
+        display:block;
+        margin-top:16px;
+        height:84px;
+        background:
+          linear-gradient(#ccc,#ccc) 0 27px/100% 1px no-repeat,
+          linear-gradient(#ccc,#ccc) 0 55px/100% 1px no-repeat,
+          linear-gradient(#ccc,#ccc) 0 83px/100% 1px no-repeat;
+      }
     }
-    @media (max-width:900px) {
-      /* background-attachment:fixed is unreliable on mobile browsers — fall back to a normal scrolling background */
-      .pf-parallax { background-attachment:scroll; }
-    }
-    .pf-parallax-scrim { position:absolute; inset:0; z-index:0; pointer-events:none; }
-    .pf-parallax-scrim--dark { background:linear-gradient(180deg, rgba(8,6,4,.62) 0%, rgba(8,6,4,.8) 55%, rgba(8,6,4,.92) 100%); }
-    .pf-parallax > .exp-inner { position:relative; z-index:1; }
-    /* Let Your Practice Grow sits on a photo too — same dark-scrim / light-text treatment as
-       the Tune In bridge section, so the intro copy reads clearly against a busy background. */
-    #practice-grow .eyebrow { color:var(--ochre-light); text-shadow:0 2px 14px rgba(0,0,0,.5); }
-    #practice-grow .exp-heading h2 { color:#fff; text-shadow:0 3px 22px rgba(0,0,0,.55); }
-    #practice-grow .exp-heading p { color:rgba(248,240,221,.85); text-shadow:0 2px 12px rgba(0,0,0,.4); }
-
-    /* What Practice Can Open — spacious atmospheric moment */
-    .pf-open {
-      color:#f8f0dd;
-    }
-    .pf-open .exp-heading p { color:rgba(248,240,221,.62); }
-    /* Light variant — no photo/dark backdrop, just the paper background with ink text */
-    .pf-open--light {
-      background:var(--paper-light); color:var(--ink);
-    }
-    .pf-open--light .eyebrow { color:var(--ochre); text-shadow:none; }
-    .pf-open--light .exp-heading h2 { color:var(--ink); text-shadow:none; }
-    .pf-open--light .exp-heading p { color:var(--muted); }
-    .pf-open--light .pf-open-lines p { color:rgba(36,27,20,.86); }
-    .pf-open--light .pf-open-word { color:var(--ochre); }
-    .pf-open--light .pf-open-close { border-top-color:var(--line); color:rgba(36,27,20,.78); }
-    .pf-open--light .pf-open-close p { color:inherit; }
-    .pf-open-lines { max-width:820px; }
-    .pf-open-lines p {
-      font-family:var(--serif); font-style:italic; font-weight:500;
-      font-size:clamp(1.3rem,2.6vw,1.7rem); line-height:1.6; color:rgba(248,240,221,.9);
-    }
-    .pf-open-lines p + p { margin-top:.7em; }
-    .pf-open-words { margin:clamp(30px,4vw,46px) 0; display:flex; flex-wrap:wrap; gap:10px 14px; }
-    .pf-open-word {
-      font-family:var(--display); font-size:clamp(1.4rem,3.4vw,2.1rem); text-transform:uppercase;
-      letter-spacing:.03em; color:var(--ochre-light);
-    }
-    .pf-open-close {
-      max-width:760px; margin-top:clamp(28px,4vw,42px); padding-top:clamp(24px,3vw,32px);
-      border-top:1px solid rgba(217,168,105,.25);
-      font-size:1.18rem; line-height:1.6; color:rgba(248,240,221,.78);
-    }
-    .pf-open-close p + p { margin-top:.6em; }
-
-    /* Statement (Begin With One Thing) */
-    .pf-statement { text-align:center; }
-    .pf-statement-inner { max-width:820px; margin:0 auto; }
-    .pf-statement h2 {
-      font-size:clamp(2.1rem,4.6vw,3.6rem); color:var(--ink); line-height:1.28; text-wrap:balance;
-    }
-    .pf-statement h2 em { color:var(--ochre); font-style:normal; }
-    .pf-statement p { margin-top:22px; font-size:1.22rem; color:var(--muted); max-width:56ch; margin-left:auto; margin-right:auto; }
-    .pf-statement--dark h2 { color:#fff; text-shadow:0 3px 22px rgba(0,0,0,.55); }
-    .pf-statement--dark h2 em { color:var(--ochre-light); }
-    .pf-statement--dark p { color:rgba(248,240,221,.82); }
-    .pf-statement--dark .eyebrow { color:var(--ochre-light); text-shadow:0 2px 14px rgba(0,0,0,.5); }
-
-    /* When Insight Becomes Part of Your Life — contrast pair */
-    .pf-insight-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(28px,4vw,56px); }
-    .pf-insight-card { padding:clamp(28px,3.6vw,42px); border:1px solid var(--line); background:rgba(255,255,255,.35); }
-    .pf-insight-card h3 { font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:14px; }
-    .pf-insight-card--flame h3 { color:var(--ochre); }
-    .pf-insight-card p { font-size:1.16rem; color:rgba(36,27,20,.82); line-height:1.6; }
-    .pf-insight-close { grid-column:1 / -1; margin-top:6px; font-size:1.3rem; font-style:italic; color:var(--ink); max-width:56ch; }
-    @media (max-width:760px) { .pf-insight-grid { grid-template-columns:1fr; } }
-
-    /* Begin With the Breath */
-    .pf-breath-note {
-      margin-top:28px; padding:18px 20px; border-left:2px solid var(--ochre); background:rgba(255,255,255,.3);
-      font-size:.98rem; font-style:italic; color:rgba(36,27,20,.75); max-width:56ch;
-    }
-    .pf-breath-safety { margin-top:18px; font-size:.9rem; color:var(--muted); max-width:56ch; }
-
-    /* Let Your Practice Grow — accordion */
-    .pf-accordion { display:flex; flex-direction:column; gap:14px; max-width:900px; }
-    .pf-acc-item { border:1px solid var(--line); background:var(--paper-light); box-shadow:0 10px 28px rgba(36,27,20,.08); }
-    .pf-acc-summary {
-      display:flex; align-items:center; justify-content:space-between; gap:20px; list-style:none; cursor:pointer;
-      padding:clamp(20px,3vw,28px) clamp(20px,3.4vw,32px);
-    }
-    .pf-acc-summary::-webkit-details-marker { display:none; }
-    .pf-acc-summary::marker { content:''; }
-    .pf-acc-summary-text { display:flex; flex-direction:column; gap:4px; }
-    .pf-acc-name { font-family:var(--display); font-size:1.14rem; color:var(--ink); letter-spacing:.01em; }
-    .pf-acc-desc { font-size:.98rem; color:var(--muted); }
-    .pf-acc-plus {
-      flex:0 0 auto; width:34px; height:34px; border-radius:50%; border:1px solid rgba(149,102,44,.4);
-      display:grid; place-items:center; color:var(--ochre); transition:transform .3s var(--ease), background .3s ease;
-    }
-    .pf-acc-plus svg { width:15px; height:15px; }
-    .pf-acc-item[open] .pf-acc-plus { transform:rotate(45deg); }
-    @media (hover:hover) and (pointer:fine) { .pf-acc-summary:hover .pf-acc-plus { border-color:var(--ochre); } }
-    .pf-acc-panel { padding:0 clamp(20px,3.4vw,32px) clamp(26px,3.6vw,36px); }
-    .pf-acc-panel p { font-size:1.08rem; color:rgba(36,27,20,.85); line-height:1.6; }
-    .pf-acc-panel p + p { margin-top:.55rem; }
-    .pf-acc-panel-media { margin-top:20px; }
-    .pf-acc-item[open] .pf-acc-panel { animation:togglePanelIn .35s var(--ease); }
-    .pf-acc-topics { margin-top:16px; display:flex; flex-wrap:wrap; gap:9px; }
-    .pf-acc-topic {
-      padding:8px 14px; border:1px solid var(--line); font-family:var(--display); font-size:.66rem;
-      letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
-    }
-
-    /* Five Mind Tools progression — each card's own video thumbnail as its background */
-    .pf-progression { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:2px; background:var(--line); border:1px solid var(--line); }
-    .pf-prog-item {
-      position:relative; isolation:isolate; overflow:hidden; display:flex; flex-direction:column; gap:10px;
-      background-size:cover; background-position:center; aspect-ratio:3/4;
-      padding:clamp(20px,2.4vw,28px) clamp(16px,2vw,22px) clamp(24px,2.6vw,30px); cursor:pointer; border:0; text-align:left; width:100%;
-      transition:transform .3s ease;
-    }
-    .pf-prog-item::before {
-      content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
-      background:linear-gradient(180deg, rgba(5,4,3,.32) 0%, rgba(5,4,3,.4) 45%, rgba(5,4,3,.9) 100%);
-      transition:background .3s ease;
-    }
-    .pf-prog-item > * { position:relative; z-index:1; }
-    .pf-prog-num { font-family:var(--display); font-size:.66rem; letter-spacing:.14em; color:var(--ochre-light); }
-    .pf-prog-title { font-family:var(--display); font-size:1rem; color:#fff; line-height:1.3; text-shadow:0 2px 10px rgba(0,0,0,.5); }
-    .pf-prog-desc { font-size:.92rem; color:rgba(248,240,221,.85); line-height:1.42; text-shadow:0 2px 8px rgba(0,0,0,.4); }
-    .pf-prog-play {
-      margin-top:auto; padding-top:10px; display:flex; align-items:center; gap:8px;
-      font-family:var(--display); font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ochre-light);
-    }
-    .pf-prog-play svg { width:11px; height:11px; }
-    @media (hover:hover) and (pointer:fine) {
-      .pf-prog-item:hover { transform:translateY(-4px); }
-      .pf-prog-item:hover::before { background:linear-gradient(180deg, rgba(5,4,3,.22) 0%, rgba(5,4,3,.32) 45%, rgba(5,4,3,.85) 100%); }
-    }
-    .pf-prog-item::after {
-      content:''; position:absolute; top:50%; right:-1px; transform:translateY(-50%); z-index:2;
-      width:7px; height:7px; border-radius:50%; background:var(--ochre);
-    }
-    .pf-prog-item:last-child::after { display:none; }
-    @media (max-width:980px) { .pf-progression { grid-template-columns:repeat(2,minmax(0,1fr)); } .pf-prog-item::after { display:none; } }
-    @media (max-width:560px) { .pf-progression { grid-template-columns:1fr; } .pf-prog-item { aspect-ratio:16/10; } }
-
-    /* Bridge — As You Tune In */
-    .pf-bridge { text-align:center; }
-    .pf-bridge-inner { max-width:900px; margin:0 auto; }
-    .pf-bridge-strands { display:flex; flex-wrap:wrap; justify-content:center; gap:10px 12px; margin:28px 0; }
-    .pf-bridge-strand {
-      padding:9px 16px; border:1px solid rgba(217,168,105,.4); border-radius:20px;
-      font-family:var(--display); font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ochre-light);
-    }
-    .pf-bridge p { font-size:1.2rem; color:rgba(248,240,221,.82); line-height:1.6; max-width:64ch; margin:0 auto; }
-    .pf-bridge p + p { margin-top:.6em; }
-    .pf-bridge-close { margin-top:22px; font-style:italic; color:rgba(248,240,221,.92); font-size:1.28rem; }
 
     @media (max-width:760px) {
       :root { --header-height:64px; }
@@ -685,18 +605,30 @@
       .exp-heading { margin-bottom:32px; }
       .exp-heading h2 { font-size:clamp(2.1rem,9vw,3.15rem); }
       .exp-heading p { font-size:1.16rem; }
+      #reflectTitle, #blueprintTitle, #readyTitle { font-size:clamp(2.1rem,9vw,3.15rem) !important; }
+      .exp-heading-symbol-wrap { gap:12px; }
+      .exp-heading-symbol { width:34px; height:34px; }
+      .exp-heading-symbol svg { width:17px; height:17px; }
+      .exp-reflect-intro { font-size:1.16rem !important; }
       .exp-btn-row { gap:12px 16px; }
       .exp-btn { padding:14px 24px; width:100%; justify-content:center; }
       .exp-question { grid-template-columns:36px minmax(0,1fr); gap:12px; padding:6px 0; }
       .exp-question-num { font-size:1.3rem; }
       .exp-question p { font-size:1.16rem; }
-      .exp-privacy { padding:16px 18px; font-size:1.1rem; }
+      .exp-reflection-close { font-size:1.16rem; }
+      .exp-reflection-options { gap:10px; }
+      .exp-option { flex-direction:row; align-items:center; gap:14px; padding:14px 16px; }
+      .exp-option-text { display:flex; flex-direction:column; gap:2px; order:0; min-width:0; flex:1; }
+      .exp-option-icon { order:1; width:26px; height:26px; font-size:.72rem; }
+      .exp-option h3 { font-size:1rem; }
+      .exp-option p { font-size:.88rem; line-height:1.4; }
+      .exp-privacy { padding:16px 18px; font-size:1.16rem; }
       .exp-video-layout, .exp-closing-layout { gap:28px; }
       .exp-video-copy p, .exp-blueprint-intro p, .exp-closing-copy p { font-size:1.16rem; }
       .exp-blueprint-intro { margin-bottom:36px; }
-      .exp-card-grid, .exp-card-grid--2, .exp-rotating-grid { gap:16px; }
+      .exp-card-grid, .exp-rotating-grid { gap:16px; }
       .exp-card-body { padding:18px 18px 22px; }
-      .exp-card-body p { font-size:1.1rem; }
+      .exp-card-body p { font-size:1.16rem; }
       .exp-tabs { gap:8px; margin-bottom:26px; }
       .exp-tab { padding:10px 16px; font-size:.64rem; }
       .exp-tree-overlay {
@@ -710,9 +642,11 @@
       .footer-inner { align-items:flex-start; flex-direction:column; gap:22px; }
       .footer-logo img { width:230px; }
       .footer-nav { gap:16px 20px; }
-      .pf-statement h2 { font-size:clamp(1.9rem,9vw,2.7rem); }
-      .pf-insight-grid { gap:20px; }
-      .pf-prog-item::after { display:none; }
+    }
+
+    @media (max-width:480px) {
+      .exp-reflection-aside { max-width:240px; }
+      .exp-btn { padding:14px 20px; font-size:.66rem; }
     }
   </style>
 </head>
@@ -731,367 +665,309 @@
   </header>
 
   <main>
-    <!-- 1. PATHFINDER HERO -->
-    <section class="exp-hero" id="pathfinderHero" aria-labelledby="pathfinderTitle">
-      <img class="exp-hero-media" src="assets/media/path-pathfinder.png" alt="" aria-hidden="true">
+    <!-- 1. OPENING -->
+    <section class="exp-hero" id="explorerHero" aria-labelledby="explorerTitle">
+      <video
+        class="exp-hero-video"
+        src="assets/media/Shoeprints.mp4"
+        poster="assets/media/path-explorer.png"
+        autoplay
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        preload="auto"
+        tabindex="-1"
+        disablepictureinpicture
+        aria-hidden="true"
+      ></video>
       <div class="exp-hero-scrim" aria-hidden="true"></div>
       <div class="exp-hero-content">
         <div class="exp-hero-copy">
           <nav class="exp-breadcrumb text-reveal" aria-label="Breadcrumb">
             <a href="index.html">Home</a>
             <span class="exp-breadcrumb-sep" aria-hidden="true">/</span>
-            <span class="exp-breadcrumb-current" aria-current="page">Pathfinder</span>
+            <span class="exp-breadcrumb-current" aria-current="page">Explorer</span>
           </nav>
-          <span class="eyebrow exp-hero-eyebrow text-reveal">Turn Insight Into Practice</span>
-          <h1 id="pathfinderTitle" class="text-reveal">The Pathfinder</h1>
+          <span class="eyebrow exp-hero-eyebrow text-reveal">Everyone Begins Somewhere</span>
+          <h1 id="explorerTitle" class="text-reveal">The Explorer</h1>
           <div class="exp-hero-text text-reveal">
-            <p>There comes a time when you're ready to see what these ideas can actually do in your life.</p>
-            <p>You begin exploring new practices, testing what works, and building upon anything that is already helping.</p>
-            <p>You bring it into your day. You notice how it changes the way you think, feel, and experience being alive.</p>
-            <p>You see what happens when you return to something consistently.</p>
+            <p>You don't need to know exactly what you believe.</p>
+            <p>You don't need to understand where this path will lead.</p>
+            <p>You only need to meet yourself honestly where you are today.</p>
+            <p class="exp-hero-close">Sometimes the first step is not finding another answer.<br>It is slowing down long enough to hear your own.</p>
           </div>
         </div>
       </div>
       <div class="exp-hero-scroll" aria-hidden="true">Begin Reading</div>
     </section>
 
-    <!-- 2. WHAT PRACTICE CAN OPEN -->
-    <section class="exp-section pf-open pf-open--light" id="what-it-opens" aria-labelledby="openTitle">
-      <div class="exp-inner">
-        <div class="exp-heading">
-          <span class="eyebrow text-reveal">The Deeper Reason This Page Exists</span>
-          <h2 id="openTitle" class="text-reveal">What practice can open.</h2>
-        </div>
-        <div class="pf-open-lines text-reveal">
-          <p>These practices can help you feel calmer, clearer, and more grounded.</p>
-          <p>But that is only part of what they can do.</p>
-        </div>
-        <p class="text-reveal" style="margin-top:26px; max-width:760px; font-size:1.2rem; color:rgba(36,27,20,.82); line-height:1.6;">Breath, awareness, meditation, writing, movement, and focused attention can shift your state of consciousness. As the noise begins to quiet and your attention becomes less scattered, you may start experiencing presence more directly.</p>
-        <p class="text-reveal" style="max-width:760px; font-size:1.2rem; color:rgba(36,27,20,.82); line-height:1.6;">You may hear your inner guidance more clearly. Reconnect with your spirit. And open to deeper states of unity, love, and connection that people have described throughout human history.</p>
-
-        <div class="pf-open-words text-reveal" aria-hidden="true">
-          <span class="pf-open-word">Awakening</span>
-          <span class="pf-open-word">God</span>
-          <span class="pf-open-word">Source</span>
-          <span class="pf-open-word">Higher Consciousness</span>
-        </div>
-
-        <div class="pf-open-close text-reveal">
-          <p>The words matter less than the direct experience.</p>
-          <p>The practices are not the destination. They help you become more available to what exists beneath ordinary thought—and bring what you discover back into the way you live.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3. TAKE A LOOK AT WHERE YOU ARE NOW -->
-    <section class="exp-section exp-section--paper" id="where-you-are" aria-labelledby="whereTitle">
-      <div class="exp-inner">
-        <div class="exp-heading">
-          <span class="eyebrow text-reveal">Before You Begin</span>
-          <h2 id="whereTitle" class="text-reveal" style="font-size:clamp(2.1rem,3.8vw,3.6rem);">Take a look at where you are now.</h2>
-          <p class="text-reveal">Let's take a moment to look at what you're doing for your mind, body, and spirit right now.</p>
-        </div>
-
-        <ol class="exp-questions" id="reflectionQuestions">
-          <li class="exp-question text-reveal"><span class="exp-question-num">01</span><p>What are you already doing that feels supportive?</p></li>
-          <li class="exp-question text-reveal"><span class="exp-question-num">02</span><p>What practices have you tried before?</p></li>
-          <li class="exp-question text-reveal"><span class="exp-question-num">03</span><p>What have you always been curious about?</p></li>
-          <li class="exp-question text-reveal"><span class="exp-question-num">04</span><p>Where do you feel like you could use something more?</p></li>
-        </ol>
-
-        <div class="exp-reflection-close text-reveal">
-          <p>This gives you a clearer picture of where you are starting and what you may want to bring into your life next.</p>
-        </div>
-
-        <div class="exp-reflection-options text-reveal">
-          <button class="exp-option" id="pfDownloadReflection" type="button">
-            <span class="exp-option-text">
-              <h3>Download the Reflection</h3>
-              <p>An editable Word document — type your answers directly and save it to your own device.</p>
-            </span>
-            <span class="exp-option-icon" aria-hidden="true">&#8595;</span>
-          </button>
-          <button class="exp-option" id="pfPrintReflection" type="button">
-            <span class="exp-option-text">
-              <h3>Print the Reflection</h3>
-              <p>A printable worksheet with room to write, straight from your browser.</p>
-            </span>
-            <span class="exp-option-icon" aria-hidden="true">
+    <!-- 2. PRIVATE SELF-REFLECTION -->
+    <section class="exp-section exp-section--paper" id="reflect" aria-labelledby="reflectTitle">
+      <div class="exp-inner exp-reflection-layout">
+        <div>
+          <div class="eyebrow text-reveal">Before You Go Further</div>
+          <h2 id="reflectTitle" class="text-reveal exp-heading-symbol-wrap" style="font-size:clamp(2.2rem,3.8vw,3.8rem); color:var(--ink); margin-bottom:20px;">
+            <span>Where are you right now?</span>
+            <span class="exp-heading-symbol" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 9V3h12v6"/>
-                <path d="M6 18H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2"/>
-                <path d="M6 14h12v7H6z"/>
+                <path d="M18.5 4.5c-4 0-9 2-11.5 7.5C5.5 15 5 18 5 19c1 0 4-.5 7-2.5C17.5 13 19.5 8.5 19.5 5.5c0-.4-.1-.7-1-1z"/>
+                <path d="M18 5 6 17"/>
+                <path d="M13.2 9.8 9.5 13.5"/>
+                <path d="M15.7 7.3 12 11"/>
               </svg>
             </span>
-          </button>
-          <a class="exp-option" href="#reflectionQuestions">
-            <span class="exp-option-text">
-              <h3>Use Your Own Journal</h3>
-              <p>Keep the questions visible here while you write on paper.</p>
+          </h2>
+          <p class="exp-reflect-intro text-reveal" style="font-size:1.2rem; color:var(--muted); max-width:56ch;">Before taking in more information, take a few minutes to pause, look within, and notice what feels true for you today.</p>
+          <p class="exp-reflect-intro text-reveal" style="font-size:1.2rem; color:var(--muted); max-width:56ch;">There are no correct answers. Don't write what you think you are supposed to believe. Write what genuinely feels true.</p>
+
+          <ol class="exp-questions" id="reflectionQuestions">
+            <li class="exp-question text-reveal"><span class="exp-question-num">01</span><p>What brought me here?</p></li>
+            <li class="exp-question text-reveal"><span class="exp-question-num">02</span><p>What feels missing from my life right now?</p></li>
+            <li class="exp-question text-reveal"><span class="exp-question-num">03</span><p>How do I feel most days?</p></li>
+            <li class="exp-question text-reveal"><span class="exp-question-num">04</span><p>How would I like to feel?</p></li>
+            <li class="exp-question text-reveal"><span class="exp-question-num">05</span><p>What am I searching for?</p></li>
+            <li class="exp-question text-reveal"><span class="exp-question-num">06</span><p>What am I most curious about?</p></li>
+            <li class="exp-question text-reveal"><span class="exp-question-num">07</span><p>How would I describe what spirit actually is?</p></li>
+            <li class="exp-question text-reveal"><span class="exp-question-num">08</span><p>What do I believe about who—or what—I am beneath my thoughts, roles, and identity?</p></li>
+            <li class="exp-question text-reveal"><span class="exp-question-num">09</span><p>Have I ever felt connected to something greater than myself? What was that experience like?</p></li>
+            <li class="exp-question text-reveal"><span class="exp-question-num">10</span><p>What part of myself have I been neglecting?</p></li>
+            <li class="exp-question text-reveal"><span class="exp-question-num">11</span><p>What kind of change feels possible for me right now?</p></li>
+            <li class="exp-question text-reveal"><span class="exp-question-num">12</span><p>What would a more conscious life look and feel like for me?</p></li>
+          </ol>
+
+          <div class="exp-reflection-close text-reveal">
+            <p>You don't have to answer every question or resolve any of them today.</p>
+            <p>Begin with the ones that speak to you or that you feel ready to explore. You can always return to the others later.</p>
+            <p>These reflections may also be meaningful to revisit as you move further along your path and notice how your answers change.</p>
+          </div>
+
+          <div class="exp-reflection-options text-reveal">
+            <button class="exp-option" id="expDownloadReflection" type="button">
+              <span class="exp-option-text">
+                <h3>Download the Reflection</h3>
+                <p>An editable Word document — type your answers directly and save it to your own device.</p>
+              </span>
+              <span class="exp-option-icon" aria-hidden="true">&#8595;</span>
+            </button>
+            <button class="exp-option" id="expPrintReflection" type="button">
+              <span class="exp-option-text">
+                <h3>Print the Reflection</h3>
+                <p>A printable worksheet with room to write, straight from your browser.</p>
+              </span>
+              <span class="exp-option-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 9V3h12v6"/>
+                  <path d="M6 18H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2"/>
+                  <path d="M6 14h12v7H6z"/>
+                </svg>
+              </span>
+            </button>
+            <a class="exp-option" href="#reflectionQuestions">
+              <span class="exp-option-text">
+                <h3>Use Your Own Journal</h3>
+                <p>Keep the questions visible here while you write on paper.</p>
+              </span>
+              <span class="exp-option-icon" aria-hidden="true">&#9998;</span>
+            </a>
+          </div>
+
+          <p class="exp-privacy text-reveal">These reflections are entirely for you. Nothing you write is entered into the website, submitted to Seek Consciousness, or shared with anyone else.</p>
+        </div>
+
+        <aside class="exp-reflection-aside text-reveal">
+          <figure>
+            <img src="assets/media/recognition-intro.jpg" alt="A quiet chair beside a window overlooking misted hills" loading="lazy">
+            <figcaption>A quiet place to sit with these, if you have one.</figcaption>
+          </figure>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 3. INTRODUCTION — collapsed by default; the full introduction now lives on the homepage -->
+    <section class="exp-section exp-section--light" id="introduction" aria-label="Introduction">
+      <div class="exp-inner">
+        <details class="exp-intro-toggle text-reveal">
+          <summary class="exp-intro-summary">
+            <span class="exp-intro-summary-text">
+              <span class="exp-intro-summary-line"><strong>First time here?</strong> Watch the introduction to get the most out of everything below.</span>
+              <span class="exp-intro-summary-line is-muted"><strong>Already seen it?</strong> Feel free to keep exploring.</span>
             </span>
-            <span class="exp-option-icon" aria-hidden="true">&#9998;</span>
-          </a>
-        </div>
-
-        <p class="exp-privacy text-reveal">These questions are private. Nothing here is entered into the website, submitted to Seek Consciousness, or shared with anyone else.</p>
-      </div>
-    </section>
-
-    <!-- 4. WHEN INSIGHT BECOMES PART OF YOUR LIFE -->
-    <section class="exp-section exp-section--light" id="insight" aria-labelledby="insightTitle">
-      <div class="exp-inner">
-        <div class="exp-heading">
-          <span class="eyebrow text-reveal">Why Practice Matters</span>
-          <h2 id="insightTitle" class="text-reveal">When insight becomes part of your life.</h2>
-        </div>
-        <div class="pf-insight-grid">
-          <div class="pf-insight-card text-reveal">
-            <h3>The Flash</h3>
-            <p>Sometimes you hear something and immediately know it matters. It clicks. You see yourself differently.</p>
-          </div>
-          <div class="pf-insight-card pf-insight-card--flame text-reveal">
-            <h3>The Flame</h3>
-            <p>Then a few days pass, life gets busy, and that clarity starts slipping away. That does not mean the insight was not real.</p>
-          </div>
-          <p class="pf-insight-close text-reveal">Practice gives you a simple way to keep working with what mattered—so it does not disappear the moment life becomes demanding again.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. BEGIN WITH ONE THING -->
-    <section class="exp-section pf-statement pf-statement--dark pf-parallax" id="one-thing" aria-labelledby="oneThingTitle" style="background-image:url('assets/media/path-question.jpg');">
-      <div class="pf-parallax-scrim pf-parallax-scrim--dark" aria-hidden="true"></div>
-      <div class="exp-inner pf-statement-inner">
-        <span class="eyebrow text-reveal">No Overhaul Required</span>
-        <h2 id="oneThingTitle" class="text-reveal">You do not need to rebuild your entire life.<br>Start with <em>one practice</em> and see what happens when you truly stay with it.</h2>
-        <p class="text-reveal">One practice can become the doorway into everything that follows.</p>
-      </div>
-    </section>
-
-    <!-- 6. BEGIN WITH THE BREATH -->
-    <section class="exp-section exp-section--light" id="breath" aria-labelledby="breathTitle">
-      <div class="exp-inner exp-video-layout">
-        <div class="exp-video-copy">
-          <span class="eyebrow text-reveal">Where I Recommend Beginning</span>
-          <h2 class="text-reveal" style="font-size:clamp(2.1rem,3.6vw,3.4rem); margin-bottom:22px;" id="breathTitle">Begin with the breath.</h2>
-          <div class="text-reveal">
-            <p>The breath is where I begin every day. It is the most important practice I do for myself and one of the simplest, most accessible places I know to begin.</p>
-            <p>Your breath is a direct lever you can use to shift your state of being. It can change your energy, bring you back into your body, settle your mind, and shift your state of consciousness.</p>
-          </div>
-          <div class="text-reveal" style="margin-top:22px; padding-top:20px; border-top:1px solid var(--line);">
-            <p>Breathwork can help regulate your system and change how you feel in the moment. But its deeper possibility goes beyond simply calming you down.</p>
-            <p>It can interrupt the ordinary movement of thought and bring you into a more direct experience of presence, energy, and connection.</p>
-            <p style="color:var(--ochre); font-style:italic;">Start with a simple practice and give it your full attention. Notice how you feel before. Notice how you feel afterward. That direct experience is where the path begins.</p>
-          </div>
-          <p class="pf-breath-note text-reveal">I'm currently recording updated versions of these breathwork videos, but the practices and teachings remain the same.</p>
-
-          <details class="exp-toggle text-reveal" style="margin-top:26px;">
-            <summary class="exp-toggle-summary">
-              <span class="exp-toggle-summary-text">
-                <span class="exp-toggle-summary-line"><strong>What is pranayama?</strong> A short note on the yogic roots of breathwork.</span>
-              </span>
-              <span class="exp-toggle-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-              </span>
-            </summary>
-            <div class="exp-toggle-panel">
-              <p>In the yogic tradition, pranayama is the conscious practice of working with the breath and the life energy carried through it. The breath is not only something happening in the background. It is something you can work with intentionally to change your state.</p>
-            </div>
-          </details>
-
-          <div class="exp-btn-row text-reveal" style="margin-top:26px;">
-            <a class="text-link" href="https://www.youtube.com/@seek_consciousness" target="_blank" rel="noopener noreferrer">Watch on YouTube <span aria-hidden="true">&#8594;</span></a>
-          </div>
-        </div>
-        <div class="exp-video-box exp-video-box--soon text-reveal" aria-hidden="true">
-          <span class="exp-badge exp-video-badge">Coming Soon</span>
-          <img src="assets/media/kurt-note.jpg" alt="">
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. LET YOUR PRACTICE GROW -->
-    <section class="exp-section pf-open pf-parallax" id="practice-grow" aria-labelledby="growTitle" style="background-image:url('assets/media/recognition-intro.jpg');">
-      <div class="pf-parallax-scrim pf-parallax-scrim--dark" aria-hidden="true"></div>
-      <div class="exp-inner">
-        <div class="exp-heading">
-          <span class="eyebrow text-reveal">Beyond the Breath</span>
-          <h2 id="growTitle" class="text-reveal" style="font-size:clamp(2.1rem,3.8vw,3.6rem);">Let your practice grow.</h2>
-          <p class="text-reveal">Breath is where I recommend beginning, but it is not the only way forward. Each practice opens a different doorway into the deeper work. You do not need to add all of them—explore one that feels useful, give it your attention, then let your own experience show you where to go next.</p>
-        </div>
-
-        <div class="pf-accordion">
-          <details class="pf-acc-item text-reveal">
-            <summary class="pf-acc-summary">
-              <span class="pf-acc-summary-text">
-                <span class="pf-acc-name">Awareness</span>
-                <span class="pf-acc-desc">Learning to notice thoughts, reactions, and inner states more clearly.</span>
-              </span>
-              <span class="pf-acc-plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
-            </summary>
-            <div class="pf-acc-panel">
-              <p>Awareness is the practice of noticing thoughts, reactions, emotional patterns, attention, and inner states more clearly—without needing to immediately fix or fight what you find.</p>
-              <p style="color:var(--ochre); font-style:italic;">Try this: pause for a moment and notice your next thought.</p>
-              <p>The teaching is not that everyone will experience a completely blank mind. The act of waiting for the next thought can shift someone from being absorbed inside thinking into observing the mind.</p>
-              <div class="exp-btn-row" style="margin-top:18px;">
-                <a class="text-link" href="explorer.html#explore-more">Explore the Five Mind Tools <span aria-hidden="true">&#8594;</span></a>
-              </div>
-            </div>
-          </details>
-
-          <details class="pf-acc-item text-reveal">
-            <summary class="pf-acc-summary">
-              <span class="pf-acc-summary-text">
-                <span class="pf-acc-name">Meditation</span>
-                <span class="pf-acc-desc">Creating intentional space for stillness, presence, and deeper observation.</span>
-              </span>
-              <span class="pf-acc-plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
-            </summary>
-            <div class="pf-acc-panel">
-              <p>Meditation creates intentional space for stillness, presence, and deeper observation. No specific posture is required—only your willingness to sit with what is.</p>
-              <div class="pf-acc-panel-media">
-                <div class="exp-video-box exp-video-box--soon" aria-hidden="true" style="max-width:420px;">
-                  <span class="exp-badge exp-video-badge">Coming Soon</span>
-                  <img src="assets/media/direct-experience.jpg" alt="">
+            <span class="exp-intro-toggle-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </span>
+          </summary>
+          <div class="exp-intro-panel">
+            <div class="exp-video-layout">
+              <div class="exp-video-copy">
+                <p>This video orients you to Seek Consciousness—what the project is, how the different pieces connect, and how this work can support your own path.</p>
+                <p style="color:var(--ochre); font-style:italic;">Take what resonates. Leave the rest. Trust your direct experience.</p>
+                <div class="exp-btn-row" style="margin-top:22px;">
+                  <a class="text-link" href="https://www.youtube.com/watch?v=17spdVgtWjw" target="_blank" rel="noopener noreferrer">Watch on YouTube <span aria-hidden="true">&#8594;</span></a>
                 </div>
               </div>
-            </div>
-          </details>
-
-          <details class="pf-acc-item text-reveal">
-            <summary class="pf-acc-summary">
-              <span class="pf-acc-summary-text">
-                <span class="pf-acc-name">Daily Vision Writing</span>
-                <span class="pf-acc-desc">Using writing to clarify direction and connect with inner guidance.</span>
-              </span>
-              <span class="pf-acc-plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
-            </summary>
-            <div class="pf-acc-panel">
-              <p>Vision Writing uses writing to clarify direction, recognize patterns, connect with inner guidance, and participate more consciously in creating your life.</p>
-              <p>Start simply: write freely for a few minutes without editing or trying to sound a certain way. Save what you write. Over time, repeated entries reveal what is becoming clear.</p>
-              <div class="pf-acc-topics" aria-hidden="true">
-                <span class="pf-acc-topic">Downloadable Prompt Sheet — Coming Soon</span>
+              <div class="exp-video-box" tabindex="0" role="button" aria-label="Play: Start Here — How This Project Can Reimagine Your Entire Life While Leaving the Path in Your Hands" data-youtube="17spdVgtWjw" data-title="Start Here — How This Project Can Reimagine Your Entire Life While Leaving the Path in Your Hands">
+                <img src="https://img.youtube.com/vi/17spdVgtWjw/hqdefault.jpg" alt="" loading="lazy">
+                <span class="exp-play" aria-hidden="true"></span>
               </div>
             </div>
-          </details>
+          </div>
+        </details>
+      </div>
+    </section>
 
-          <details class="pf-acc-item text-reveal">
-            <summary class="pf-acc-summary">
-              <span class="pf-acc-summary-text">
-                <span class="pf-acc-name">Body Integration</span>
-                <span class="pf-acc-desc">Supporting inner change through movement, recovery, and physical awareness.</span>
-              </span>
-              <span class="pf-acc-plus" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
-            </summary>
-            <div class="pf-acc-panel">
-              <p>The body is not separate from consciousness work—movement, sleep, strength, and physical awareness all affect how you experience life and how available you are to it.</p>
-              <div class="pf-acc-topics">
-                <span class="pf-acc-topic">Mobility &amp; Stretching</span>
-                <span class="pf-acc-topic">Strength &amp; Grease the Groove</span>
-                <span class="pf-acc-topic">Sleep &amp; Recovery</span>
-                <span class="pf-acc-topic">Nervous-System Support</span>
-              </div>
+    <!-- 4. FOUNDATIONAL TEACHINGS -->
+    <section class="exp-section exp-section--deep" id="foundation" aria-labelledby="foundationTitle">
+      <div class="exp-inner">
+        <div class="exp-heading">
+          <span class="eyebrow text-reveal">Begin Exploring</span>
+          <h2 id="foundationTitle" class="text-reveal">There is no single order you need to follow.</h2>
+          <p class="text-reveal">Begin with whatever speaks to where you are today. Some teachings will help you understand consciousness. Some will help you observe your mind. Others will help you reconnect with your creativity, attention, and everyday life. Follow your curiosity.</p>
+        </div>
+
+        <div class="exp-card-grid">
+          <div class="exp-card text-reveal" tabindex="0" role="button" aria-label="Play: Get Back Inside Your Life (Stop Consuming. Start Participating.)" data-youtube="qUqEZ34kZ8s" data-title="Get Back Inside Your Life (Stop Consuming. Start Participating.)" style="cursor:pointer;">
+            <div class="exp-card-media"><img src="https://img.youtube.com/vi/qUqEZ34kZ8s/hqdefault.jpg" alt="" loading="lazy"><span class="exp-play" aria-hidden="true"></span></div>
+            <div class="exp-card-body">
+              <h3>Get Back Inside Your Life (Stop Consuming. Start Participating.)</h3>
+              <p>Step out of passive waiting and back into your own life — presence isn't found later, it's chosen now.</p>
             </div>
-          </details>
+          </div>
+          <div class="exp-card text-reveal" tabindex="0" role="button" aria-label="Play: How to Return to Yourself When the Day Pulls You Away" data-youtube="87FSEkIX99I" data-title="How to Return to Yourself When the Day Pulls You Away" style="cursor:pointer;">
+            <div class="exp-card-media"><img src="https://img.youtube.com/vi/87FSEkIX99I/hqdefault.jpg" alt="" loading="lazy"><span class="exp-play" aria-hidden="true"></span></div>
+            <div class="exp-card-body">
+              <h3>How to Return to Yourself When the Day Pulls You Away</h3>
+              <p>Notice when attention drifts, return to the present, and let clarity guide more aligned choices.</p>
+            </div>
+          </div>
+          <div class="exp-card text-reveal" tabindex="0" role="button" aria-label="Play: When You Stop Missing Yourself" data-youtube="6L4qzh4Ghh8" data-title="When You Stop Missing Yourself" style="cursor:pointer;">
+            <div class="exp-card-media"><img src="https://img.youtube.com/vi/6L4qzh4Ghh8/hqdefault.jpg" alt="" loading="lazy"><span class="exp-play" aria-hidden="true"></span></div>
+            <div class="exp-card-body">
+              <h3>When You Stop Missing Yourself</h3>
+              <p>Constant stimulation and endless information can quietly disconnect us from our inner voice. Create space to simply listen.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 8. FROM MENTAL LOOPS TO FLOW -->
-    <section class="exp-section exp-section--deep" id="mind-tools" aria-labelledby="flowTitle">
+    <!-- 5. FOLLOW WHAT CALLS TO YOU -->
+    <section class="exp-section exp-section--light" id="explore-more" aria-labelledby="exploreMoreTitle">
       <div class="exp-inner">
         <div class="exp-heading">
-          <span class="eyebrow text-reveal">One Connected System</span>
-          <h2 id="flowTitle" class="text-reveal">From mental loops to flow.</h2>
-          <p class="text-reveal">These five videos work together as a system. As your attention becomes less scattered, more of your consciousness becomes available to the present moment. You begin spending less time being pulled around by every thought—and more time fully inside the experience in front of you.</p>
+          <span class="eyebrow text-reveal">More to Explore</span>
+          <h2 id="exploreMoreTitle" class="text-reveal">Follow what calls to you.</h2>
+          <p class="text-reveal">A rotating set of teachings, grouped by what they support. New pieces are added as they're published — check back anytime.</p>
         </div>
 
-        <div class="pf-progression">
-          <button type="button" class="pf-prog-item text-reveal" data-youtube="k0TA52HUjbs" data-title="Cat & Mouse Method" style="background-image:url('https://img.youtube.com/vi/k0TA52HUjbs/hqdefault.jpg');">
-            <span class="pf-prog-num">I</span>
-            <span class="pf-prog-title">Cat &amp; Mouse Method</span>
-            <span class="pf-prog-desc">Notice mental loops and decide whether to keep, park, replace, or release them.</span>
-            <span class="pf-prog-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch</span>
-          </button>
-          <button type="button" class="pf-prog-item text-reveal" data-youtube="0isBXHY7R6I" data-title="Replacement Loop" style="background-image:url('https://img.youtube.com/vi/0isBXHY7R6I/hqdefault.jpg');">
-            <span class="pf-prog-num">II</span>
-            <span class="pf-prog-title">Replacement Loop</span>
-            <span class="pf-prog-desc">Replace an unhelpful pattern rather than only trying to suppress it.</span>
-            <span class="pf-prog-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch</span>
-          </button>
-          <button type="button" class="pf-prog-item text-reveal" data-youtube="0sZLafQc3xM" data-title="Single Point Focus" style="background-image:url('https://img.youtube.com/vi/0sZLafQc3xM/hqdefault.jpg');">
-            <span class="pf-prog-num">III</span>
-            <span class="pf-prog-title">Single Point Focus</span>
-            <span class="pf-prog-desc">Strengthen the ability to place and sustain attention.</span>
-            <span class="pf-prog-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch</span>
-          </button>
-          <button type="button" class="pf-prog-item text-reveal" data-youtube="LUgaGi08B8E" data-title="Flow State" style="background-image:url('https://img.youtube.com/vi/LUgaGi08B8E/hqdefault.jpg');">
-            <span class="pf-prog-num">IV</span>
-            <span class="pf-prog-title">Flow State</span>
-            <span class="pf-prog-desc">Experience what becomes possible when attention becomes fully absorbed in the present.</span>
-            <span class="pf-prog-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch</span>
-          </button>
-          <button type="button" class="pf-prog-item text-reveal" data-youtube="iYIyFlRidfI" data-title="Stay in Flow Longer" style="background-image:url('https://img.youtube.com/vi/iYIyFlRidfI/hqdefault.jpg');">
-            <span class="pf-prog-num">V</span>
-            <span class="pf-prog-title">Stay in Flow Longer</span>
-            <span class="pf-prog-desc">Recognize what interrupts flow and learn how to return.</span>
-            <span class="pf-prog-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch</span>
-          </button>
-        </div>
-      </div>
-    </section>
+        <div class="exp-divider text-reveal" aria-hidden="true"></div>
 
-    <!-- 9. AS YOU TUNE IN, EVERYTHING GETS BETTER -->
-    <section class="exp-section pf-open pf-bridge pf-parallax" id="tune-in" aria-labelledby="tuneInTitle" style="background-image:url('assets/media/living-map-tree.jpg');">
-      <div class="pf-parallax-scrim pf-parallax-scrim--dark" aria-hidden="true"></div>
-      <div class="exp-inner pf-bridge-inner">
-        <span class="eyebrow text-reveal" style="color:var(--ochre-light);">Bringing It Together</span>
-        <h2 id="tuneInTitle" class="text-reveal" style="color:#fff;">As you tune in, everything gets better.</h2>
-
-        <div class="pf-bridge-strands text-reveal" aria-hidden="true">
-          <span class="pf-bridge-strand">Breath changes your state</span>
-          <span class="pf-bridge-strand">Awareness helps you see</span>
-          <span class="pf-bridge-strand">Focus directs your energy</span>
-          <span class="pf-bridge-strand">Writing gives you direction</span>
-          <span class="pf-bridge-strand">Movement brings it into your body</span>
-        </div>
-
-        <p class="text-reveal">As these pieces begin working together, they affect the way you create, make decisions, connect with others, and move through everyday life.</p>
-        <p class="text-reveal">But something deeper can also begin to happen. You become quieter inside. More receptive. More connected to your spirit and inner guidance—more capable of experiencing the deeper states of consciousness this path is pointing toward.</p>
-        <p class="pf-bridge-close text-reveal">The teachings below will help you begin bringing those pieces together.</p>
-      </div>
-    </section>
-
-    <!-- 10. CORE PATHFINDER TEACHINGS -->
-    <section class="exp-section exp-section--light" id="teachings" aria-labelledby="teachingsTitle">
-      <div class="exp-inner">
-        <div class="exp-heading">
-          <span class="eyebrow text-reveal">Continue the Work</span>
-          <h2 id="teachingsTitle" class="text-reveal">Core Pathfinder teachings.</h2>
-          <p class="text-reveal">A curated, rotating set of teachings on practice, integration, presence, and bringing the work into everyday life. New pieces are added as they're published.</p>
+        <div class="exp-video-layout" style="margin-bottom:clamp(48px,6vw,72px);">
+          <div class="exp-video-copy">
+            <span class="eyebrow text-reveal">Where to Start</span>
+            <h3 class="text-reveal" style="font-family:var(--display); font-weight:500; font-size:clamp(1.5rem,2.4vw,2rem); color:var(--ink); margin-bottom:16px;">The Cat &amp; Mouse Method</h3>
+            <div class="text-reveal">
+              <p>The Cat &amp; Mouse Method is the beginning of a five-part series that builds one practice upon another.</p>
+              <p>Together, these teachings help you recognize and replace unhelpful thought loops, strengthen your attention, develop single-point focus, and ultimately enter and remain in flow state.</p>
+            </div>
+            <div class="exp-btn-row text-reveal" style="margin-top:22px;">
+              <a class="text-link" href="https://www.youtube.com/watch?v=iYIyFlRidfI&list=PLTOeXIhHW6PY&index=1" target="_blank" rel="noopener noreferrer">Watch the Whole Playlist <span aria-hidden="true">&#8594;</span></a>
+            </div>
+          </div>
+          <div class="exp-video-box text-reveal" tabindex="0" role="button" aria-label="Play: Cat & Mouse Method" data-youtube="k0TA52HUjbs" data-title="Cat & Mouse Method">
+            <img src="https://img.youtube.com/vi/k0TA52HUjbs/hqdefault.jpg" alt="" loading="lazy">
+            <span class="exp-play" aria-hidden="true"></span>
+          </div>
         </div>
 
         <div class="exp-tabs" role="tablist" aria-label="Teaching pools">
-          <button class="exp-tab is-active" type="button" role="tab" aria-selected="true" data-pool="foundation">Build a Foundation</button>
-          <button class="exp-tab" type="button" role="tab" aria-selected="false" data-pool="mind">Work With Your Mind</button>
-          <button class="exp-tab" type="button" role="tab" aria-selected="false" data-pool="life">Bring It Into Life</button>
+          <button class="exp-tab is-active" type="button" role="tab" aria-selected="true" data-pool="mind">Explore Your Mind</button>
+          <button class="exp-tab" type="button" role="tab" aria-selected="false" data-pool="life">Return to Your Life</button>
+          <button class="exp-tab" type="button" role="tab" aria-selected="false" data-pool="curiosity">Follow Your Curiosity</button>
         </div>
 
-        <div class="exp-rotating-grid" id="pfRotatingGrid"></div>
+        <div id="mindPoolFixed" class="exp-card-grid">
+          <div class="exp-card text-reveal" tabindex="0" role="button" aria-label="Play: Turning What You Know Into How You Live" data-youtube="Jkt0aRNtlEQ" data-title="Turning What You Know Into How You Live" style="cursor:pointer;">
+            <div class="exp-card-media"><img src="https://img.youtube.com/vi/Jkt0aRNtlEQ/hqdefault.jpg" alt="" loading="lazy"><span class="exp-play" aria-hidden="true"></span></div>
+            <div class="exp-card-body">
+              <h3>Turning What You Know Into How You Live</h3>
+              <p>Move understanding out of your head and into the way you actually live day to day.</p>
+            </div>
+          </div>
+          <div class="exp-card text-reveal" tabindex="0" role="button" aria-label="Play: Why You Can't Hear Yourself Anymore" data-youtube="B_ZtHN6-xnA" data-title="Why You Can't Hear Yourself Anymore" style="cursor:pointer;">
+            <div class="exp-card-media"><img src="https://img.youtube.com/vi/B_ZtHN6-xnA/hqdefault.jpg" alt="" loading="lazy"><span class="exp-play" aria-hidden="true"></span></div>
+            <div class="exp-card-body">
+              <h3>Why You Can't Hear Yourself Anymore</h3>
+              <p>Constant stimulation and endless information can quietly disconnect us from our inner voice.</p>
+            </div>
+          </div>
+          <div class="exp-card exp-card--soon text-reveal">
+            <div class="exp-card-media" style="background-image:url('assets/media/direct-experience.jpg');background-size:cover;background-position:center;"></div>
+            <div class="exp-card-body">
+              <span class="exp-badge">Coming Soon</span>
+              <h3>Creativity as a Practice</h3>
+              <p>Reconnecting with flow through small acts of creation.</p>
+            </div>
+          </div>
+        </div>
 
-        <button class="text-link exp-shuffle" id="pfShuffleBtn" type="button">Show Me Something Different <span aria-hidden="true">&#8635;</span></button>
+        <div class="exp-rotating-grid" id="rotatingGrid" hidden></div>
+
+        <button class="text-link exp-shuffle" id="shuffleBtn" type="button" hidden>Show Me Something Different <span aria-hidden="true">&#8635;</span></button>
       </div>
     </section>
 
-    <!-- 13. REVIEW THE SEEK CONSCIOUSNESS BLUEPRINT -->
+    <!-- 5b. SPIRITUAL TRAINING REGIMEN — coming soon -->
+    <section class="exp-section exp-training" id="training-regimen" aria-labelledby="trainingRegimenTitle" style="background-image:url('assets/media/training-regimen.png');">
+      <div class="exp-training-scrim" aria-hidden="true"></div>
+      <div class="exp-inner exp-soon-section">
+        <span class="exp-badge text-reveal">Coming Soon</span>
+        <h2 id="trainingRegimenTitle" class="text-reveal">Spiritual Training Regimen</h2>
+        <p class="text-reveal">A structured practice for building presence, discipline, and inner steadiness — the way you'd train a muscle. This section is taking shape as a series of guided videos and posts.</p>
+        <div class="exp-soon-grid text-reveal">
+          <div class="exp-soon-tile">
+            <span class="exp-soon-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M10 8.5l6 3.5-6 3.5z" fill="currentColor" stroke="none"/>
+              </svg>
+            </span>
+            <span>Video</span>
+          </div>
+          <div class="exp-soon-tile">
+            <span class="exp-soon-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 3h7l4 4v14H7z"/>
+                <path d="M14 3v4h4"/>
+                <path d="M9.5 12h5M9.5 15h5M9.5 18h3"/>
+              </svg>
+            </span>
+            <span>Post</span>
+          </div>
+          <div class="exp-soon-tile">
+            <span class="exp-soon-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 3h7l4 4v14H7z"/>
+                <path d="M14 3v4h4"/>
+                <path d="M9.5 12h5M9.5 15h5M9.5 18h3"/>
+              </svg>
+            </span>
+            <span>Post</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. BLUEPRINT — full-bleed break in the layout rhythm -->
     <section class="exp-section exp-section--paper" id="blueprint" aria-labelledby="blueprintTitle" style="padding-left:0; padding-right:0; padding-bottom:0;">
       <div class="exp-inner" style="padding:0 6vw;">
         <div class="exp-blueprint-intro">
           <span class="eyebrow text-reveal">The Bigger Picture</span>
           <h2 class="text-reveal" style="font-size:clamp(2.3rem,4vw,4rem); color:var(--ink); margin-bottom:22px;" id="blueprintTitle">See how it all connects</h2>
           <div class="text-reveal">
-            <p>Already explored the Blueprint? Return anytime and notice which parts stand out now that you are beginning to work with the practices.</p>
-            <p>New to it? Watch the complete overview or explore the Tree one piece at a time.</p>
+            <p>When you're ready to understand how the different teachings, practices, and areas of exploration fit together, the Seek Consciousness Blueprint offers a map of the larger journey.</p>
+            <p>You can watch the complete 30-minute introduction from beginning to end. Or you can explore the Tree one piece at a time.</p>
+            <p>There is no wrong way to go. Simply explore what you feel called to.</p>
           </div>
           <div class="exp-btn-row text-reveal">
             <button type="button" id="watchBlueprintBtn" class="exp-btn exp-btn--primary" data-youtube="vFnXQ0wqT1U" data-eyebrow="The Complete Blueprint" data-title="The Complete Map of Inner Transformation, Explained Through the Metaphor of a Tree">Watch the Complete Blueprint</button>
@@ -1107,7 +983,17 @@
       </div>
 
       <figure class="exp-tree-full text-reveal" id="treeBlueprint">
-        <video autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture poster="assets/media/tree.png" aria-label="An illustrated tree with an equally expansive root system: Ancient Wisdom, Mind &amp; Nervous System, Catalysts &amp; Expanded States, Living the Practice, Nature Sound &amp; Environment, and Identity &amp; Purpose in the branches; Breath, Awareness, Writing &amp; Reflection, and Body Integration in the trunk; Inner Authority, Direct Experience, Daily Practice, and Love &amp; Truth in the roots.">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          webkit-playsinline
+          preload="auto"
+          disablepictureinpicture
+          poster="assets/media/tree.png"
+          aria-label="An illustrated tree with an equally expansive root system: Ancient Wisdom, Mind &amp; Nervous System, Catalysts &amp; Expanded States, Living the Practice, Nature Sound &amp; Environment, and Identity &amp; Purpose in the branches; Breath, Awareness, Writing &amp; Reflection, and Body Integration in the trunk; Inner Authority, Direct Experience, Daily Practice, and Love &amp; Truth in the roots."
+        >
           <source src="assets/media/tree.mp4" type="video/mp4">
         </video>
 
@@ -1182,52 +1068,21 @@
       </figure>
     </section>
 
-    <!-- 12. INTRODUCTION VIDEO ACCESS — compact, secondary -->
-    <section class="exp-section exp-section--light" id="new-here" aria-label="New to Seek Consciousness">
-      <div class="exp-inner">
-        <details class="exp-toggle text-reveal">
-          <summary class="exp-toggle-summary">
-            <span class="exp-toggle-summary-text">
-              <span class="exp-toggle-summary-line"><strong>New to Seek Consciousness?</strong> Watch the introduction to understand what the project is and how the larger framework fits together.</span>
-            </span>
-            <span class="exp-toggle-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-            </span>
-          </summary>
-          <div class="exp-toggle-panel">
-            <div class="exp-video-layout">
-              <div class="exp-video-copy">
-                <p>This video orients you to Seek Consciousness—what the project is, how the different pieces connect, and how this work can support your own path.</p>
-                <div class="exp-btn-row" style="margin-top:20px;">
-                  <a class="text-link" href="https://www.youtube.com/watch?v=17spdVgtWjw" target="_blank" rel="noopener noreferrer">Watch on YouTube <span aria-hidden="true">&#8594;</span></a>
-                </div>
-              </div>
-              <div class="exp-video-box" tabindex="0" role="button" aria-label="Play: Start Here — How This Project Can Reimagine Your Entire Life While Leaving the Path in Your Hands" data-youtube="17spdVgtWjw" data-title="Start Here — How This Project Can Reimagine Your Entire Life While Leaving the Path in Your Hands">
-                <img src="https://img.youtube.com/vi/17spdVgtWjw/hqdefault.jpg" alt="" loading="lazy">
-                <span class="exp-play" aria-hidden="true"></span>
-              </div>
-            </div>
-          </div>
-        </details>
-      </div>
-    </section>
-
-    <!-- 14. TRANSITION INTO THE SEEKER -->
-    <section class="exp-section exp-section--deep" id="ready" aria-labelledby="readyTitle">
+    <!-- 7. TRANSITION TO PATHFINDER -->
+    <section class="exp-section exp-section--light" id="ready" aria-labelledby="readyTitle">
       <div class="exp-inner exp-closing-layout">
         <div class="exp-closing-copy">
-          <span class="eyebrow text-reveal">When Practice Opens Something Deeper</span>
+          <span class="eyebrow text-reveal">When You Feel Ready</span>
           <h2 class="text-reveal" style="font-size:clamp(2.3rem,4vw,4rem); color:var(--ink); margin-bottom:22px;" id="readyTitle">There is no need to rush through any of this.</h2>
           <div class="text-reveal">
-            <p>As you become more present and begin working with consciousness directly, questions may naturally arise about spirit, identity, unity, awakening, God or Source, and the nature of reality itself.</p>
-            <p>The Seeker is another direction available whenever those questions begin calling. It does not mean you are more advanced. It only means something deeper is asking to be explored.</p>
+            <p>Follow your curiosity. Spend time with the teachings that affect you. Return to the ones you are still thinking about days later.</p>
+            <p>When you begin wanting to connect these ideas through consistent practice, the Pathfinder will be waiting.</p>
           </div>
           <div class="exp-btn-row text-reveal">
-            <a class="exp-btn exp-btn--primary" href="index.html#choose-path">Explore the Seeker Path <span aria-hidden="true">&#8594;</span></a>
-            <a class="exp-btn" href="#top">Continue Exploring the Pathfinder</a>
+            <a class="exp-btn exp-btn--primary" href="index.html#choose-path">Continue to the Pathfinder <span aria-hidden="true">&#8594;</span></a>
           </div>
         </div>
-        <div class="exp-closing-media text-reveal" style="background-image:url('assets/media/path-seeker.png'); background-position:left center;" role="img" aria-label="A winding path opening into deeper, more mysterious terrain"></div>
+        <div class="exp-closing-media text-reveal" style="background-image:url('assets/media/path-pathfinder.png')" role="img" aria-label="A wooded trail winding downhill beneath a large tree at sunset"></div>
       </div>
     </section>
   </main>
@@ -1239,7 +1094,7 @@
         <a href="index.html#intro">Recognition</a>
         <a href="index.html#mission">Seek Consciousness</a>
         <a href="index.html#choose-path">Choose Your Path</a>
-        <a href="explorer.html">The Explorer</a>
+        <a href="index.html#latest-videos">Teachings</a>
       </nav>
     </div>
     <p class="copyright">&copy; <span id="year"></span> Seek Consciousness. All rights reserved.</p>
@@ -1263,14 +1118,38 @@
   <template id="tmplTrunk">
     <p>The full trunk contains four categories. People do not need to begin all four at once.</p>
     <p>Breath is the default first practice. Vision Writing is the second major anchor. Awareness and Body Integration deepen gradually.</p>
-    <h4 style="margin-top:1.6em; margin-bottom:.5em; font-family:var(--display); font-weight:600; font-size:.98rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ochre);">Breath</h4>
-    <p>Breath is one of the most immediate ways to influence inner state. Within Seek Consciousness, it functions as a morning foundation, a reset, a doorway into meditation, and a direct return to the body and present moment.</p>
-    <h4 style="margin-top:1.6em; margin-bottom:.5em; font-family:var(--display); font-weight:600; font-size:.98rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ochre);">Awareness</h4>
-    <p>Awareness is the ability to notice what is happening without being completely controlled by it—thoughts, reactions, triggers, and patterns running beneath behavior.</p>
-    <h4 style="margin-top:1.6em; margin-bottom:.5em; font-family:var(--display); font-weight:600; font-size:.98rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ochre);">Writing &amp; Reflection</h4>
-    <p>Vision Writing helps clarify direction, recognize patterns, and bring thoughts out of the head into a form that can be examined and returned to.</p>
-    <h4 style="margin-top:1.6em; margin-bottom:.5em; font-family:var(--display); font-weight:600; font-size:.98rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ochre);">Body Integration</h4>
-    <p>Movement, sleep, and physical care are not separate from consciousness work. The body is the instrument through which human life is lived.</p>
+
+    <h4>Breath</h4>
+    <p>Breath is one of the most immediate ways to influence inner state. It is embodied, accessible, and requires no belief.</p>
+    <p>Within Seek Consciousness, breath functions as a morning foundation, a reset, a way to interrupt automatic reactivity, a grounding practice before the phone or noise, a doorway into meditation, and a direct return to the body and present moment.</p>
+    <p>Core practices include foundational breathwork, 90 Seconds to Nirvana, reset breathing, and practices intended to support greater steadiness and regulation.</p>
+    <p>Specific physiological or medical claims must be researched before publication. The strongest teaching often begins with what a person can directly feel and observe.</p>
+
+    <h4>Awareness</h4>
+    <p>Awareness is the ability to notice what is happening without being completely controlled by it.</p>
+    <p>It includes thoughts, emotional reactions, triggers, bodily tension, impulses, attention being pulled, and patterns running beneath behavior. Once a pattern can be seen clearly, a different relationship with it becomes possible.</p>
+    <p>The Five Mind Tools are:</p>
+    <ol>
+      <li>Cat &amp; Mouse Method — noticing thoughts as they appear rather than remaining unconsciously captured by them.</li>
+      <li>Replacement Loop — interrupting an unhelpful mental loop by consciously replacing it rather than only fighting it.</li>
+      <li>Single Point Focus — training the ability to place and sustain attention deliberately.</li>
+      <li>Flow State — entering deep engagement where attention, ability, challenge, and action come together.</li>
+      <li>Staying in Flow — recognizing what breaks attention and learning how to protect, extend, and return to flow.</li>
+    </ol>
+    <p>The purpose is not to fight every thought. It is to become aware enough to choose a different relationship with it.</p>
+
+    <h4>Writing &amp; Reflection</h4>
+    <p>Writing &amp; Reflection is the trunk category. Vision Writing is its primary practice.</p>
+    <p>Vision Writing helps a person clarify direction, recognize patterns, explore questions, connect present experience with future vision, and bring thoughts out of the head into a form that can be examined.</p>
+    <p>Kurt&rsquo;s personal practice is generally at least 500 freely written words without polishing or trying to sound a certain way. It may include relationships, work, fear, purpose, contradiction, dreams, questions, fragments, and emerging vision. The original writing is saved. Over time, repeated entries reveal what is becoming clear, what remains unresolved, and what may be asking for action.</p>
+    <p>It is more than journaling and more than planning. It is partly reflection and partly manifestation: what a person repeatedly envisions, examines, and returns to begins shaping attention, decisions, and the life being created.</p>
+    <p>AI reflection is optional and remains a mirror, never an authority.</p>
+
+    <h4>Body Integration</h4>
+    <p>The body is not separate from consciousness work. It is part of the path.</p>
+    <p>Movement, yoga, stretching, strength, sleep, rest, nutrition, physical care, and releasing tension all affect how a person experiences life. The body is not merely a shell or something to transcend. It is the instrument through which human life is lived.</p>
+    <p>Body care should fit into ordinary life: stretch while watching something, walk instead of scrolling, practice five minutes rather than zero, build strength gradually, and protect sleep.</p>
+    <p>Presence is not something you visit. It is something you practice living.</p>
   </template>
 
   <script>
@@ -1336,14 +1215,14 @@
         media.innerHTML = '';
         media.appendChild(iframe);
       };
-      document.querySelectorAll('[data-youtube]:not(.exp-tree-node):not(#watchBlueprintBtn):not(.exp-video-box--soon):not(.pf-prog-item)').forEach(box => {
+      document.querySelectorAll('[data-youtube]:not(.exp-tree-node):not(#watchBlueprintBtn)').forEach(box => {
         box.addEventListener('click', () => playFacade(box));
         box.addEventListener('keydown', e => {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); playFacade(box); }
         });
       });
 
-      /* Tree node popup + Five Mind Tools progression share the same modal */
+      /* Tree node popup: embedded video + text, opened from Branches/Trunk/Roots icons */
       const treeModal = document.getElementById('treeModal');
       if (treeModal) {
         const modalMedia = treeModal.querySelector('.exp-tree-modal-media');
@@ -1415,7 +1294,7 @@
           lastTreeTrigger?.focus();
         };
 
-        document.querySelectorAll('.exp-tree-node[data-youtube], #watchBlueprintBtn, .pf-prog-item[data-youtube]').forEach(node => {
+        document.querySelectorAll('.exp-tree-node[data-youtube], #watchBlueprintBtn').forEach(node => {
           node.addEventListener('click', () => openTreeModal(node));
         });
         treeModal.querySelectorAll('[data-modal-dismiss]').forEach(el => el.addEventListener('click', closeTreeModal));
@@ -1424,28 +1303,82 @@
         });
       }
 
-      /* Rotating teaching pools — Coming Soon placeholders until real Pathfinder videos are tagged */
+      /* Reflection: download as an editable Word document (RTF opens natively in Word, Pages, Google Docs) */
+      const getQuestions = () => Array.from(document.querySelectorAll('#reflectionQuestions .exp-question p'))
+        .map(p => p.innerText.replace(/\s+/g,' ').trim());
+
+      const rtfEscape = (str) => str
+        .replace(/\\/g, '\\\\')
+        .replace(/\{/g, '\\{')
+        .replace(/\}/g, '\\}')
+        .replace(/[\u2018\u2019]/g, "'")
+        .replace(/[\u201C\u201D]/g, '"')
+        .replace(/\u2014/g, '\\emdash ')
+        .replace(/\u2013/g, '\\endash ');
+
+      const downloadReflectionDoc = () => {
+        const questions = getQuestions();
+        const intro = [
+          'Before taking in more information, take a few minutes to pause, look within, and notice what feels true for you today.',
+          'There are no correct answers. Don\u2019t write what you think you are supposed to believe. Write what genuinely feels true.',
+          'This document is entirely private \u2014 type your answers directly below each question and save the file to your own device.'
+        ];
+
+        let rtf = '{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1033'
+          + '{\\fonttbl{\\f0\\froman Times New Roman;}}'
+          + '{\\colortbl;\\red149\\green102\\blue44;}'
+          + '\\f0\\fs20\\pard\\sa240';
+
+        rtf += `\\fs40\\b The Explorer \\emdash  Private Reflection\\b0\\par`;
+        rtf += `\\fs22\\i Seek Consciousness\\i0\\par\\sa280`;
+
+        intro.forEach(line => { rtf += `\\fs20 ${rtfEscape(line)}\\par`; });
+        rtf += `\\par`;
+
+        questions.forEach((q, i) => {
+          rtf += `\\sa60\\fs24\\b\\cf1 ${i + 1}.\\cf0\\b0  \\b ${rtfEscape(q)}\\b0\\par`;
+          rtf += `\\sa280\\fs22 \\line\\line\\line\\line\\par`;
+        });
+
+        rtf += '}';
+
+        const blob = new Blob([rtf], { type:'application/rtf' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'seek-consciousness-explorer-reflection.rtf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      };
+      document.getElementById('expDownloadReflection')?.addEventListener('click', downloadReflectionDoc);
+      document.getElementById('expPrintReflection')?.addEventListener('click', () => window.print());
+
+      /* Rotating teaching pools for "Return to Your Life" / "Follow Your Curiosity" — illustrative dataset; swap for WordPress-tagged feed later.
+         "Explore Your Mind" is a fixed layout (#mindPoolFixed in the markup), not part of this rotation. */
       const pools = {
-        foundation: [
-          { title:'Building the Bridge', desc:'Connecting insight to action, one deliberate step at a time.', img:'assets/media/path-pathfinder.png' },
-          { type:'video', id:'tOCFbcy5IUk', title:'Stop Consuming. Start Creating.', desc:'Shift from passive consumption into small acts of intentional creation that reconnect you with flow and aliveness.' },
-          { title:'What Consistency Actually Builds', desc:'Why showing up matters more than getting it right.', img:'assets/media/kurt-note.jpg' }
-        ],
-        mind: [
-          { title:'Working With Resistance', desc:'What to do when a practice starts feeling difficult to keep.', img:'assets/media/living-map-tree.jpg' },
-          { title:'Attention as a Trainable Skill', desc:'Treating focus like a muscle rather than a fixed trait.', img:'assets/media/tree-of-consciousness.png' },
-          { title:'Noticing Without Judging', desc:'The difference between observing a pattern and fighting it.', img:'assets/media/direct-experience.jpg' }
-        ],
         life: [
-          { title:'Bringing Practice Into Relationships', desc:'How inner steadiness changes the way you show up for others.', img:'assets/media/path-seeker.jpg' },
-          { title:'Practice on a Hard Day', desc:'What a meaningful practice looks like when life gets demanding.', img:'assets/media/recognition-intro.jpg' },
-          { title:'Small Rituals, Real Change', desc:'Why brief, repeated practices outperform occasional overhauls.', img:'assets/media/path-pathfinder-hover.png' }
+          { type:'soon', title:'Consuming vs. Creating', desc:'Shifting from passive consumption into participation.', img:'assets/media/path-explorer.jpg' },
+          { type:'soon', title:'Finding Purpose in the Everyday', desc:'Bringing presence into ordinary moments.', img:'assets/media/living-map-tree.jpg' },
+          { type:'soon', title:'Consistency Over Intensity', desc:'Small daily practice compounds more than occasional bursts of effort.', img:'assets/media/kurt-note.jpg' },
+          { type:'soon', title:'Boundaries as an Act of Love', desc:"Say no to protect what matters, without armor or apology.", img:'assets/media/path-question.jpg' },
+          { type:'soon', title:'Rest Without Guilt', desc:"Slowing down isn't falling behind — it's how integration happens.", img:'assets/media/recognition-checklist.jpg' }
+        ],
+        curiosity: [
+          { type:'soon', title:'Ancient Wisdom, Modern Life', desc:'Where old teachings meet everyday experience.', img:'assets/media/tree-of-consciousness.png' },
+          { type:'soon', title:'Questions Worth Sitting With', desc:'Ideas that reward slow, repeated reflection.', img:'assets/media/path-pathfinder.png' },
+          { type:'soon', title:'From the Community', desc:'Reflections and questions from fellow explorers.', img:'assets/media/path-seeker.jpg' },
+          { type:'soon', title:'What the Body Already Knows', desc:'Sensation and instinct often understand before the mind catches up.', img:'assets/media/recognition-looking-for.jpg' },
+          { type:'soon', title:'Sitting With Not Knowing', desc:"Certainty isn't required to keep walking the path.", img:'assets/media/path-pathfinder.jpg' }
         ]
       };
 
-      const grid = document.getElementById('pfRotatingGrid');
+      const mindPoolFixed = document.getElementById('mindPoolFixed');
+      const grid = document.getElementById('rotatingGrid');
+      const shuffleBtn = document.getElementById('shuffleBtn');
       const tabs = Array.from(document.querySelectorAll('.exp-tab'));
-      let activePool = 'foundation';
+      let activePool = 'mind';
 
       const cardMarkup = (item) => {
         if (item.type === 'video') {
@@ -1472,14 +1405,37 @@
         return el;
       };
 
+      const pickRandom = (arr, n) => {
+        const copy = arr.slice();
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy.slice(0, n);
+      };
+
       const renderPool = (key) => {
         if (!grid || !pools[key]) return;
         grid.classList.add('is-fading');
         window.setTimeout(() => {
           grid.innerHTML = '';
-          pools[key].forEach(item => grid.appendChild(cardMarkup(item)));
+          pickRandom(pools[key], 3).forEach(item => grid.appendChild(cardMarkup(item)));
           grid.classList.remove('is-fading');
         }, reducedMotion.matches ? 0 : 220);
+      };
+
+      const showPool = (key) => {
+        activePool = key;
+        if (key === 'mind') {
+          mindPoolFixed?.removeAttribute('hidden');
+          grid?.setAttribute('hidden','');
+          shuffleBtn?.setAttribute('hidden','');
+        } else {
+          mindPoolFixed?.setAttribute('hidden','');
+          grid?.removeAttribute('hidden');
+          shuffleBtn?.removeAttribute('hidden');
+          renderPool(key);
+        }
       };
 
       tabs.forEach(tab => {
@@ -1487,73 +1443,11 @@
           tabs.forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected','false'); });
           tab.classList.add('is-active');
           tab.setAttribute('aria-selected','true');
-          activePool = tab.dataset.pool;
-          renderPool(activePool);
+          showPool(tab.dataset.pool);
         });
       });
 
-      document.getElementById('pfShuffleBtn')?.addEventListener('click', () => {
-        const arr = pools[activePool];
-        for (let i = arr.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
-        renderPool(activePool);
-      });
-
-      renderPool(activePool);
-
-      /* Reflection: download as an editable Word document (RTF opens natively in Word, Pages, Google Docs) */
-      const getQuestions = () => Array.from(document.querySelectorAll('#reflectionQuestions .exp-question p'))
-        .map(p => p.innerText.replace(/\s+/g,' ').trim());
-
-      const rtfEscape = (str) => str
-        .replace(/\\/g, '\\\\')
-        .replace(/\{/g, '\\{')
-        .replace(/\}/g, '\\}')
-        .replace(/[‘’]/g, "'")
-        .replace(/[“”]/g, '"')
-        .replace(/—/g, '\\emdash ')
-        .replace(/–/g, '\\endash ');
-
-      const downloadReflectionDoc = () => {
-        const questions = getQuestions();
-        const intro = [
-          "Let's take a moment to look at what you're doing for your mind, body, and spirit right now.",
-          'There are no correct answers. Consider these privately, and write what genuinely feels true.',
-          'This document is entirely private — type your answers directly below each question and save the file to your own device.'
-        ];
-
-        let rtf = '{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1033'
-          + '{\\fonttbl{\\f0\\froman Times New Roman;}}'
-          + '{\\colortbl;\\red149\\green102\\blue44;}'
-          + '\\f0\\fs20\\pard\\sa240';
-
-        rtf += `\\fs40\\b The Pathfinder \\emdash  Where You Are Now\\b0\\par`;
-        rtf += `\\fs22\\i Seek Consciousness\\i0\\par\\sa280`;
-
-        intro.forEach(line => { rtf += `\\fs20 ${rtfEscape(line)}\\par`; });
-        rtf += `\\par`;
-
-        questions.forEach((q, i) => {
-          rtf += `\\sa60\\fs24\\b\\cf1 ${i + 1}.\\cf0\\b0  \\b ${rtfEscape(q)}\\b0\\par`;
-          rtf += `\\sa280\\fs22 \\line\\line\\line\\line\\par`;
-        });
-
-        rtf += '}';
-
-        const blob = new Blob([rtf], { type:'application/rtf' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'seek-consciousness-pathfinder-reflection.rtf';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-      };
-      document.getElementById('pfDownloadReflection')?.addEventListener('click', downloadReflectionDoc);
-      document.getElementById('pfPrintReflection')?.addEventListener('click', () => window.print());
+      shuffleBtn?.addEventListener('click', () => renderPool(activePool));
 
       const year = document.getElementById('year');
       if (year) year.textContent = String(new Date().getFullYear());
