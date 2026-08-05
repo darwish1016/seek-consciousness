@@ -304,6 +304,13 @@
     }
     .exp-video-badge { position:absolute; top:16px; left:16px; z-index:2; background:var(--paper-light); }
     @media (max-width:900px) { .exp-video-layout { grid-template-columns:1fr; } }
+    @media (max-width:760px) {
+      /* Video before the watch button on mobile. */
+      .exp-video-layout { gap:0; }
+      .exp-video-copy { display:contents; }
+      .exp-video-box { order:2; margin-top:28px; }
+      .exp-video-copy .exp-btn-row { order:3; }
+    }
 
     /* ===== Toggle / details pattern (Introduction, Pranayama context) ===== */
     .exp-toggle { border:1px solid var(--line); background:rgba(255,255,255,.4); }
