@@ -344,6 +344,13 @@
       50% { box-shadow:0 14px 30px rgba(36,27,20,.25), 0 0 0 14px rgba(149,102,44,.12); }
     }
     @media (max-width:900px) { .exp-video-layout { grid-template-columns:1fr; } }
+    @media (max-width:760px) {
+      /* Video before the watch button on mobile. */
+      .exp-video-layout { gap:0; }
+      .exp-video-copy { display:contents; }
+      .exp-video-box { order:2; margin-top:28px; }
+      .exp-video-copy .exp-btn-row { order:3; }
+    }
 
     /* ===== Introduction toggle (collapsed by default — full intro now lives on the homepage) ===== */
     .exp-intro-toggle { border:1px solid var(--line); background:rgba(255,255,255,.4); }
