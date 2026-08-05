@@ -161,6 +161,10 @@
 
     /* ===== 1. A Living Project ===== */
     #living-project { min-height:100svh; display:flex; align-items:center; }
+    @media (max-width:760px) {
+      /* The figure in the photo sits right-of-center; shift the crop so they stay in frame. */
+      #living-project { background-position:74% center; }
+    }
     #living-project .exp-inner { width:100%; }
     #living-project .exp-breadcrumb, #living-project .exp-breadcrumb a, #living-project .exp-breadcrumb-current { color:rgba(248,240,221,.7); }
     #living-project .exp-breadcrumb a:hover { color:#fff; }
@@ -214,6 +218,14 @@
       50% { box-shadow:0 14px 30px rgba(36,27,20,.25), 0 0 0 14px rgba(149,102,44,.12); }
     }
     @media (max-width:900px) { .exp-video-layout { grid-template-columns:1fr; } }
+    @media (max-width:760px) {
+      /* Video before the watch buttons (and transcript toggle) on mobile. */
+      .exp-video-layout { gap:0; }
+      .exp-video-copy { display:contents; }
+      .exp-video-box { order:2; margin-top:28px; }
+      .exp-video-copy .exp-btn-row { order:3; gap:20px; }
+      .exp-video-copy .exp-toggle { order:4; }
+    }
 
     /* ===== Collapsed transcript toggle ===== */
     .exp-toggle { margin-top:clamp(26px,3.6vw,36px); border:1px solid var(--line); background:rgba(255,255,255,.4); }
