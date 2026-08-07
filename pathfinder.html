@@ -321,8 +321,8 @@
     .exp-toggle-summary::-webkit-details-marker { display:none; }
     .exp-toggle-summary::marker { content:''; }
     .exp-toggle-summary-text { display:flex; flex-direction:column; gap:6px; }
-    .exp-toggle-summary-line { font-size:1.1rem; color:var(--ink); line-height:1.5; }
-    .exp-toggle-summary-line strong { font-family:var(--display); font-weight:600; font-size:.9em; letter-spacing:.01em; }
+    .exp-toggle-summary-line { font-size:1.12rem; color:var(--ink); line-height:1.5; }
+    .exp-toggle-summary-line strong { font-family:var(--display); font-weight:600; font-size:.92em; letter-spacing:.01em; }
     .exp-toggle-summary-line.is-muted { color:var(--muted); }
     .exp-toggle-icon {
       flex:0 0 auto; width:32px; height:32px; border-radius:50%; border:1px solid rgba(149,102,44,.4);
@@ -333,12 +333,13 @@
     @media (hover:hover) and (pointer:fine) { .exp-toggle-summary:hover .exp-toggle-icon { border-color:var(--ochre); } }
     .exp-toggle-panel { padding:0 clamp(20px,4vw,36px) clamp(28px,4vw,40px); }
     @media (min-width:901px) { .exp-toggle-panel .exp-video-layout { grid-template-columns:minmax(0,1fr) minmax(280px,.9fr); } }
-    .exp-toggle-panel p { font-size:1.08rem; color:rgba(36,27,20,.86); }
+    .exp-toggle-panel p { font-size:1.1rem; color:rgba(36,27,20,.86); }
     .exp-toggle-panel p + p { margin-top:.55rem; }
     @keyframes togglePanelIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
     .exp-toggle[open] .exp-toggle-panel { animation:togglePanelIn .35s var(--ease); }
     @media (max-width:760px) {
       .exp-toggle-summary { padding:20px 18px; gap:14px; }
+      .exp-toggle-summary-line { font-size:1.16rem; }
       .exp-toggle-panel { padding:0 18px 26px; }
     }
 
@@ -698,18 +699,20 @@
       .exp-heading { margin-bottom:32px; }
       .exp-heading h2 { font-size:clamp(2.1rem,9vw,3.15rem); }
       .exp-heading p { font-size:1.16rem; }
+      #whereTitle, #blueprintTitle, #readyTitle { font-size:clamp(2.1rem,9vw,3.15rem) !important; }
+      .exp-reflect-intro { font-size:1.16rem !important; }
       .exp-btn-row { gap:12px 16px; }
-      .exp-btn { padding:14px 24px; width:100%; justify-content:center; }
+      .exp-btn { padding:14px 24px; font-size:.66rem; width:100%; justify-content:center; }
       .exp-question { grid-template-columns:36px minmax(0,1fr); gap:12px; padding:6px 0; }
       .exp-question-num { font-size:1.3rem; }
       .exp-question p { font-size:1.16rem; }
-      .exp-privacy { padding:16px 18px; font-size:1.1rem; }
+      .exp-privacy { padding:16px 18px; font-size:1.16rem; }
       .exp-video-layout, .exp-closing-layout { gap:28px; }
       .exp-video-copy p, .exp-blueprint-intro p, .exp-closing-copy p { font-size:1.16rem; }
       .exp-blueprint-intro { margin-bottom:36px; }
       .exp-card-grid, .exp-card-grid--2, .exp-rotating-grid { gap:16px; }
       .exp-card-body { padding:18px 18px 22px; }
-      .exp-card-body p { font-size:1.1rem; }
+      .exp-card-body p { font-size:1.16rem; }
       .exp-tabs { gap:8px; margin-bottom:26px; }
       .exp-tab { padding:10px 16px; font-size:.64rem; }
       .exp-tree-overlay {
@@ -807,8 +810,8 @@
       <div class="exp-inner">
         <div class="exp-heading">
           <span class="eyebrow text-reveal">Before You Begin</span>
-          <h2 id="whereTitle" class="text-reveal" style="font-size:clamp(2.1rem,3.8vw,3.6rem);">Take a look at where you are now.</h2>
-          <p class="text-reveal">Let's take a moment to look at what you're doing for your mind, body, and spirit right now.</p>
+          <h2 id="whereTitle" class="text-reveal" style="font-size:clamp(2.2rem,3.8vw,3.8rem);">Take a look at where you are now.</h2>
+          <p class="exp-reflect-intro text-reveal" style="font-size:1.2rem; color:var(--muted); max-width:56ch;">Let's take a moment to look at what you're doing for your mind, body, and spirit right now.</p>
         </div>
 
         <ol class="exp-questions" id="reflectionQuestions">
