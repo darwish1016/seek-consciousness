@@ -514,7 +514,7 @@
     .intro-feature-inner {
       width:min(1400px,100%); margin:0 auto;
       display:grid; grid-template-columns:minmax(0,1.05fr) minmax(360px,1fr);
-      gap:clamp(40px,5vw,80px); align-items:center;
+      column-gap:clamp(40px,5vw,80px); row-gap:0; align-items:center;
     }
     .intro-feature-copy h2 { max-width:14ch; margin-bottom:20px; font-size:clamp(2.4rem,4.2vw,4.6rem); color:var(--ink); line-height:1.08; text-wrap:balance; }
     .intro-feature-copy p { font-size:clamp(1.16rem,1.42vw,1.38rem); color:rgba(36,27,20,.85); line-height:1.56; }
@@ -559,6 +559,25 @@
       50% { box-shadow:0 16px 32px rgba(36,27,20,.26), 0 0 0 15px rgba(149,102,44,.12); }
     }
     @media (max-width:980px) { .intro-feature-inner { grid-template-columns:1fr; } }
+    .intro-guidance {
+      grid-column:1 / -1;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      margin-top:clamp(22px,2.4vw,30px);
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+    }
+    .intro-guidance p {
+      margin:0;
+      padding:clamp(22px,2.6vw,30px) 24px;
+      border-right:1px solid var(--line);
+      text-align:center;
+      font-style:italic;
+      color:rgba(36,27,20,.86);
+      font-size:clamp(1.1rem,1.3vw,1.3rem);
+      line-height:1.5;
+    }
+    .intro-guidance p:last-child { border-right:0; }
 
     .paths { background:var(--paper-deep); padding:clamp(95px,10vw,145px) 6vw; }
     .paths-inner { width:min(1450px,100%); margin:0 auto; }
@@ -866,6 +885,18 @@
       .intro-feature-copy { display:contents; }
       .intro-video-box { order:2; margin-top:28px; }
       .intro-feature-actions { order:3; flex-direction:column; align-items:stretch; gap:20px; }
+      .intro-guidance {
+        order:4;
+        grid-template-columns:1fr;
+        margin-top:34px;
+      }
+      .intro-guidance p {
+        padding:18px 6px;
+        border-right:0;
+        border-bottom:1px solid var(--line);
+        font-size:1.12rem;
+      }
+      .intro-guidance p:last-child { border-bottom:0; }
 
       .paths { padding:82px 7vw 92px; }
       .paths-heading { margin-bottom:42px; }
@@ -1287,25 +1318,6 @@
       line-height:1.6;
     }
 
-    /* Guiding text: below the portrait on desktop and mobile. */
-    .guidance {
-      width:100%;
-      margin:0;
-      padding-top:12px;
-      border-top:1px solid var(--line);
-      color:rgba(36,27,20,.86);
-      text-align:center;
-    }
-    .guidance p {
-      margin:0;
-      color:rgba(36,27,20,.86);
-      font-size:clamp(1.16rem,1.42vw,1.38rem);
-      line-height:1.6;
-    }
-    .guidance p + p {
-      margin-top:2px;
-    }
-
     @media (max-width:980px) {
       .journey-layout {
         grid-template-columns:minmax(250px,.7fr) minmax(0,1fr);
@@ -1338,7 +1350,6 @@
         grid-template-columns:1fr;
         grid-template-areas:
           "portrait"
-          "guidance"
           "story";
         row-gap:30px;
         margin-top:48px;
@@ -1379,16 +1390,6 @@
       }
       .journey-step:nth-child(2) .journey-copy p:last-child {
         padding-left:18px;
-      }
-      .guidance {
-        grid-area:guidance;
-        margin-top:0;
-        padding-top:12px;
-      }
-      .guidance p {
-        color:rgba(36,27,20,.86);
-        font-size:1.12rem;
-        line-height:1.6;
       }
     }
 
@@ -1489,12 +1490,6 @@
                 <img src="assets/media/kurt_portrait.jpg" alt="Kurt, the person behind Seek Consciousness" loading="lazy">
               </div>
             </figure>
-
-            <div class="guidance" aria-label="Guiding principles">
-              <p>Take what serves you.</p>
-              <p>Leave what doesn’t.</p>
-              <p>Let your experience guide you.</p>
-            </div>
           </div>
 
           <div class="journey-story">
@@ -1551,6 +1546,11 @@
         <div class="intro-video-box" id="introVideoBox" tabindex="0" role="button" aria-label="Play: Start Here — How This Project Can Reimagine Your Entire Life While Leaving the Path in Your Hands" data-youtube="17spdVgtWjw" data-title="Start Here — How This Project Can Reimagine Your Entire Life While Leaving the Path in Your Hands">
           <img src="https://img.youtube.com/vi/17spdVgtWjw/hqdefault.jpg" alt="" loading="lazy">
           <span class="intro-play" aria-hidden="true"></span>
+        </div>
+        <div class="intro-guidance" aria-label="Guiding principles">
+          <p>Take what serves you.</p>
+          <p>Leave what doesn’t.</p>
+          <p>Let your experience guide you.</p>
         </div>
       </div>
     </section>
@@ -1625,7 +1625,7 @@
             <div class="teaching-player">
               <iframe
                 src="https://www.youtube-nocookie.com/embed/87FSEkIX99I?rel=0"
-                title="The practice that changes how you experience life"
+                title="What Presence Actually Feels Like"
                 loading="lazy"
                 referrerpolicy="strict-origin-when-cross-origin"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1634,15 +1634,15 @@
             </div>
             <div class="teaching-body">
               <span class="teaching-number">01</span>
-              <h3>The practice that changes how you experience life.</h3>
-              <p>Notice when attention drifts, return to the present, and let clarity guide more aligned choices.</p>
+              <h3>What Presence Actually Feels Like</h3>
+              <p>A simple shift in how you pay attention that gradually brings more clarity, less anxiety, and a stronger sense of which direction is actually yours.</p>
             </div>
           </article>
           <article class="teaching-card">
             <div class="teaching-player">
               <iframe
                 src="https://www.youtube-nocookie.com/embed/tOCFbcy5IUk?rel=0"
-                title="Stop consuming. Start participating. Become the creator of your own life"
+                title="Put a Piece of Yourself Into the World"
                 loading="lazy"
                 referrerpolicy="strict-origin-when-cross-origin"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1651,15 +1651,15 @@
             </div>
             <div class="teaching-body">
               <span class="teaching-number">02</span>
-              <h3>Stop consuming. Start participating. Become the creator of your own life.</h3>
-              <p>Shift from passive consumption into small acts of intentional creation that reconnect you with flow and aliveness.</p>
+              <h3>Put a Piece of Yourself Into the World</h3>
+              <p>Learn why making something, however small, can pull you out of a flat mood faster than almost anything else.</p>
             </div>
           </article>
           <article class="teaching-card">
             <div class="teaching-player">
               <iframe
                 src="https://www.youtube-nocookie.com/embed/rL4LhiwCFws?rel=0"
-                title="IQ vs. wisdom: What is the difference?"
+                title="What Your Body Knows First"
                 loading="lazy"
                 referrerpolicy="strict-origin-when-cross-origin"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1668,15 +1668,15 @@
             </div>
             <div class="teaching-body">
               <span class="teaching-number">03</span>
-              <h3>IQ vs. wisdom: What’s the difference?</h3>
-              <p>Use intelligence as the engine that moves you forward and wisdom as the compass that keeps you aligned.</p>
+              <h3>What Your Body Knows First</h3>
+              <p>Why the choice that feels right in your body is often more trustworthy than the one that makes the most sense on paper.</p>
             </div>
           </article>
           <article class="teaching-card">
             <div class="teaching-player">
               <iframe
                 src="https://www.youtube-nocookie.com/embed/k0TA52HUjbs?rel=0"
-                title="The Cat &amp; Mouse Method"
+                title="Closing the Mental Tabs"
                 loading="lazy"
                 referrerpolicy="strict-origin-when-cross-origin"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1685,8 +1685,8 @@
             </div>
             <div class="teaching-body">
               <span class="teaching-number">04</span>
-              <h3>Choose your thoughts: the Cat &amp; Mouse Method.</h3>
-              <p>Notice mental loops and decide whether to keep, park, replace, or release them.</p>
+              <h3>Closing the Mental Tabs</h3>
+              <p>One small shift, repeated daily, that gradually clears mental noise and sharpens focus.</p>
             </div>
           </article>
         </div>
@@ -1818,8 +1818,8 @@
       const revealGroups = [
         ['.reflection h2'],
         ['.recognition-copy > h2', '.recognition-sequence > p', '.recognition-deeper > p'],
-        ['.practical-heading > *', '.portrait', '.journey-step', '.guidance'],
-        ['.intro-feature-copy > .eyebrow', '.intro-feature-copy > h2', '.intro-feature-copy > p', '.intro-questions > p', '.intro-feature-actions', '.intro-video-box'],
+        ['.practical-heading > *', '.portrait', '.journey-step'],
+        ['.intro-feature-copy > .eyebrow', '.intro-feature-copy > h2', '.intro-feature-copy > p', '.intro-questions > p', '.intro-feature-actions', '.intro-video-box', '.intro-guidance'],
         ['.map-copy > .eyebrow', '.map-copy > h2', '.map-copy > .map-intro', '.map-point', '.map-copy > .map-close'],
         ['.paths-heading > h2', '.paths-heading > p', '.path-card-body > *', '.destination'],
         ['.teachings-heading > .eyebrow', '.teachings-heading h2', '.teachings-heading p', '.teaching-body > *', '.channel-row > *']
