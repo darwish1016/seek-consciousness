@@ -206,35 +206,6 @@
       .threshold-step:first-child { border-left:0; }
     }
 
-    /* ===== Scroll lure — a quiet, mysterious pull toward the next step ===== */
-    .scroll-lure {
-      position:relative; display:flex; flex-direction:column; align-items:center; gap:22px;
-      padding:clamp(72px,13vh,132px) 20px;
-      background:linear-gradient(180deg, var(--paper-light) 0%, var(--paper) 100%);
-      text-align:center;
-    }
-    .scroll-lure-eyebrow {
-      font-family:var(--display); font-size:.68rem; font-weight:600;
-      letter-spacing:.22em; text-transform:uppercase; color:var(--ochre);
-    }
-    .scroll-lure-line {
-      max-width:26ch;
-      font-family:var(--serif); font-style:italic; font-weight:500;
-      font-size:clamp(1.3rem,2.6vw,1.7rem); line-height:1.5; color:var(--ink);
-    }
-    .scroll-lure-cue {
-      width:1px; height:52px;
-      background:linear-gradient(180deg, var(--ochre), rgba(149,102,44,0));
-      animation:scrollLurePulse 2.4s ease-in-out infinite;
-    }
-    @keyframes scrollLurePulse {
-      0%,100% { opacity:.25; transform:scaleY(.7); transform-origin:top; }
-      50% { opacity:1; transform:scaleY(1); transform-origin:top; }
-    }
-    @media (prefers-reduced-motion:reduce) {
-      .scroll-lure-cue { animation:none; opacity:.6; }
-    }
-
     /* ===== 3. Share — the close, held in a plaque instead of floating ===== */
     .connect-share-section {
       background:var(--paper);
@@ -425,13 +396,6 @@
     </div>
   </section>
 
-  <!-- A quiet, mysterious pull toward the next step -->
-  <div class="scroll-lure text-reveal">
-    <span class="scroll-lure-eyebrow">Keep Going</span>
-    <p class="scroll-lure-line">What you're looking for is still ahead of you.</p>
-    <span class="scroll-lure-cue" aria-hidden="true"></span>
-  </div>
-
   <!-- 3. SHARE — the close -->
   <section class="connect-section connect-share-section" id="share">
     <img class="share-bg" src="assets/media/tree.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
@@ -441,7 +405,7 @@
       <div class="share-plaque text-reveal">
         <span class="eyebrow">Pass It On</span>
         <h2 class="connect-share-heading">Know someone who might need this?</h2>
-        <p class="connect-share-sub">Share the portal, not the pressure.</p>
+        <p class="connect-share-sub">Share the portal. Let them choose the path.</p>
 
         <div class="share-actions">
           <button type="button" class="connect-btn connect-btn--primary connect-share-btn" id="shareBtn">
