@@ -545,6 +545,7 @@
     .pf-open--light .exp-heading p { color:var(--muted); }
     .pf-open--light .pf-open-lines p { color:rgba(36,27,20,.86); }
     .pf-open--light .pf-open-word { color:var(--ochre); }
+    .pf-open--light .pf-open-sep { color:rgba(149,102,44,.4); }
     .pf-open--light .pf-open-close { border-top-color:var(--line); color:rgba(36,27,20,.78); }
     .pf-open--light .pf-open-close p { color:inherit; }
     .pf-open-lines { max-width:820px; }
@@ -553,10 +554,15 @@
       font-size:clamp(1.3rem,2.6vw,1.7rem); line-height:1.6; color:rgba(248,240,221,.9);
     }
     .pf-open-lines p + p { margin-top:.7em; }
-    .pf-open-words { margin:clamp(30px,4vw,46px) 0; display:flex; flex-wrap:wrap; gap:10px 14px; }
+    .pf-open-words {
+      margin:clamp(28px,3.6vw,40px) 0; display:flex; flex-wrap:wrap; align-items:center; row-gap:8px;
+    }
     .pf-open-word {
-      font-family:var(--display); font-size:clamp(1.4rem,3.4vw,2.1rem); text-transform:uppercase;
-      letter-spacing:.03em; color:var(--ochre-light);
+      font-family:var(--display); font-size:clamp(.85rem,1.4vw,1.05rem); font-weight:600;
+      text-transform:uppercase; letter-spacing:.1em; color:var(--ochre-light);
+    }
+    .pf-open-sep {
+      font-size:clamp(.85rem,1.4vw,1.05rem); color:rgba(217,168,105,.4); margin:0 .65em;
     }
     .pf-open-close {
       max-width:760px; margin-top:clamp(28px,4vw,42px); padding-top:clamp(24px,3vw,32px);
@@ -767,19 +773,25 @@
       <div class="exp-inner">
         <div class="exp-heading">
           <span class="eyebrow text-reveal">The Deeper Reason This Page Exists</span>
-          <h2 id="openTitle" class="text-reveal">What practice can open.</h2>
+          <h2 id="openTitle" class="text-reveal">What you begin to notice.</h2>
         </div>
         <div class="pf-open-lines text-reveal">
           <p>These practices can help you feel calmer, clearer, and more grounded.</p>
           <p>But that is only part of what they can do.</p>
         </div>
-        <p class="text-reveal" style="margin-top:26px; max-width:760px; font-size:1.2rem; color:rgba(36,27,20,.82); line-height:1.6;">Breath, awareness, meditation, writing, movement, and focused attention can shift your state of consciousness. As the noise begins to quiet and your attention becomes less scattered, you may start experiencing presence more directly.</p>
-        <p class="text-reveal" style="max-width:760px; font-size:1.2rem; color:rgba(36,27,20,.82); line-height:1.6;">You may hear your inner guidance more clearly. Reconnect with your spirit. And open to deeper states of unity, love, and connection that people have described throughout human history.</p>
+        <p class="text-reveal" style="margin-top:26px; max-width:760px; font-size:1.2rem; color:rgba(36,27,20,.82); line-height:1.6;">Breath, awareness, meditation, writing, movement, and focused attention can shift your state of consciousness. As the noise begins to quiet and your attention becomes less scattered, you can start experiencing presence more directly.</p>
+        <p class="text-reveal" style="max-width:760px; font-size:1.2rem; color:rgba(36,27,20,.82); line-height:1.6;">You can hear your inner guidance more clearly. Reconnect with your spirit. And open to deeper states of unity, love, and connection that people have described throughout human history.</p>
+        <p class="text-reveal" style="max-width:760px; font-size:1.2rem; color:rgba(36,27,20,.82); line-height:1.6;">Different traditions have given this experience different names. The experience itself matters more than the name.</p>
 
         <div class="pf-open-words text-reveal" aria-hidden="true">
+          <span class="pf-open-word">Presence</span>
+          <span class="pf-open-sep">&bull;</span>
           <span class="pf-open-word">Awakening</span>
-          <span class="pf-open-word">God</span>
+          <span class="pf-open-sep">&bull;</span>
           <span class="pf-open-word">Source</span>
+          <span class="pf-open-sep">&bull;</span>
+          <span class="pf-open-word">God</span>
+          <span class="pf-open-sep">&bull;</span>
           <span class="pf-open-word">Higher Consciousness</span>
         </div>
 
@@ -858,7 +870,7 @@
           </div>
           <div class="pf-insight-card pf-insight-card--flame text-reveal">
             <h3>The Flame</h3>
-            <p>Then a few days pass, life gets busy, and that clarity starts slipping away. That does not mean the insight was not real.</p>
+            <p>Then a few days pass. Life gets busy, and that spark of insight begins to flicker. The flame is still there—it just becomes harder to access.</p>
           </div>
           <p class="pf-insight-close text-reveal">Practice gives you a simple way to keep working with what mattered—so it does not disappear the moment life becomes demanding again.</p>
         </div>
@@ -924,7 +936,7 @@
         <div class="exp-heading">
           <span class="eyebrow text-reveal">Beyond the Breath</span>
           <h2 id="growTitle" class="text-reveal" style="font-size:clamp(2.1rem,3.8vw,3.6rem);">Let your practice grow.</h2>
-          <p class="text-reveal">Breath is where I recommend beginning, but it is not the only way forward. Each practice opens a different doorway into the deeper work. You do not need to add all of them—explore one that feels useful, give it your attention, then let your own experience show you where to go next.</p>
+          <p class="text-reveal">The breath opens the door. These practices help you continue the journey. Each practice opens a different doorway into the deeper work. You do not need to add all of them—explore one that feels useful, give it your attention, then let your own experience show you where to go next.</p>
         </div>
 
         <div class="pf-accordion">
@@ -1020,28 +1032,28 @@
             <span class="pf-prog-desc">Notice mental loops and decide whether to keep, park, replace, or release them.</span>
             <span class="pf-prog-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch</span>
           </button>
-          <button type="button" class="pf-prog-item text-reveal" data-youtube="0isBXHY7R6I" data-title="Replacement Loop" style="background-image:url('https://img.youtube.com/vi/0isBXHY7R6I/hqdefault.jpg');">
+          <button type="button" class="pf-prog-item text-reveal" data-youtube="0isBXHY7R6I" data-title="Higher Energy Wins" style="background-image:url('https://img.youtube.com/vi/0isBXHY7R6I/hqdefault.jpg');">
             <span class="pf-prog-num">II</span>
-            <span class="pf-prog-title">Replacement Loop</span>
-            <span class="pf-prog-desc">Replace an unhelpful pattern rather than only trying to suppress it.</span>
+            <span class="pf-prog-title">Higher Energy Wins</span>
+            <span class="pf-prog-desc">Discover how consistently choosing gratitude over friction slowly changes your emotional baseline.</span>
             <span class="pf-prog-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch</span>
           </button>
-          <button type="button" class="pf-prog-item text-reveal" data-youtube="0sZLafQc3xM" data-title="Single Point Focus" style="background-image:url('https://img.youtube.com/vi/0sZLafQc3xM/hqdefault.jpg');">
+          <button type="button" class="pf-prog-item text-reveal" data-youtube="0sZLafQc3xM" data-title="Undivided Attention" style="background-image:url('https://img.youtube.com/vi/0sZLafQc3xM/hqdefault.jpg');">
             <span class="pf-prog-num">III</span>
-            <span class="pf-prog-title">Single Point Focus</span>
-            <span class="pf-prog-desc">Strengthen the ability to place and sustain attention.</span>
+            <span class="pf-prog-title">Undivided Attention</span>
+            <span class="pf-prog-desc">A simple technique for bringing all of your attention to the one thing in front of you—and noticing how much clearer everything gets.</span>
             <span class="pf-prog-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch</span>
           </button>
-          <button type="button" class="pf-prog-item text-reveal" data-youtube="LUgaGi08B8E" data-title="Flow State" style="background-image:url('https://img.youtube.com/vi/LUgaGi08B8E/hqdefault.jpg');">
+          <button type="button" class="pf-prog-item text-reveal" data-youtube="LUgaGi08B8E" data-title="Effortless, Not Forced" style="background-image:url('https://img.youtube.com/vi/LUgaGi08B8E/hqdefault.jpg');">
             <span class="pf-prog-num">IV</span>
-            <span class="pf-prog-title">Flow State</span>
-            <span class="pf-prog-desc">Experience what becomes possible when attention becomes fully absorbed in the present.</span>
+            <span class="pf-prog-title">Effortless, Not Forced</span>
+            <span class="pf-prog-desc">Learn what flow state really is, and why it's available in far more ordinary moments than you'd think.</span>
             <span class="pf-prog-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch</span>
           </button>
-          <button type="button" class="pf-prog-item text-reveal" data-youtube="iYIyFlRidfI" data-title="Stay in Flow Longer" style="background-image:url('https://img.youtube.com/vi/iYIyFlRidfI/hqdefault.jpg');">
+          <button type="button" class="pf-prog-item text-reveal" data-youtube="iYIyFlRidfI" data-title="The Moment It Breaks" style="background-image:url('https://img.youtube.com/vi/iYIyFlRidfI/hqdefault.jpg');">
             <span class="pf-prog-num">V</span>
-            <span class="pf-prog-title">Stay in Flow Longer</span>
-            <span class="pf-prog-desc">Recognize what interrupts flow and learn how to return.</span>
+            <span class="pf-prog-title">The Moment It Breaks</span>
+            <span class="pf-prog-desc">Learn why flow breaks so easily, and the simple reset that brings it back faster than you'd expect.</span>
             <span class="pf-prog-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch</span>
           </button>
         </div>
