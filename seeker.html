@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Seeker — Seek Consciousness</title>
+  <meta name="description" content="How deep does consciousness go? Explore the Seeker path through direct experience, mystery, contemplation, and curiosity.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper:#eadfcb;
+      --paper-light:#f6efe3;
+      --paper-pale:#fbf7ee;
+      --paper-deep:#dfcfb4;
+      --ink:#241b14;
+      --muted:#726658;
+      --ochre:#95662c;
+      --ochre-soft:#c79859;
+      --ochre-light:#d9a869;
+      --line:rgba(61,43,25,.17);
+      --line-strong:rgba(149,102,44,.42);
+      --header-height:78px;
+      --toc-height:0px;
+      --serif:'Cormorant Garamond', Georgia, serif;
+      --display:'Cinzel', Georgia, serif;
+      --ease:cubic-bezier(.22,.61,.36,1);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{overflow-x:hidden;background:var(--paper-light);color:var(--ink);font-family:var(--serif);font-size:18px;font-weight:500;line-height:1.65;-webkit-font-smoothing:antialiased}
+    body::before{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;background:
+      radial-gradient(circle at 12% 8%,rgba(199,152,89,.08),transparent 25%),
+      radial-gradient(circle at 88% 32%,rgba(149,102,44,.05),transparent 30%),
+      linear-gradient(90deg,rgba(80,55,28,.018) 1px,transparent 1px),
+      linear-gradient(rgba(80,55,28,.014) 1px,transparent 1px);background-size:auto,auto,44px 44px,44px 44px}
+    img{display:block;width:100%;height:100%;object-fit:cover}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;color:inherit;cursor:pointer}
+    h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.1;letter-spacing:.01em}
+    p+p{margin-top:.55rem}
+    ::selection{background:var(--ochre);color:white}
+    section{scroll-margin-top:calc(var(--header-height) + 20px)}
+    .wrap{width:min(1280px,88vw);margin:0 auto}
+    .eyebrow{display:block;margin-bottom:16px;font-family:var(--display);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ochre)}
+    .serif-italic{font-style:italic}
+    .gold{color:var(--ochre)}
+    .text-reveal{opacity:0;transform:translateY(20px);transition:opacity .72s var(--ease),transform .72s var(--ease)}
+    .text-reveal.is-visible{opacity:1;transform:none}
+    .fine-rule{height:1px;background:linear-gradient(90deg,transparent,var(--line-strong),transparent)}
+
+    /* ===== Header (identical component to explorer.html/pathfinder.html) ===== */
+    .site-header{position:fixed;inset:0 0 auto;z-index:100;height:var(--header-height);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(22px,6vw,92px);color:var(--ink);background:rgba(244,236,222,.9);border-bottom:1px solid var(--line);box-shadow:0 12px 30px rgba(36,27,20,.06);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+    .site-logo{display:block;line-height:0}
+    .site-logo img{width:clamp(122px,11vw,174px);height:auto;object-fit:contain;filter:brightness(.46) saturate(1.3) contrast(1.05);transition:filter .25s ease}
+    .site-logo:hover img{filter:brightness(.36) saturate(1.4) contrast(1.08)}
+    .primary-nav{display:flex;align-items:center;gap:28px}
+    .primary-nav a{position:relative;font-family:var(--display);font-size:.76rem;letter-spacing:.05em;color:rgba(36,27,20,.72);transition:color .25s ease}
+    .primary-nav a::after{content:'';position:absolute;left:0;right:100%;bottom:-6px;height:1px;background:var(--ochre);transition:right .3s var(--ease)}
+    .primary-nav a:hover{color:var(--ink)}
+    .primary-nav a:hover::after{right:0}
+    .nav-toggle{display:none;width:44px;height:44px;border:0;background:transparent;cursor:pointer}
+    .nav-toggle span{display:block;width:24px;height:1px;margin:6px auto;background:var(--ink);transition:.25s ease}
+
+    /* ===== Hero — identical component to explorer.html/pathfinder.html ===== */
+    .exp-hero{position:relative;height:100svh;min-height:660px;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate;background:#040301}
+    .exp-hero-media{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;object-position:center 38%;filter:saturate(.9) contrast(1.03) brightness(.78);pointer-events:none}
+    .exp-hero-scrim{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(4,3,1,0) 0%,rgba(4,3,1,.3) 42%,rgba(4,3,1,.88) 100%),linear-gradient(90deg,rgba(4,3,1,.72) 0%,rgba(4,3,1,.32) 38%,rgba(4,3,1,0) 68%)}
+    .exp-hero-content{position:relative;z-index:3;width:100%;padding:0 clamp(22px,6vw,92px) clamp(56px,8vw,96px)}
+    .exp-hero-copy{position:relative;max-width:min(640px,88vw)}
+    .exp-breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-family:var(--display);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,247,231,.68)}
+    .exp-breadcrumb a{position:relative;color:rgba(255,247,231,.68);transition:color .25s ease}
+    .exp-breadcrumb a::after{content:'';position:absolute;left:0;right:100%;bottom:-3px;height:1px;background:var(--ochre-light);transition:right .3s var(--ease)}
+    .exp-breadcrumb a:hover{color:#fff}
+    .exp-breadcrumb a:hover::after{right:0}
+    .exp-breadcrumb-sep{color:var(--ochre-light)}
+    .exp-breadcrumb-current{color:rgba(255,247,231,.92)}
+    .exp-hero-eyebrow{color:var(--ochre-light);letter-spacing:.13em;text-shadow:0 2px 16px rgba(0,0,0,.5)}
+    .exp-hero h1{font-size:clamp(2.3rem,5.2vw,3.9rem);color:#fff;text-transform:uppercase;letter-spacing:.005em;margin-bottom:22px;text-wrap:balance;text-shadow:0 4px 26px rgba(0,0,0,.55)}
+    .exp-hero-text{max-width:52ch;font-size:clamp(1.18rem,1.6vw,1.42rem);color:rgba(255,247,231,.92);line-height:1.55;text-shadow:0 2px 18px rgba(0,0,0,.5)}
+    .exp-hero-text p+p{margin-top:.5rem}
+    .exp-hero-close{display:block;margin-top:1.2rem;padding-top:1.1rem;border-top:1px solid rgba(255,247,231,.28);color:var(--ochre-light);font-style:italic}
+    .exp-hero-scroll{position:absolute;bottom:28px;right:clamp(22px,6vw,92px);z-index:3;display:flex;align-items:center;gap:10px;padding:10px 16px;font-family:var(--display);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,247,231,.85)}
+    .exp-hero-scroll::after{content:'';width:1px;height:18px;background:var(--ochre-light);animation:scrollPulse 2.4s ease-in-out infinite}
+    @keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+    /* General editorial sections */
+    .section-pad{padding:clamp(88px,10vw,140px) 0;position:relative}
+    .section-title{font-size:clamp(2.3rem,4.2vw,4.2rem);text-wrap:balance}
+    .section-copy{font-size:1.24rem;color:rgba(36,27,20,.8);max-width:52ch}
+
+    /* Once the door opens — atmospheric light through an opening, not a literal door */
+    .door-section{background:var(--paper);position:relative;overflow:hidden}
+    .door-section::before{content:'';position:absolute;left:50%;top:50%;width:min(1100px,120vw);height:min(1100px,120vw);transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(217,168,105,.16) 0%,rgba(217,168,105,.06) 35%,transparent 68%);pointer-events:none}
+    .door-grid{display:grid;grid-template-columns:.86fr 180px 1.05fr;gap:clamp(30px,5vw,80px);align-items:center;position:relative;z-index:1}
+    .door-text h2{font-size:clamp(2.3rem,4.2vw,4.2rem);max-width:10ch}
+    .threshold{height:470px;position:relative;display:grid;place-items:center}
+    .threshold::before{content:'';width:2px;height:86%;background:linear-gradient(180deg,transparent,rgba(217,168,105,.75),#fff9e8,rgba(217,168,105,.75),transparent);box-shadow:0 0 30px rgba(217,168,105,.6),0 0 90px rgba(217,168,105,.32),0 0 170px rgba(217,168,105,.14)}
+    .door-quote{font-size:clamp(1.3rem,2.6vw,1.7rem);line-height:1.22;font-style:italic;color:#5c4632;max-width:26ch}
+    .door-quote span{display:block;margin-top:22px;font-size:1.02rem;font-family:var(--serif);font-weight:500;font-style:italic;letter-spacing:0;text-transform:none;color:var(--ochre)}
+
+    /* Infinite dial */
+    .dial-section{background:var(--paper-pale);overflow:hidden}
+    .dial-grid{display:grid;grid-template-columns:minmax(460px,1.05fr) minmax(360px,.95fr);gap:clamp(60px,8vw,120px);align-items:center}
+    .dial-stage{position:relative;aspect-ratio:1;display:grid;place-items:center;border-radius:50%;overflow:hidden;background:linear-gradient(rgba(246,239,227,.62),rgba(246,239,227,.62)),url('assets/media/seeker-dial-texture.png') center/cover no-repeat}
+    .dial-stage::before{content:'';position:absolute;inset:4%;border-radius:50%;background:radial-gradient(circle,rgba(199,152,89,.13) 0 1px,transparent 1px 100%);background-size:22px 22px;mask-image:radial-gradient(circle,#000 0 60%,transparent 73%)}
+    .dial-ring{position:absolute;border:1px solid rgba(149,102,44,.30);border-radius:50%}
+    .dial-ring.r1{width:92%;height:92%;animation:spin 48s linear infinite}
+    .dial-ring.r2{width:72%;height:72%;border-style:dashed;animation:spinBack 36s linear infinite}
+    .dial-ring.r3{width:50%;height:50%;animation:spin 26s linear infinite}
+    .dial-ring.r4{width:28%;height:28%;border-width:2px}
+    .dial-ring::before,.dial-ring::after{content:'✦';position:absolute;color:var(--ochre-soft);font-size:.8rem;background:var(--paper-pale);padding:2px}
+    .dial-ring::before{top:-8px;left:50%;transform:translateX(-50%)}
+    .dial-ring::after{bottom:-8px;left:50%;transform:translateX(-50%)}
+    .dial-cross{position:absolute;width:82%;height:82%;opacity:.55;background:linear-gradient(90deg,transparent 49.8%,rgba(149,102,44,.25) 50%,transparent 50.2%),linear-gradient(transparent 49.8%,rgba(149,102,44,.25) 50%,transparent 50.2%)}
+    .dial-center{width:clamp(56px,24%,92px);height:clamp(56px,24%,92px);border-radius:50%;display:grid;place-items:center;border:1px solid var(--ochre);background:var(--paper-light);font-family:var(--display);font-size:clamp(.56rem,2.4vw,.62rem);letter-spacing:.1em;text-align:center;text-transform:uppercase;color:var(--ochre);box-shadow:0 0 0 clamp(6px,1.6vw,13px) rgba(149,102,44,.045)}
+    @keyframes spin{to{transform:rotate(360deg)}}@keyframes spinBack{to{transform:rotate(-360deg)}}
+    .dial-copy{position:relative}
+    .dial-copy h2{font-size:clamp(2.3rem,4.2vw,4.2rem);max-width:11ch}
+    .dial-index{position:absolute;right:-4vw;top:-40px;font-family:var(--display);font-size:clamp(5rem,11vw,11rem);line-height:.8;color:rgba(149,102,44,.07)}
+    .dial-copy .section-copy{margin-top:28px}
+    .dial-pull{margin-top:30px;padding:25px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:1.18rem;font-style:italic;color:#5f4934}
+
+    /* Doorways */
+    .doorways-section{background:var(--paper-light);overflow:hidden}
+    .doorways-head{max-width:760px;margin-bottom:70px}
+    .doorways-head h2{font-size:clamp(2.3rem,4.2vw,4.2rem)}
+    .pathline{position:relative;padding:40px 0 20px}
+    .pathline svg{position:absolute;inset:0;width:100%;height:180px;overflow:visible;pointer-events:none}
+    .path-items{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;position:relative;z-index:2}
+    .path-item{padding-top:42px;min-height:220px;position:relative}
+    .path-item:nth-child(even){transform:translateY(42px)}
+    .path-dot{position:absolute;top:6px;left:0;width:22px;height:22px;border-radius:50%;border:1px solid var(--ochre);background:var(--paper-light);box-shadow:0 0 0 7px rgba(149,102,44,.06);z-index:1}
+    .path-item h3{font-size:clamp(1.22rem,1.7vw,1.75rem);line-height:1.2}
+    .path-item p{margin-top:10px;color:var(--muted);font-size:1rem;max-width:18ch}
+    .path-no{display:block;margin-bottom:12px;font-family:var(--display);font-size:.58rem;letter-spacing:.14em;color:var(--ochre)}
+
+    /* Gnosis */
+    .gnosis-section{background:var(--paper);overflow:hidden}
+    .gnosis-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(55px,7vw,105px);align-items:center}
+    .gnosis-photo{position:relative;min-height:740px}
+    .gnosis-photo::before{content:'GNOSIS';position:absolute;left:-26px;top:20px;z-index:3;writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--display);font-size:.67rem;letter-spacing:.28em;color:var(--ochre)}
+    .gnosis-photo-frame{position:absolute;inset:0 7% 0 0;padding:13px;border:1px solid var(--line-strong);background:rgba(255,255,255,.22);box-shadow:0 28px 65px rgba(70,42,19,.14)}
+    .gnosis-photo-frame img{object-position:center center;filter:saturate(.88) sepia(.08)}
+    .gnosis-word{font-family:var(--display);font-weight:500;font-size:clamp(1.7rem,3vw,2.5rem);letter-spacing:.14em;text-transform:uppercase;color:var(--ochre)}
+    .gnosis-sub{margin:14px 0 30px;font-family:var(--display);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+    .gnosis-lead{font-size:clamp(1.3rem,2.6vw,1.7rem);line-height:1.28;font-style:italic;color:#5c4632;margin-bottom:28px}
+
+    /* Mysteries */
+    .mysteries-section{padding:clamp(88px,10vw,140px) 0;background:linear-gradient(rgba(251,247,238,.88),rgba(251,247,238,.88)),url('assets/media/seeker-mysteries-texture.png') center/cover no-repeat;position:relative;overflow:hidden}
+    .mysteries-section::before{content:'';position:absolute;width:760px;height:760px;border:1px solid rgba(149,102,44,.09);border-radius:50%;right:-310px;top:-170px;box-shadow:0 0 0 75px rgba(149,102,44,.025),0 0 0 145px rgba(149,102,44,.016)}
+    .mystery-intro{max-width:760px;margin-bottom:65px}
+    .mystery-intro h2{font-size:clamp(2.3rem,4.2vw,4.2rem)}
+    .mystery-stack{border-top:1px solid var(--line)}
+    .mystery{display:grid;grid-template-columns:90px 1fr 220px;gap:25px;align-items:center;padding:42px 0;border-bottom:1px solid var(--line)}
+    .mystery-no{font-family:var(--display);font-size:.68rem;letter-spacing:.14em;color:var(--ochre)}
+    .mystery h3{font-family:var(--serif);font-size:clamp(2.2rem,4.5vw,4.2rem);font-weight:400;line-height:.95;letter-spacing:-.025em}
+    .mystery span:last-child{font-style:italic;color:var(--muted);font-size:1.08rem}
+    .minor-questions{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:36px;color:var(--muted);font-style:italic}
+    .minor-questions span::after{content:'✦';margin-left:18px;color:rgba(149,102,44,.38);font-size:.56rem;vertical-align:2px}
+
+    /* Inward — a deliberately quieter, typography-and-space moment (no image; the page itself slows down here) */
+    .inward-section{background:var(--paper-pale);position:relative;overflow:hidden;padding:clamp(130px,16vw,230px) 0}
+    .inward-glow{position:absolute;left:50%;top:50%;width:min(760px,80vw);height:min(760px,80vw);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(149,102,44,.05),transparent 70%);pointer-events:none}
+    .inward-horizon{position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(149,102,44,.22),transparent)}
+    .inward-shell{position:relative;z-index:1;max-width:620px;margin:0 auto;text-align:center}
+    .inward-shell h2{font-size:clamp(2.3rem,4.2vw,4.2rem)}
+    .inward-shell .section-copy{margin:28px auto 0;text-align:center}
+    .silence-line{margin:48px auto 0;max-width:220px;display:flex;align-items:center;gap:14px;font-family:var(--display);font-size:.63rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre)}
+    .silence-line::before,.silence-line::after{content:'';height:1px;flex:1;background:var(--line)}
+
+    /* Sit with this — a compact, quiet pause (not another large Explorer-style assessment) */
+    .sit-section{background:var(--paper);overflow:hidden}
+    .sit-shell{position:relative;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);padding:clamp(56px,6vw,80px) 0}
+    .sit-shell::before{content:'✦';position:absolute;top:-14px;left:50%;transform:translateX(-50%);padding:0 14px;background:var(--paper);color:var(--ochre)}
+    .sit-head{max-width:560px;margin:0 auto 44px;text-align:center}
+    .sit-head h2{font-size:clamp(2.3rem,4.2vw,4.2rem)}
+    .sit-head p{margin-top:14px;font-size:1.05rem;font-style:italic;color:var(--muted)}
+    .sit-questions{max-width:800px;margin:0 auto;border-top:1px solid var(--line)}
+    .sit-question{display:grid;grid-template-columns:38px 1fr;gap:16px;align-items:baseline;padding:24px 0;border-bottom:1px solid var(--line)}
+    .sit-question-num{font-family:var(--display);font-size:.64rem;letter-spacing:.1em;color:var(--ochre)}
+    .sit-question p{font-size:clamp(1.12rem,1.6vw,1.28rem);font-style:italic;color:var(--ink);line-height:1.42;margin:0}
+    .sit-actions{max-width:800px;margin:36px auto 0;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;font-family:var(--display);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase}
+    .sit-actions button,.sit-actions a{position:relative;color:var(--ochre);background:transparent;border:0;padding:4px 1px}
+    .sit-actions button::after,.sit-actions a::after{content:'';position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--ochre);transition:right .3s var(--ease)}
+    .sit-actions button:hover::after,.sit-actions a:hover::after{right:0}
+    .sit-actions-sep{color:rgba(149,102,44,.4)}
+    .sit-privacy{max-width:560px;margin:24px auto 0;text-align:center;font-size:.92rem;font-style:italic;color:var(--muted)}
+
+    /* Follow what calls */
+    .follow-section{background:var(--paper-pale)}
+    .follow-head{max-width:760px;margin-bottom:52px}
+    .follow-head h2{font-size:clamp(2.3rem,4.2vw,4.2rem)}
+    .category-list{border-top:1px solid var(--line)}
+    .category-row{display:grid;grid-template-columns:56px minmax(200px,280px) 1fr auto;gap:28px;align-items:center;padding:32px 0;border-bottom:1px solid var(--line);transition:background .3s var(--ease)}
+    .category-row:hover{background:rgba(149,102,44,.05)}
+    .cat-no{font-family:var(--display);font-size:.62rem;letter-spacing:.14em;color:var(--ochre)}
+    .category-row h3{font-size:clamp(1.28rem,1.8vw,1.6rem)}
+    .category-row p{color:var(--muted);max-width:46ch}
+    .category-row .explore{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre);white-space:nowrap}
+    .category-row .explore span{display:inline-block;transition:transform .25s var(--ease)}
+    .category-row:hover .explore span{transform:translateX(4px)}
+
+    /* Closing */
+    .closing-section{padding:clamp(88px,10vw,140px) 0 clamp(60px,7vw,100px);background:var(--paper-light)}
+    .closing-copy{max-width:900px;margin:0 auto 58px;text-align:center}
+    .closing-copy h2{font-size:clamp(2.3rem,4.2vw,4.2rem)}
+    .closing-copy .section-copy{margin:28px auto 0;max-width:58ch}
+    .closing-question{margin-top:42px;font-size:clamp(2.1rem,4.6vw,3.6rem);font-style:italic;color:#5c4632}
+    .closing-panorama{width:min(1450px,94vw);height:clamp(360px,40vw,540px);margin:0 auto;position:relative;overflow:hidden;border:1px solid var(--line);box-shadow:0 35px 70px rgba(63,41,21,.16)}
+    .closing-panorama::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,3,1,.05) 0%,rgba(4,3,1,.1) 60%,rgba(4,3,1,.4) 100%)}
+    .closing-panorama img{object-position:center 57%;filter:saturate(.85) sepia(.07)}
+    .closing-stamp{position:absolute;right:6%;bottom:10%;z-index:2;width:176px;height:176px;border-radius:50%;display:grid;place-items:center;text-align:center;border:1px solid rgba(247,240,225,.56);color:#fff7e8;font-family:var(--display);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;background:rgba(32,24,17,.20);backdrop-filter:blur(4px);box-shadow:0 0 0 12px rgba(255,255,255,.05)}
+
+    /* Buttons needed by exact Blueprint code */
+    .exp-btn{position:relative;display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border:1px solid var(--ink);font-family:var(--display);font-size:.7rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--ink);background:transparent;transition:.3s var(--ease)}
+    .exp-btn--primary{border-color:var(--ochre);color:var(--ochre)}
+    .exp-btn:hover{background:var(--ink);color:var(--paper-light)}
+    .exp-btn--primary:hover{background:var(--ochre);color:#fff}
+    .exp-btn-row{display:flex;flex-wrap:wrap;align-items:center;gap:16px 22px}
+    .exp-section{padding:clamp(88px,10vw,140px) 6vw}
+    .exp-section--paper{background:var(--paper)}
+    .exp-inner{width:min(1280px,100%);margin:0 auto}
+
+    /* ===== Blueprint — copied from the supplied Explorer code ===== */
+    .exp-blueprint-intro { max-width:760px; margin:0 auto clamp(48px,6vw,76px); text-align:center; }
+    .exp-blueprint-intro p { font-size:1.22rem; color:rgba(36,27,20,.86); }
+    .exp-blueprint-intro p + p { margin-top:.6rem; }
+    .exp-blueprint-intro .exp-btn-row { margin-top:34px; justify-content:center; }
+    .exp-tree-hint {margin-top:26px; max-width:34ch; margin-left:auto; margin-right:auto;font-family:var(--display); font-size:.72rem; font-weight:600; letter-spacing:.09em; text-transform:uppercase;color:var(--ochre); line-height:1.8;}
+    .exp-tree-hint-icon { display:inline-block; width:15px; height:15px; margin-right:7px; vertical-align:-3px; }
+    .exp-tree-hint-icon svg { width:100%; height:100%; display:block; }
+    #treeBlueprint { scroll-margin-top:calc(var(--header-height) + var(--toc-height) + 14px); }
+    .exp-tree-full { position:relative; width:100%; margin:0; line-height:0; background:var(--paper-deep); min-height:360px; }
+    .exp-tree-full img, .exp-tree-full video { width:100%; height:auto; display:block; }
+    .exp-tree-scrim {position:absolute; inset:0; pointer-events:none;background:linear-gradient(180deg, rgba(4,3,1,.58) 0%, rgba(4,3,1,.22) 20%, rgba(4,3,1,.3) 48%, rgba(4,3,1,.24) 76%, rgba(4,3,1,.62) 100%),radial-gradient(ellipse at center, rgba(4,3,1,0) 42%, rgba(4,3,1,.4) 100%);}
+    .exp-tree-overlay { position:absolute; inset:0; }
+    .exp-tree-band { position:absolute; left:0; right:0; transform:translateY(-50%); display:flex; flex-direction:column; align-items:center; gap:clamp(10px,1.6vw,20px); padding:0 clamp(14px,4vw,40px); }
+    .exp-tree-band-title {position:relative; display:inline-block; padding-bottom:17px;font-family:var(--display); font-weight:500; text-transform:uppercase; letter-spacing:.14em; color:#f8f0dd;font-size:clamp(1rem,2.6vw,2.1rem); text-shadow:0 3px 16px rgba(5,4,3,.6);}
+    .exp-tree-band-title::after {content:''; position:absolute; left:50%; bottom:0; transform:translateX(-50%);width:34px; height:1px; background:var(--ochre-light);}
+    .exp-tree-row { display:flex; flex-wrap:nowrap; justify-content:space-between; width:min(1360px,88%); }
+    .exp-tree-row--roots { width:min(920px,64%); }
+    .exp-tree-node {display:flex; flex-direction:column; align-items:center; gap:clamp(6px,.8vw,10px);width:clamp(64px,9vw,140px); color:#f8f0dd; text-align:center;background:none; border:0; padding:0; font:inherit;}
+    .exp-tree-node-icon {position:relative;width:clamp(44px,4.2vw,58px); height:clamp(44px,4.2vw,58px); border-radius:50%;display:grid; place-items:center; border:1px solid var(--ochre-light);background:rgba(5,4,3,.32); backdrop-filter:blur(2px); -webkit-backdrop-filter:blur(2px);transition:background .3s var(--ease), border-color .3s ease, transform .25s var(--ease);}
+    .exp-tree-node-icon svg { width:54%; height:54%; }
+    .exp-tree-node-icon::after {content:''; position:absolute; right:-3px; bottom:-3px;width:clamp(15px,1.5vw,19px); height:clamp(15px,1.5vw,19px); border-radius:50%;background:var(--ochre) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7l8 5-8 5z' fill='%23fff'/%3E%3C/svg%3E") center/44% no-repeat;border:1.5px solid var(--paper-light);box-shadow:0 2px 6px rgba(5,4,3,.45);}
+    .exp-tree-node-label { font-family:var(--display); font-size:clamp(.54rem,1vw,.82rem); letter-spacing:.02em; line-height:1.28; text-shadow:0 2px 10px rgba(5,4,3,.65); }
+    .exp-tree-node:hover .exp-tree-node-icon { background:var(--ochre); border-color:var(--ochre); transform:translateY(-3px) scale(1.06); }
+    .exp-tree-trunk-list { list-style:none; font-family:var(--serif); font-weight:500; color:#f8f0dd; font-size:clamp(.72rem,1.3vw,1.08rem); line-height:1.7; text-align:center; text-shadow:0 2px 10px rgba(5,4,3,.6); }
+    .exp-tree-trunk-list li::before { content:'\2022  '; color:var(--ochre-light); }
+    .exp-tree-modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .35s var(--ease),visibility .35s var(--ease)}
+    .exp-tree-modal.is-open{opacity:1;visibility:visible;pointer-events:auto}
+    .exp-tree-modal-backdrop{position:absolute;inset:0;background:rgba(5,4,3,.82);backdrop-filter:blur(3px)}
+    .exp-tree-modal-dialog{position:relative;z-index:1;width:min(880px,100%);max-height:90vh;overflow-y:auto;background:var(--paper-light);border:1px solid var(--line);box-shadow:0 40px 90px rgba(5,4,3,.5);transform:translateY(18px) scale(.98);opacity:0;transition:transform .4s var(--ease),opacity .4s var(--ease)}
+    .exp-tree-modal.is-open .exp-tree-modal-dialog{transform:none;opacity:1}
+    .exp-tree-modal-close{position:absolute;top:24px;right:24px;z-index:3;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:rgba(5,4,3,.7);color:#f8f0dd;border:1px solid rgba(248,240,221,.3)}
+    .exp-tree-modal-close svg{width:16px;height:16px}
+    .exp-tree-modal-media{position:relative;aspect-ratio:16/9;background:#000}
+    .exp-tree-modal-media iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .exp-tree-modal-body{padding:clamp(24px,4vw,42px)}
+    .exp-tree-modal-eyebrow{display:block;margin-bottom:10px;font-family:var(--display);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ochre)}
+    .exp-tree-modal-title{font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:14px}
+    .exp-tree-modal-desc{font-size:1.14rem;color:rgba(36,27,20,.82);line-height:1.55}
+    .exp-tree-modal-desc h4{margin-top:1.6em;margin-bottom:.5em;font-family:var(--display);font-size:.98rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ochre)}
+    .exp-tree-modal-desc ol{margin:.9em 0 0;padding-left:1.25em;display:flex;flex-direction:column;gap:.6em}
+
+    /* ===== Footer (identical component to explorer.html/pathfinder.html) ===== */
+    .site-footer{position:relative;padding:64px 6vw 30px;background:var(--paper-deep);color:rgba(36,27,20,.7);border-top:1px solid var(--line)}
+    .site-footer::before{content:'';position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--ochre) 50%,transparent)}
+    .footer-inner{width:min(1380px,100%);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:35px;flex-wrap:wrap}
+    .footer-logo img{width:clamp(180px,18vw,290px);height:auto;object-fit:contain;filter:brightness(.46) saturate(1.3) contrast(1.05)}
+    .footer-nav{display:flex;flex-wrap:wrap;gap:22px}
+    .footer-nav a{position:relative;font-family:var(--display);font-size:.67rem;letter-spacing:.08em;color:rgba(36,27,20,.68);transition:color .25s ease}
+    .footer-nav a::after{content:'';position:absolute;left:0;right:100%;bottom:-5px;height:1px;background:var(--ochre);transition:right .3s var(--ease)}
+    .footer-nav a:hover{color:var(--ink)}
+    .footer-nav a:hover::after{right:0}
+    .copyright{margin-top:28px;text-align:center;font-size:.82rem;color:rgba(36,27,20,.45)}
+
+    @media(max-width:1000px){
+      .dial-grid,.gnosis-grid{grid-template-columns:1fr}
+      .door-grid{grid-template-columns:1fr 120px 1fr}
+      .path-items{grid-template-columns:repeat(3,1fr)}
+      .path-item:nth-child(even){transform:none}
+      .category-row{grid-template-columns:48px 1fr;row-gap:6px}
+      .category-row h3,.category-row p,.category-row .explore{grid-column:2}
+      .category-row p{margin-top:2px}
+      .category-row .explore{margin-top:8px}
+      .mystery{grid-template-columns:70px 1fr}
+      .mystery span:last-child{grid-column:2}
+    }
+    @media(max-width:760px){
+      :root{--header-height:64px}
+      body{font-size:17px}
+      .site-header{padding:0 18px}
+      .site-logo img{width:90px}
+      .nav-toggle{display:block}
+      .primary-nav{position:absolute;top:100%;left:0;right:0;display:flex;flex-direction:column;align-items:stretch;gap:0;padding:8px 18px 18px;background:rgba(246,239,227,.98);border-bottom:1px solid var(--line);opacity:0;visibility:hidden;transform:translateY(-8px);transition:.25s ease}
+      .primary-nav.open{opacity:1;visibility:visible;transform:none}
+      .primary-nav a{padding:13px 0;border-top:1px solid var(--line)}
+      .exp-hero{height:100svh;min-height:620px;align-items:center}
+      .exp-hero-media{object-position:62% 42%}
+      .exp-hero-scrim{background:linear-gradient(180deg,rgba(4,3,1,.35) 0%,rgba(4,3,1,.5) 42%,rgba(4,3,1,.5) 62%,rgba(4,3,1,.35) 100%),linear-gradient(90deg,rgba(4,3,1,.5) 0%,rgba(4,3,1,0) 85%)}
+      .exp-hero-content{padding:0 20px;display:flex;justify-content:center}
+      .exp-hero-copy{max-width:min(480px,92vw);margin:0 auto}
+      .exp-hero h1{font-size:clamp(2.1rem,9vw,3.15rem);margin-bottom:14px}
+      .exp-hero-text{font-size:1.16rem;line-height:1.5}
+      .exp-hero-text p+p{margin-top:.4rem}
+      .exp-hero-close{margin-top:.9rem;padding-top:.8rem}
+      .exp-hero-scroll{display:none}
+      .door-grid{grid-template-columns:1fr}
+      .threshold{height:150px}
+      .threshold::before{height:100%;transform:rotate(90deg)}
+      .door-quote{max-width:none}
+      .dial-stage{width:min(520px,100%);margin:0 auto}
+      .path-items{grid-template-columns:1fr}
+      .pathline svg{display:none}
+      .path-item{min-height:auto;padding:26px 0 26px 48px;border-bottom:1px solid var(--line)}
+      .path-dot{top:28px}
+      .gnosis-photo{min-height:560px}
+      .gnosis-photo::before{display:none}
+      .mystery{grid-template-columns:50px 1fr;padding:30px 0}
+      .mystery h3{font-size:clamp(2rem,10vw,3.6rem)}
+      .sit-question{grid-template-columns:26px 1fr;padding:18px 0}
+      .category-row{grid-template-columns:1fr;row-gap:8px;padding:24px 0}
+      .closing-stamp{width:130px;height:130px;font-size:.55rem}
+      .site-footer{padding:48px 6vw 24px}
+      .footer-inner{align-items:flex-start;flex-direction:column;gap:22px}
+      .footer-logo img{width:230px}
+      .footer-nav{gap:16px 20px}
+      .exp-tree-overlay{position:static;display:flex;flex-direction:column;gap:32px;padding:34px 6vw 38px;background:linear-gradient(180deg,rgba(20,15,10,.94),rgba(20,15,10,.88))}
+      .exp-tree-band{position:static;transform:none;padding:0;gap:16px}
+      .exp-tree-row,.exp-tree-row--roots{width:100%;flex-wrap:wrap;justify-content:center;gap:20px 16px}
+      .exp-tree-node{width:calc(33.333% - 12px)}
+    }
+    @media print{
+      .site-header,.site-footer{display:none!important}
+      main>section{display:none!important}
+      #sit{display:block!important;padding:24px 6vw!important;background:#fff}
+      .text-reveal{opacity:1!important;transform:none!important}
+      body{background:#fff}
+      .sit-shell{border:0!important;padding:0!important}
+      .sit-shell::before{display:none!important}
+      .sit-questions{display:block}
+      .sit-question{display:block;break-inside:avoid;page-break-inside:avoid;padding:18px 0 30px;border-bottom:1px solid #ccc}
+      .sit-question-num{display:inline;margin-right:8px}
+      .sit-question p{display:inline;font-size:13pt;font-style:normal}
+      .sit-question::after{content:'';display:block;margin-top:16px;height:84px;background:linear-gradient(#ccc,#ccc) 0 27px/100% 1px no-repeat,linear-gradient(#ccc,#ccc) 0 55px/100% 1px no-repeat,linear-gradient(#ccc,#ccc) 0 83px/100% 1px no-repeat}
+      .sit-actions,.sit-privacy{display:none!important}
+    }
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}.text-reveal{opacity:1!important;transform:none!important}}
+  </style>
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <a class="site-logo" href="index.html" aria-label="Seek Consciousness home"><img src="assets/media/seek-consciousness-logo.png" alt="Seek Consciousness"></a>
+    <button class="nav-toggle" type="button" aria-controls="primaryNav" aria-expanded="false" aria-label="Open navigation">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+    <nav class="primary-nav" id="primaryNav" aria-label="Primary navigation">
+      <a href="index.html">Home</a>
+      <a href="index.html#choose-path">Choose Your Path</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="exp-hero" id="seekerHero" aria-labelledby="seekerTitle">
+      <video
+        class="exp-hero-media"
+        src="assets/media/seeker-hero.mp4"
+        poster="assets/media/seeker-hero.png"
+        autoplay
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        preload="auto"
+        tabindex="-1"
+        disablepictureinpicture
+        aria-hidden="true"
+      ></video>
+      <div class="exp-hero-scrim" aria-hidden="true"></div>
+      <div class="exp-hero-content">
+        <div class="exp-hero-copy">
+          <nav class="exp-breadcrumb text-reveal" aria-label="Breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="exp-breadcrumb-sep" aria-hidden="true">/</span>
+            <span class="exp-breadcrumb-current" aria-current="page">Seeker</span>
+          </nav>
+          <span class="eyebrow exp-hero-eyebrow text-reveal">How Deep Does Consciousness Go?</span>
+          <h1 id="seekerTitle" class="text-reveal">The Seeker</h1>
+          <div class="exp-hero-text text-reveal">
+            <p>The deeper I go into consciousness, the more I realize how infinite this path really is.</p>
+            <p>Every new practice, experience, and understanding reveals something else.</p>
+            <p class="exp-hero-close">The Seeker is where we lean into that mystery. You can explore one piece that calls to you or keep following the path deeper. You decide where this path takes you. And how deep you want to go.</p>
+          </div>
+        </div>
+      </div>
+      <div class="exp-hero-scroll" aria-hidden="true">Continue Into The Mystery</div>
+    </section>
+
+    <section class="section-pad door-section" id="door" aria-labelledby="doorTitle">
+      <div class="wrap door-grid">
+        <div class="door-text">
+          <span class="eyebrow text-reveal">Once The Door Opens</span>
+          <h2 id="doorTitle" class="text-reveal">Something inside you remembers.</h2>
+          <div class="section-copy text-reveal" style="margin-top:28px">
+            <p>Maybe you’ve caught a glimpse of something beyond your ordinary way of experiencing life—something that showed you there was more.</p>
+            <p>A deep meditation. A plant medicine catalyst. A connection in nature.</p>
+          </div>
+        </div>
+        <div class="threshold text-reveal" aria-hidden="true"></div>
+        <blockquote class="door-quote text-reveal">“Or simply one of those profound moments when, for a little while, you felt connected to the infinite, to something ineffable, and to a sense that you were never separate from the universe at all.”<span>And once you’ve touched that deeper place, something inside you remembers it — and wants to return.</span></blockquote>
+      </div>
+    </section>
+
+    <section class="section-pad dial-section" aria-labelledby="dialTitle">
+      <div class="wrap dial-grid">
+        <div class="dial-stage text-reveal" aria-hidden="true">
+          <div class="dial-cross"></div><div class="dial-ring r1"></div><div class="dial-ring r2"></div><div class="dial-ring r3"></div><div class="dial-ring r4"></div><div class="dial-center">Infinite<br>Dial</div>
+        </div>
+        <div class="dial-copy">
+          <span class="dial-index" aria-hidden="true">∞</span>
+          <span class="eyebrow text-reveal">Enlightenment Is An Infinite Dial</span>
+          <h2 id="dialTitle" class="text-reveal">There is always another layer.</h2>
+          <div class="section-copy text-reveal">
+            <p>Enlightenment isn’t somewhere you arrive. It’s a state of being that can keep opening deeper and deeper. I think of it as an infinite dial.</p>
+            <p>With every turn, the noise of the mind can fall further away. The boundaries of the self begin to dissolve. You feel more of the connection running through everything. And eventually, there are moments when there is no separation at all — only consciousness, love, and the direct experience of being part of the whole.</p>
+          </div>
+          <p class="dial-pull text-reveal">What may begin as a rare or extraordinary state can become more familiar over time. The more often you return to these deeper states, the more familiar they become, and the more they begin to feel like your normal state of being.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad doorways-section" aria-labelledby="doorwaysTitle">
+      <div class="wrap">
+        <div class="doorways-head">
+          <span class="eyebrow text-reveal">There Is More Than One Doorway</span>
+          <h2 id="doorwaysTitle" class="text-reveal">Every path can contain a piece.</h2>
+          <p class="section-copy text-reveal" style="margin-top:20px">I believe in using every possible piece that can help us go deeper. The Seeker learns to recognize what resonates, explore it fully, and see where it leads. Sometimes one doorway changes the way you understand the entire path.</p>
+        </div>
+        <div class="pathline text-reveal">
+          <svg viewBox="0 0 1200 180" preserveAspectRatio="none" aria-hidden="true"><path d="M11 57 C131 57 131 99 251 99 S371 57 491 57 S611 99 731 99 S851 57 971 57" fill="none" stroke="rgba(149,102,44,.35)" stroke-width="1.3" stroke-dasharray="4 8"/></svg>
+          <div class="path-items">
+            <div class="path-item"><span class="path-dot"></span><span class="path-no">01 / MEMORY</span><h3>Ancient Wisdom</h3><p>What human beings have preserved across centuries.</p></div>
+            <div class="path-item"><span class="path-dot"></span><span class="path-no">02 / LANGUAGE</span><h3>Modern Understanding</h3><p>New maps for mind, body, attention, and experience.</p></div>
+            <div class="path-item"><span class="path-dot"></span><span class="path-no">03 / GUIDANCE</span><h3>Teachings</h3><p>Ideas carried from one consciousness to another.</p></div>
+            <div class="path-item"><span class="path-dot"></span><span class="path-no">04 / KNOWING</span><h3>Experiences</h3><p>The laboratory of what you have actually lived.</p></div>
+            <div class="path-item"><span class="path-dot"></span><span class="path-no">05 / OPENING</span><h3>Catalysts</h3><p>Moments that crack certainty open and reveal more.</p></div>
+          </div>
+        </div>
+        <p class="section-copy text-reveal" style="margin-top:55px;font-style:italic">Follow what calls to you. Pay attention to what it reveals. And let that experience lead you deeper.</p>
+      </div>
+    </section>
+
+    <section class="section-pad gnosis-section" aria-labelledby="gnosisTitle">
+      <div class="wrap gnosis-grid">
+        <div class="gnosis-photo text-reveal">
+          <div class="gnosis-photo-frame"><img src="assets/media/seeker-gnosis.png" alt="A contemplative scholar writing among manuscripts and astronomical drawings"></div>
+        </div>
+        <div class="gnosis-copy">
+          <h2 id="gnosisTitle" class="gnosis-word text-reveal">Gnosis</h2>
+          <div class="gnosis-sub text-reveal">Knowing Through Direct Experience</div>
+          <p class="gnosis-lead text-reveal">There is a huge difference between believing something and knowing it for yourself.</p>
+          <div class="section-copy text-reveal">
+            <p>You can read about nonduality. Study awakening. Believe in God or Source. Listen to someone describe what oneness feels like.</p>
+            <p>But gnosis is different. Gnosis is knowing through your own direct experience.</p>
+            <p>For thousands of years, seekers have gone inward to discover these truths for themselves.</p>
+            <p>And until you experience something directly, part of it is still someone else’s story.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mysteries-section" aria-labelledby="mysteriesTitle">
+      <div class="wrap">
+        <div class="mystery-intro"><span class="eyebrow text-reveal">The Mysteries We Keep Returning To</span><h2 id="mysteriesTitle" class="text-reveal">Some questions are too important to leave as someone else’s answer.</h2><p class="section-copy text-reveal" style="margin-top:20px">Human beings have been asking them for thousands of years—searching, contemplating, and going inward to understand what lies beneath the surface of ordinary life.</p></div>
+        <div class="mystery-stack">
+          <div class="mystery text-reveal"><span class="mystery-no">01</span><h3>What is consciousness?</h3><span>What is aware of this moment?</span></div>
+          <div class="mystery text-reveal"><span class="mystery-no">02</span><h3>Who am I beneath the mind?</h3><span>Who remains when roles and thoughts fall quiet?</span></div>
+          <div class="mystery text-reveal"><span class="mystery-no">03</span><h3>What happens when we die?</h3><span>Where does experience end — if it ends at all?</span></div>
+        </div>
+        <p class="section-copy text-reveal" style="margin-top:36px">And the deeper you explore, more questions begin to open:</p>
+        <div class="minor-questions text-reveal"><span>What is spirit?</span><span>What is God or Source?</span><span>Why are we here?</span><span>What is enlightenment?</span><span>How much of reality are we actually perceiving?</span></div>
+        <p class="section-copy text-reveal" style="margin-top:36px">These questions can take a lifetime to explore. Some answers may never fit completely into words. But that doesn’t mean they can’t be known.</p>
+      </div>
+    </section>
+
+    <section class="inward-section" aria-labelledby="inwardTitle">
+      <div class="inward-glow" aria-hidden="true"></div>
+      <div class="wrap inward-shell">
+        <span class="eyebrow text-reveal">When The Path Turns Inward</span>
+        <h2 id="inwardTitle" class="text-reveal">Eventually, the searching becomes stillness.</h2>
+        <div class="section-copy text-reveal">
+          <p>You can spend your whole life searching for the next teaching, experience, or answer.</p>
+          <p>But at some point, the path begins turning inward. You become still. You listen. You give yourself enough space to notice what is underneath the constant movement of the mind.</p>
+          <p>And the deeper you tune in, the more you begin realizing that so many of the answers you were searching for were already within you. The work becomes learning how to access what was there all along.</p>
+        </div>
+        <div class="silence-line text-reveal">listen</div>
+      </div>
+      <div class="inward-horizon" aria-hidden="true"></div>
+    </section>
+
+    <section class="section-pad sit-section" id="sit" aria-labelledby="sitTitle">
+      <div class="wrap sit-shell">
+        <div class="sit-head">
+          <span class="eyebrow text-reveal">A Reflective Pause</span>
+          <h2 id="sitTitle" class="text-reveal">Sit With This</h2>
+          <p class="text-reveal">There are no correct answers. Write what genuinely feels true.</p>
+        </div>
+
+        <ol class="sit-questions" id="reflectionQuestions">
+          <li class="sit-question text-reveal"><span class="sit-question-num">01</span><p>What has been the most profound or mystical experience of my life?</p></li>
+          <li class="sit-question text-reveal"><span class="sit-question-num">02</span><p>What mystery do I feel most called to understand—and why does it keep pulling me back?</p></li>
+          <li class="sit-question text-reveal"><span class="sit-question-num">03</span><p>What feels true because I’ve lived it—and what have I not yet experienced directly for myself?</p></li>
+          <li class="sit-question text-reveal"><span class="sit-question-num">04</span><p>If I listened closely to my intuition, where would it pull me to explore next?</p></li>
+        </ol>
+
+        <div class="sit-actions text-reveal">
+          <button type="button" id="skDownloadReflection">Download</button>
+          <span class="sit-actions-sep" aria-hidden="true">·</span>
+          <button type="button" id="skPrintReflection">Print</button>
+          <span class="sit-actions-sep" aria-hidden="true">·</span>
+          <a href="#reflectionQuestions">Use Your Own Journal</a>
+        </div>
+
+        <p class="sit-privacy text-reveal">These questions are private. Nothing here is entered into the website or shared with anyone else.</p>
+      </div>
+    </section>
+
+    <section class="section-pad follow-section" aria-labelledby="followTitle">
+      <div class="wrap">
+        <div class="follow-head">
+          <span class="eyebrow text-reveal">Follow What Calls To You</span>
+          <h2 id="followTitle" class="text-reveal">There isn’t one direction you need to follow from here.</h2>
+          <p class="section-copy text-reveal" style="margin-top:20px">Notice what keeps drawing your attention. Explore it. Let what you discover become your own knowing. Then see where your curiosity leads next.</p>
+        </div>
+        <div class="category-list text-reveal">
+          <a class="category-row" href="#"><span class="cat-no">01</span><h3>Ancient Wisdom</h3><p>Traditions, philosophy, contemplative practices, old maps of consciousness.</p><span class="explore">Explore <span>→</span></span></a>
+          <a class="category-row" href="#"><span class="cat-no">02</span><h3>Mind &amp; Nervous System</h3><p>Attention, regulation, psychology, awareness, patterns, and the body-mind.</p><span class="explore">Explore <span>→</span></span></a>
+          <a class="category-row" href="#"><span class="cat-no">03</span><h3>Catalysts &amp; Expanded States</h3><p>Altered states, deep meditation, plant medicine, integration, and insight.</p><span class="explore">Explore <span>→</span></span></a>
+          <a class="category-row" href="#"><span class="cat-no">04</span><h3>Living The Practice</h3><p>Relationships, work, choices, integrity, presence, and daily embodiment.</p><span class="explore">Explore <span>→</span></span></a>
+          <a class="category-row" href="#"><span class="cat-no">05</span><h3>Nature, Sound &amp; Environment</h3><p>How place, nature, silence, music, and sensory experience alter awareness.</p><span class="explore">Explore <span>→</span></span></a>
+          <a class="category-row" href="#"><span class="cat-no">06</span><h3>Identity &amp; Purpose</h3><p>Ego, shadow, dreams, vocation, becoming, and the question of who you are.</p><span class="explore">Explore <span>→</span></span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing-section" aria-labelledby="closingTitle">
+      <div class="closing-copy wrap">
+        <span class="eyebrow text-reveal">There Is No End To This Path</span>
+        <h2 id="closingTitle" class="text-reveal">Every answer opens another mystery.</h2>
+        <div class="section-copy text-reveal">
+          <p>The beautiful thing about going deeper is realizing how infinite this really is. Every realization seems to reveal another layer. And every time you think you understand the path, something else begins to unfold.</p>
+          <p>There is nowhere you need to arrive. Explore with joy and curiosity. Go as deep as you feel called. And whatever you discover there, bring some of that love, connection, and understanding back with you.</p>
+        </div>
+        <div class="closing-question text-reveal">So how deep does consciousness go?<br><span class="gold">I think that’s exactly what the Seeker is here to explore.</span></div>
+      </div>
+      <div class="closing-panorama text-reveal"><img src="assets/media/seeker-hero.png" alt="A winding trail across a mountain ridge beneath a darkening dusk sky scattered with stars"><div class="closing-stamp">The path<br>remains<br>open</div></div>
+    </section>
+
+    <section class="exp-section exp-section--paper" id="blueprint" aria-labelledby="blueprintTitle" style="padding-left:0; padding-right:0; padding-bottom:0;">
+      <div class="exp-inner" style="padding:0 6vw;">
+        <div class="exp-blueprint-intro">
+          <span class="eyebrow text-reveal">The Bigger Picture</span>
+          <h2 class="text-reveal" style="font-size:clamp(2.3rem,4vw,4rem); color:var(--ink); margin-bottom:22px;" id="blueprintTitle">See how it all connects</h2>
+          <div class="text-reveal">
+            <p>When you're ready to understand how the different teachings, practices, and areas of exploration fit together, the Seek Consciousness Blueprint offers a map of the larger journey.</p>
+            <p>You can watch the complete 30-minute introduction from beginning to end. Or you can explore the Tree one piece at a time.</p>
+            <p>There is no wrong way to go. Simply explore what you feel called to.</p>
+          </div>
+          <div class="exp-btn-row text-reveal">
+            <button type="button" id="watchBlueprintBtn" class="exp-btn exp-btn--primary" data-youtube="vFnXQ0wqT1U" data-eyebrow="The Complete Blueprint" data-title="The Complete Map of Inner Transformation, Explained Through the Metaphor of a Tree">Watch the Complete Blueprint</button>
+            <a class="exp-btn" href="#treeBlueprint">Explore It Piece by Piece</a>
+          </div>
+          <p class="exp-tree-hint text-reveal">
+            <span class="exp-tree-hint-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10.5" stroke="currentColor" stroke-width="1.3"/><path d="M10 8.3l6 3.7-6 3.7z" fill="currentColor"/></svg>
+            </span>
+            Tap any icon below to watch its teaching
+          </p>
+        </div>
+      </div>
+
+      <figure class="exp-tree-full text-reveal" id="treeBlueprint">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          webkit-playsinline
+          preload="auto"
+          disablepictureinpicture
+          poster="assets/media/tree.png"
+          aria-label="An illustrated tree with an equally expansive root system: Ancient Wisdom, Mind &amp; Nervous System, Catalysts &amp; Expanded States, Living the Practice, Nature Sound &amp; Environment, and Identity &amp; Purpose in the branches; Breath, Awareness, Writing &amp; Reflection, and Body Integration in the trunk; Inner Authority, Direct Experience, Daily Practice, and Love &amp; Truth in the roots."
+        >
+          <source src="assets/media/tree.mp4" type="video/mp4">
+        </video>
+
+        <div class="exp-tree-scrim" aria-hidden="true"></div>
+
+        <div class="exp-tree-overlay">
+          <div class="exp-tree-band exp-tree-band--branches" style="top:16%;">
+            <span class="exp-tree-band-title">Branches</span>
+            <div class="exp-tree-row exp-tree-row--branches">
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="760" data-eyebrow="Branch 01" data-title="Ancient Wisdom" data-desc="The maps of consciousness preserved through the Yoga Sutras, Buddhist teachings, contemplative mysticism, nonduality, Daoism, Sufism, hermetic philosophy, indigenous and earth-based traditions, meditation lineages, and other forms of spiritual inquiry.||The traditions should not be flattened into one identical teaching. Their histories and differences matter.||Study widely. Experience directly. Keep what proves true and useful in lived practice.">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3 2-5 5-5 8a5 5 0 0 0 10 0c0-3-2-6-5-8z"/><path d="M12 13v8"/><path d="M9 21h6"/></svg></span>
+                <span class="exp-tree-node-label">Ancient Wisdom</span>
+              </button>
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="902" data-eyebrow="Branch 02" data-title="Mind &amp; Nervous System" data-desc="Psychology, attention, emotional loops, habits, brain states, trauma literacy, focus, flow, regulation, and the relationship among body, mind, and awareness.||Modern research can offer useful language, mechanisms, and corrective evidence. It should not be used as decoration or as a way to make every spiritual claim sound scientifically proven.">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4.5A2.5 2.5 0 0 0 6.5 7 2.5 2.5 0 0 0 5 11.5 2.7 2.7 0 0 0 6 16.3 2.5 2.5 0 0 0 9 19.5z"/><path d="M15 4.5A2.5 2.5 0 0 1 17.5 7 2.5 2.5 0 0 1 19 11.5 2.7 2.7 0 0 1 18 16.3a2.5 2.5 0 0 1-3 3.2z"/><path d="M9 8.5h2M9 12h2.5M9 15.5h2M13 8.5h2M12.5 12H15M13 15.5h2"/></svg></span>
+                <span class="exp-tree-node-label">Mind &amp; Nervous System</span>
+              </button>
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="1000" data-eyebrow="Branch 03" data-title="Catalysts &amp; Expanded States" data-desc="Plant medicines, psychedelics, breath-induced states, deep contemplative states, ego dissolution, shadow material, the dark night of the soul, tantric depth practices, and integration.||Catalysts can open awareness and reveal patterns. They are not the destination, not required, and not proof of spiritual maturity.">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="12" cy="12" r="3.4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></span>
+                <span class="exp-tree-node-label">Catalysts &amp; Expanded States</span>
+              </button>
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="668" data-eyebrow="Branch 04" data-title="Living the Practice" data-desc="The place where insight is tested in relationships, work, time, decisions, conflict, creativity, family, leadership, sexuality, boundaries, repair, compassion, integrity, and ordinary behavior.||The shift does not happen only in what a person learns. It happens in what they use.">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5.5" r="1.8"/><path d="M12 9v3.5"/><path d="M12 9c-2 1.6-3.2 2-5 2M12 9c2 1.6 3.2 2 5 2"/><path d="M12 12.5c-2.5 1-4 3-4 5.5h8c0-2.5-1.5-4.5-4-5.5z"/></svg></span>
+                <span class="exp-tree-node-label">Living the Practice</span>
+              </button>
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="1317" data-eyebrow="Branch 05" data-title="Nature, Sound &amp; Environment" data-desc="Nature as teacher, sacred space, music, sound, travel, new environments, and the intentional design of spaces that support consciousness.||The practical inquiry is direct: What happens within you in different environments? What calms you, opens you, agitates you, or helps you hear yourself more clearly?">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 12v0M7 9v6M10 6v12M13 4v16M16 8v8M19 10.5v3"/></svg></span>
+                <span class="exp-tree-node-label">Nature, Sound &amp; Environment</span>
+              </button>
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="1144" data-eyebrow="Branch 06" data-title="Identity &amp; Purpose" data-desc="Identity, ego, shadow, dreams, the subconscious, community, relationships, vocation, and the question of who a person is becoming.||Identity is not fixed. The ego is not simply an enemy to destroy; it can be understood and brought into service of something deeper. Purpose may be uncovered, created, and revealed over time.||Who are you becoming?||If you do not like the answer, you may be moving in the wrong direction. The question is not shame. It is orientation.">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 3 5 6 5 9a5 5 0 0 1-10 0c0-1.2.4-2.2 1-3 .2 1 .8 1.6 1.5 1.8C9 8.5 10.5 6 12 3z"/></svg></span>
+                <span class="exp-tree-node-label">Identity &amp; Purpose</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="exp-tree-band exp-tree-band--trunk" style="top:47%;">
+            <span class="exp-tree-band-title">Trunk</span>
+            <button type="button" class="exp-tree-node exp-tree-trunk-node" aria-label="Play: Trunk" data-youtube="vFnXQ0wqT1U" data-start="311" data-eyebrow="The Trunk" data-title="Trunk" data-template="tmplTrunk">
+              <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.4"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg></span>
+            </button>
+            <ul class="exp-tree-trunk-list">
+              <li>Breath</li>
+              <li>Awareness</li>
+              <li>Writing &amp; Reflection</li>
+              <li>Body Integration</li>
+            </ul>
+          </div>
+
+          <div class="exp-tree-band exp-tree-band--roots" style="top:83%;">
+            <span class="exp-tree-band-title">Roots</span>
+            <div class="exp-tree-row exp-tree-row--roots">
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="77" data-eyebrow="Root 01" data-title="Inner Authority" data-desc="Follow your own path while strengthening self-trust, discernment, and responsibility. Teachers and traditions can help, but none should replace a person&rsquo;s direct relationship with their own experience and inner guidance.">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5 13 12 12 20.5 11 12z"/><path d="M3.5 12 12 13 20.5 12 12 11z"/></svg></span>
+                <span class="exp-tree-node-label">Inner Authority</span>
+              </button>
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="132" data-eyebrow="Root 02" data-title="Direct Experience" data-desc="Approach truth through lived experience rather than belief or borrowed stories. Practice the teaching. Observe it. See what changes. Remain humble about the meaning assigned to the experience.">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/></svg></span>
+                <span class="exp-tree-node-label">Direct Experience</span>
+              </button>
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="177" data-eyebrow="Root 03" data-title="Daily Practice" data-desc="Consistency creates change. Practice turns an idea into a capacity and an insight into a way of being. The Blueprint is not meant to be consumed as information alone.">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3.5"/><path d="M5 13a7 7 0 0 1 14 0"/><path d="M2.5 13h19"/><path d="M4.6 8.6l1.6 1.6M19.4 8.6l-1.6 1.6"/></svg></span>
+                <span class="exp-tree-node-label">Daily Practice</span>
+              </button>
+              <button type="button" class="exp-tree-node" data-youtube="vFnXQ0wqT1U" data-start="218" data-eyebrow="Root 04" data-title="Love &amp; Truth" data-desc="Compassion and honesty keep the path aligned. Love protects truth from becoming cruelty. Truth protects love from becoming avoidance or spiritual bypassing.">
+                <span class="exp-tree-node-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.7-9C.7 7.5 2.7 4 6.3 4c2 0 3.6 1.1 4.7 2.7C12.1 5.1 13.7 4 15.7 4c3.6 0 5.6 3.5 4 7-2.2 4.4-9.7 9-9.7 9z"/></svg></span>
+                <span class="exp-tree-node-label">Love &amp; Truth</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="footer-logo" href="index.html" aria-label="Return to the homepage"><img src="assets/media/seek-consciousness-logo.png" alt="Seek Consciousness"></a>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html#intro">Recognition</a>
+        <a href="index.html#mission">Seek Consciousness</a>
+        <a href="index.html#choose-path">Choose Your Path</a>
+        <a href="pathfinder.html">The Pathfinder</a>
+      </nav>
+    </div>
+    <p class="copyright">&copy; <span id="year"></span> Seek Consciousness. All rights reserved.</p>
+  </footer>
+
+  <div class="exp-tree-modal" id="treeModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="treeModalTitle">
+    <div class="exp-tree-modal-backdrop" data-modal-dismiss></div>
+    <button type="button" class="exp-tree-modal-close" aria-label="Close" data-modal-dismiss><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="exp-tree-modal-dialog"><div class="exp-tree-modal-media"></div><div class="exp-tree-modal-body"><span class="exp-tree-modal-eyebrow"></span><h3 class="exp-tree-modal-title" id="treeModalTitle"></h3><div class="exp-tree-modal-desc"></div></div></div>
+  </div>
+  <template id="tmplTrunk">
+    <p>The full trunk contains four categories. People do not need to begin all four at once.</p>
+    <p>Breath is the default first practice. Vision Writing is the second major anchor. Awareness and Body Integration deepen gradually.</p>
+
+    <h4>Breath</h4>
+    <p>Breath is one of the most immediate ways to influence inner state. It is embodied, accessible, and requires no belief.</p>
+    <p>Within Seek Consciousness, breath functions as a morning foundation, a reset, a way to interrupt automatic reactivity, a grounding practice before the phone or noise, a doorway into meditation, and a direct return to the body and present moment.</p>
+    <p>Core practices include foundational breathwork, 90 Seconds to Nirvana, reset breathing, and practices intended to support greater steadiness and regulation.</p>
+    <p>Specific physiological or medical claims must be researched before publication. The strongest teaching often begins with what a person can directly feel and observe.</p>
+
+    <h4>Awareness</h4>
+    <p>Awareness is the ability to notice what is happening without being completely controlled by it.</p>
+    <p>It includes thoughts, emotional reactions, triggers, bodily tension, impulses, attention being pulled, and patterns running beneath behavior. Once a pattern can be seen clearly, a different relationship with it becomes possible.</p>
+    <p>The Five Mind Tools are:</p>
+    <ol>
+      <li>Cat &amp; Mouse Method — noticing thoughts as they appear rather than remaining unconsciously captured by them.</li>
+      <li>Replacement Loop — interrupting an unhelpful mental loop by consciously replacing it rather than only fighting it.</li>
+      <li>Single Point Focus — training the ability to place and sustain attention deliberately.</li>
+      <li>Flow State — entering deep engagement where attention, ability, challenge, and action come together.</li>
+      <li>Staying in Flow — recognizing what breaks attention and learning how to protect, extend, and return to flow.</li>
+    </ol>
+    <p>The purpose is not to fight every thought. It is to become aware enough to choose a different relationship with it.</p>
+
+    <h4>Writing &amp; Reflection</h4>
+    <p>Writing &amp; Reflection is the trunk category. Vision Writing is its primary practice.</p>
+    <p>Vision Writing helps a person clarify direction, recognize patterns, explore questions, connect present experience with future vision, and bring thoughts out of the head into a form that can be examined.</p>
+    <p>Kurt&rsquo;s personal practice is generally at least 500 freely written words without polishing or trying to sound a certain way. It may include relationships, work, fear, purpose, contradiction, dreams, questions, fragments, and emerging vision. The original writing is saved. Over time, repeated entries reveal what is becoming clear, what remains unresolved, and what may be asking for action.</p>
+    <p>It is more than journaling and more than planning. It is partly reflection and partly manifestation: what a person repeatedly envisions, examines, and returns to begins shaping attention, decisions, and the life being created.</p>
+    <p>AI reflection is optional and remains a mirror, never an authority.</p>
+
+    <h4>Body Integration</h4>
+    <p>The body is not separate from consciousness work. It is part of the path.</p>
+    <p>Movement, yoga, stretching, strength, sleep, rest, nutrition, physical care, and releasing tension all affect how a person experiences life. The body is not merely a shell or something to transcend. It is the instrument through which human life is lived.</p>
+    <p>Body care should fit into ordinary life: stretch while watching something, walk instead of scrolling, practice five minutes rather than zero, build strength gradually, and protect sleep.</p>
+    <p>Presence is not something you visit. It is something you practice living.</p>
+  </template>
+
+  <script>
+  (()=>{
+    'use strict';
+    const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const toggle=document.querySelector('.nav-toggle'); const nav=document.getElementById('primaryNav');
+    toggle?.addEventListener('click',()=>{const open=!nav.classList.contains('open');nav.classList.toggle('open',open);toggle.setAttribute('aria-expanded',String(open));});
+    nav?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+    const items=[...document.querySelectorAll('.text-reveal')];
+    if(reduced||!('IntersectionObserver'in window)) items.forEach(x=>x.classList.add('is-visible')); else {
+      const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');io.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px -4%'});items.forEach(x=>io.observe(x));
+    }
+
+    // Exact Blueprint interaction model from the supplied page: node -> YouTube modal + copy.
+    const treeModal=document.getElementById('treeModal');
+    if(treeModal){
+      const media=treeModal.querySelector('.exp-tree-modal-media');const eyebrow=treeModal.querySelector('.exp-tree-modal-eyebrow');const title=treeModal.querySelector('.exp-tree-modal-title');const desc=treeModal.querySelector('.exp-tree-modal-desc');let last=null;let scrollY=0;
+      const openModal=(trigger)=>{const id=trigger.dataset.youtube;if(!id)return;last=trigger;const start=trigger.dataset.start?`&start=${trigger.dataset.start}`:'';const iframe=document.createElement('iframe');iframe.src=`https://www.youtube-nocookie.com/embed/${id}?rel=0&autoplay=1${start}`;iframe.title=trigger.dataset.title||'Seek Consciousness video';iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';iframe.allowFullscreen=true;media.innerHTML='';media.appendChild(iframe);eyebrow.textContent=trigger.dataset.eyebrow||'';title.textContent=trigger.dataset.title||'';desc.innerHTML='';const templateId=trigger.dataset.template;const t=templateId?document.getElementById(templateId):null;if(t)desc.appendChild(t.content.cloneNode(true));else if(trigger.dataset.desc)trigger.dataset.desc.split('||').forEach(part=>{const p=document.createElement('p');p.textContent=part.trim();desc.appendChild(p)});treeModal.classList.add('is-open');treeModal.setAttribute('aria-hidden','false');scrollY=window.scrollY;document.body.style.position='fixed';document.body.style.top=`-${scrollY}px`;document.body.style.left='0';document.body.style.right='0';treeModal.querySelector('.exp-tree-modal-close').focus();};
+      const closeModal=()=>{if(!treeModal.classList.contains('is-open'))return;treeModal.classList.remove('is-open');treeModal.setAttribute('aria-hidden','true');media.innerHTML='';document.body.style.position='';document.body.style.top='';document.body.style.left='';document.body.style.right='';window.scrollTo(0,scrollY);last?.focus();};
+      document.querySelectorAll('.exp-tree-node[data-youtube], #watchBlueprintBtn').forEach(node=>node.addEventListener('click',()=>openModal(node)));
+      treeModal.querySelectorAll('[data-modal-dismiss]').forEach(el=>el.addEventListener('click',closeModal));
+      document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+    }
+    /* Reflection: download as an editable Word document (RTF opens natively in Word, Pages, Google Docs) */
+    const getQuestions=()=>Array.from(document.querySelectorAll('#reflectionQuestions .sit-question p')).map(p=>p.innerText.replace(/\s+/g,' ').trim());
+    const rtfEscape=(str)=>str.replace(/\\/g,'\\\\').replace(/\{/g,'\\{').replace(/\}/g,'\\}').replace(/[\u2018\u2019]/g,"'").replace(/[\u201C\u201D]/g,'"').replace(/\u2014/g,'\\emdash ').replace(/\u2013/g,'\\endash ');
+    const downloadReflectionDoc=()=>{
+      const questions=getQuestions();
+      const intro=[
+        'Before you keep exploring, take a few minutes to pause, look within, and notice what feels true for you today.',
+        'There are no correct answers. Don\u2019t write what you think you\u2019re supposed to believe. Write what genuinely feels true.',
+        'This document is entirely private \u2014 type your answers directly below each question and save the file to your own device.'
+      ];
+      let rtf='{\\rtf1\\ansi\\ansicpg1252\\deff0\\deflang1033{\\fonttbl{\\f0\\froman Times New Roman;}}{\\colortbl;\\red149\\green102\\blue44;}\\f0\\fs20\\pard\\sa240';
+      rtf+=`\\fs40\\b The Seeker \\emdash  Sit With This\\b0\\par`;
+      rtf+=`\\fs22\\i Seek Consciousness\\i0\\par\\sa280`;
+      intro.forEach(line=>{rtf+=`\\fs20 ${rtfEscape(line)}\\par`;});
+      rtf+=`\\par`;
+      questions.forEach((q,i)=>{
+        rtf+=`\\sa60\\fs24\\b\\cf1 ${i+1}.\\cf0\\b0  \\b ${rtfEscape(q)}\\b0\\par`;
+        rtf+=`\\sa280\\fs22 \\line\\line\\line\\line\\par`;
+      });
+      rtf+='}';
+      const blob=new Blob([rtf],{type:'application/rtf'});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;
+      a.download='seek-consciousness-seeker-reflection.rtf';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    };
+    document.getElementById('skDownloadReflection')?.addEventListener('click',downloadReflectionDoc);
+    document.getElementById('skPrintReflection')?.addEventListener('click',()=>window.print());
+
+    document.getElementById('year').textContent=new Date().getFullYear();
+  })();
+  </script>
+</body>
+</html>
