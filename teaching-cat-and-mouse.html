@@ -16,9 +16,9 @@
     - Hero now bookends with the site's existing ✦ ornament motif
     - Chapters get a visible "currently selected" state
     - Transcript now sits beside the video instead of in its own
-      section further down the page. It's still an expandable
-      "+" toggle (collapsed by default), just relocated. Its
-      timestamp buttons seek the video, same as Chapters.
+      section further down the page, and stays fully visible (no
+      expand toggle). Its timestamp buttons seek the video, same
+      as Chapters.
     - Main Ideas moved from a flat numbered list to a ledger-style
       grid with a faint ghost numeral per card
     - Added visible focus states for keyboard users
@@ -32,11 +32,11 @@
     4. Overview copy
     5. Main Ideas list
     6. Transcript text + chapter timestamps — the transcript is an
-       expandable panel beside the video (not a separate section),
-       but its timestamp buttons must still use the SAME seconds as
-       the Chapters list below the video. Timestamps below are
-       estimated from the transcript's word count — replace with
-       real times once the video is published.
+       always-visible, scrollable panel beside the video (not a
+       separate section), but its timestamp buttons must still use
+       the SAME seconds as the Chapters list below the video.
+       Timestamps below are estimated from the transcript's word
+       count — replace with real times once the video is published.
     7. Reflection questions / practice
     8. Blueprint placement card (which branch/trunk/root this maps to)
     9. Related Teachings cards
@@ -180,17 +180,12 @@
     .tv-chapter.is-active .tv-chapter-label{font-weight:600}
     .tv-chapters-note{margin-top:14px;font-size:.9rem;font-style:italic;color:var(--muted)}
 
-    /* Transcript panel, beside the video — collapsible */
+    /* Transcript panel, beside the video — always visible */
     .tv-transcript-col{min-width:0}
     .tv-transcript-eyebrow{display:block;margin-bottom:8px;font-family:var(--display);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre)}
     .tv-transcript-caption{display:block;margin-bottom:18px;font-size:.94rem;font-style:italic;color:var(--muted)}
-    .tv-transcript-details{border:1px solid var(--line-strong);background:var(--paper-pale)}
-    .tv-transcript-details summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:20px clamp(18px,2.4vw,28px);font-family:var(--display);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ochre)}
-    .tv-transcript-details summary::-webkit-details-marker{display:none}
-    .tv-transcript-details summary::after{content:'+';font-size:1.3rem;line-height:1;flex:none;transition:transform .3s var(--ease)}
-    .tv-transcript-details[open] summary::after{transform:rotate(45deg)}
-    .tv-transcript-scroll{max-height:520px;overflow-y:auto;overflow-x:hidden;scrollbar-gutter:stable;border-top:1px solid var(--line)}
-    .tv-transcript-scroll-inner{padding:22px clamp(18px,2.4vw,28px) 26px;color:rgba(36,27,20,.84);font-size:1.05rem;line-height:1.7}
+    .tv-transcript-scroll{max-height:640px;overflow-y:auto;overflow-x:hidden;scrollbar-gutter:stable;border:1px solid var(--line-strong);background:var(--paper-pale)}
+    .tv-transcript-scroll-inner{padding:24px clamp(18px,2.4vw,28px) 28px;color:rgba(36,27,20,.84);font-size:1.05rem;line-height:1.7}
     .tv-transcript-scroll-inner p{margin:0 0 22px}
     .tv-transcript-scroll-inner p:last-child{margin-bottom:0}
     .tv-transcript-time{display:inline-block;margin-right:10px;min-width:40px;text-align:left;border:0;background:transparent;font-family:var(--display);font-size:.68rem;letter-spacing:.04em;color:var(--ochre);position:relative;padding-bottom:1px}
@@ -379,23 +374,20 @@
           </div>
         </div>
 
-        <!-- 5. TRANSCRIPT, beside the video — collapsed by default -->
+        <!-- 5. TRANSCRIPT, beside the video -->
         <div class="tv-transcript-col text-reveal">
           <span class="tv-transcript-eyebrow">Full Transcript</span>
           <span class="tv-transcript-caption">Read along, or click any line to jump the video there.</span>
-          <details class="tv-transcript-details">
-            <summary>Expand the full transcript</summary>
-            <div class="tv-transcript-scroll">
-              <div class="tv-transcript-scroll-inner">
-                <p><button type="button" class="tv-transcript-time js-seek" data-seek="0">0:00</button>Have you ever noticed how one thought can take over your entire mind? You're doing totally fine and then one thing pops up and suddenly you're caught in a loop replaying something, trying to figure something out or going over something that actually doesn't need your attention. And before you know it, you're not really here anymore. You're lost somewhere in your own mind.</p>
-                <p><button type="button" class="tv-transcript-time js-seek" data-seek="33">0:33</button>What's happening is you've got too many things running at the same time. Let's think about this like a computer. If you have 10 or 20 programs open all running in the background, what happens? It greatly reduces the capacity you actually have left for the task in front of you. The same thing happens with your mind. The more thoughts running in the background, the less presence you actually have. And with less presence comes less clarity, less focus, and less connection to what's happening right now.</p>
-                <p><button type="button" class="tv-transcript-time js-seek" data-seek="65">1:05</button>So, here's a simple way to start working with that. I call it the cat and the mouse method. Think of your thoughts like mice coming out of a hole one at a time. And you, you're the cat. Each time a thought appears, you observe it. And if it's not something you need to be focused on, working through, or intentionally giving your attention to, you let it go.</p>
-                <p><button type="button" class="tv-transcript-time js-seek" data-seek="98">1:38</button>Not every thought needs your energy. Not every thought needs to be solved. Of course, some thoughts you may want to keep and unpack. Some you may want to explore later. You can capture them, write them down, or come back to them. But in the moment, you're choosing which stays and what goes.</p>
-                <p><button type="button" class="tv-transcript-time js-seek" data-seek="132">2:12</button>This process is also cumulative. Every time you do it, you reduce some of the noise. You close another tab. And over time, your mind starts to become clear. You can begin to experience this beautiful state of being which I call single point focus where your attention is fully available to what's in front of you. And then what happens? Your clarity increases. Your decisions improve. You start operating from a deeper level of awareness.</p>
-                <p><button type="button" class="tv-transcript-time js-seek" data-seek="158">2:38</button>This doesn't happen all at once. It happens one thought at a time. There's a Japanese concept called kaizen, which means continuous improvement. Small changes over time that compound. And that's what this is, too. You're not trying to control your mind. You're learning how to work with it, one thought at a time.</p>
-              </div>
+          <div class="tv-transcript-scroll">
+            <div class="tv-transcript-scroll-inner">
+              <p><button type="button" class="tv-transcript-time js-seek" data-seek="0">0:00</button>Have you ever noticed how one thought can take over your entire mind? You're doing totally fine and then one thing pops up and suddenly you're caught in a loop replaying something, trying to figure something out or going over something that actually doesn't need your attention. And before you know it, you're not really here anymore. You're lost somewhere in your own mind.</p>
+              <p><button type="button" class="tv-transcript-time js-seek" data-seek="33">0:33</button>What's happening is you've got too many things running at the same time. Let's think about this like a computer. If you have 10 or 20 programs open all running in the background, what happens? It greatly reduces the capacity you actually have left for the task in front of you. The same thing happens with your mind. The more thoughts running in the background, the less presence you actually have. And with less presence comes less clarity, less focus, and less connection to what's happening right now.</p>
+              <p><button type="button" class="tv-transcript-time js-seek" data-seek="65">1:05</button>So, here's a simple way to start working with that. I call it the cat and the mouse method. Think of your thoughts like mice coming out of a hole one at a time. And you, you're the cat. Each time a thought appears, you observe it. And if it's not something you need to be focused on, working through, or intentionally giving your attention to, you let it go.</p>
+              <p><button type="button" class="tv-transcript-time js-seek" data-seek="98">1:38</button>Not every thought needs your energy. Not every thought needs to be solved. Of course, some thoughts you may want to keep and unpack. Some you may want to explore later. You can capture them, write them down, or come back to them. But in the moment, you're choosing which stays and what goes.</p>
+              <p><button type="button" class="tv-transcript-time js-seek" data-seek="132">2:12</button>This process is also cumulative. Every time you do it, you reduce some of the noise. You close another tab. And over time, your mind starts to become clear. You can begin to experience this beautiful state of being which I call single point focus where your attention is fully available to what's in front of you. And then what happens? Your clarity increases. Your decisions improve. You start operating from a deeper level of awareness.</p>
+              <p><button type="button" class="tv-transcript-time js-seek" data-seek="158">2:38</button>This doesn't happen all at once. It happens one thought at a time. There's a Japanese concept called kaizen, which means continuous improvement. Small changes over time that compound. And that's what this is, too. You're not trying to control your mind. You're learning how to work with it, one thought at a time.</p>
             </div>
-          </details>
+          </div>
         </div>
       </div>
     </section>
