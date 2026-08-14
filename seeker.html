@@ -102,25 +102,24 @@
 
     /* Infinite dial */
     .dial-section{background:var(--paper-pale);overflow:hidden}
-    .dial-grid{display:grid;grid-template-columns:minmax(460px,1.05fr) minmax(360px,.95fr);gap:clamp(60px,8vw,120px);align-items:center}
-    .dial-stage{position:relative;aspect-ratio:1;display:grid;place-items:center;border-radius:50%;overflow:hidden;background:linear-gradient(rgba(246,239,227,.62),rgba(246,239,227,.62)),url('assets/media/seeker-dial-texture.png') center/cover no-repeat}
-    .dial-stage::before{content:'';position:absolute;inset:4%;border-radius:50%;background:radial-gradient(circle,rgba(199,152,89,.13) 0 1px,transparent 1px 100%);background-size:22px 22px;mask-image:radial-gradient(circle,#000 0 60%,transparent 73%)}
-    .dial-ring{position:absolute;border:1px solid rgba(149,102,44,.30);border-radius:50%}
-    .dial-ring.r1{width:92%;height:92%;animation:spin 48s linear infinite}
-    .dial-ring.r2{width:72%;height:72%;border-style:dashed;animation:spinBack 36s linear infinite}
-    .dial-ring.r3{width:50%;height:50%;animation:spin 26s linear infinite}
-    .dial-ring.r4{width:28%;height:28%;border-width:2px}
-    .dial-ring::before,.dial-ring::after{content:'✦';position:absolute;color:var(--ochre-soft);font-size:.8rem;background:var(--paper-pale);padding:2px}
-    .dial-ring::before{top:-8px;left:50%;transform:translateX(-50%)}
-    .dial-ring::after{bottom:-8px;left:50%;transform:translateX(-50%)}
-    .dial-cross{position:absolute;width:82%;height:82%;opacity:.55;background:linear-gradient(90deg,transparent 49.8%,rgba(149,102,44,.25) 50%,transparent 50.2%),linear-gradient(transparent 49.8%,rgba(149,102,44,.25) 50%,transparent 50.2%)}
-    .dial-center{width:clamp(56px,24%,92px);height:clamp(56px,24%,92px);border-radius:50%;display:grid;place-items:center;border:1px solid var(--ochre);background:var(--paper-light);font-family:var(--display);font-size:clamp(.56rem,2.4vw,.62rem);letter-spacing:.1em;text-align:center;text-transform:uppercase;color:var(--ochre);box-shadow:0 0 0 clamp(6px,1.6vw,13px) rgba(149,102,44,.045)}
-    @keyframes spin{to{transform:rotate(360deg)}}@keyframes spinBack{to{transform:rotate(-360deg)}}
-    .dial-copy{position:relative}
-    .dial-copy h2{font-size:clamp(2.3rem,4.2vw,4.2rem);max-width:11ch}
-    .dial-index{position:absolute;right:-4vw;top:-40px;font-family:var(--display);font-size:clamp(5rem,11vw,11rem);line-height:.8;color:rgba(149,102,44,.07)}
+    .dial-grid{display:grid;grid-template-columns:minmax(440px,1fr) minmax(400px,1fr);grid-template-areas:"visual copy" "pull copy";column-gap:clamp(60px,8vw,110px);row-gap:30px;align-items:start}
+    .dial-visual{grid-area:visual}
+    .dial-frame{position:relative;background:var(--paper-light);padding:clamp(12px,2vw,20px);border:1px solid var(--line-strong);box-shadow:0 1px 0 rgba(255,251,240,.6) inset,0 34px 80px rgba(63,38,17,.24)}
+    .dial-stage{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;box-shadow:0 0 0 1px rgba(149,102,44,.55),inset 0 0 26px rgba(20,12,5,.3)}
+    .dial-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+    .dial-stage::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;background:linear-gradient(rgba(20,12,5,.2),transparent 20%,transparent 80%,rgba(20,12,5,.24)),linear-gradient(90deg,rgba(20,12,5,.16),transparent 14%,transparent 86%,rgba(20,12,5,.16));mix-blend-mode:multiply}
+    .dial-corner{position:absolute;width:20px;height:20px;pointer-events:none;z-index:3}
+    .dial-corner.tl{top:5px;left:5px;border-top:2px solid var(--ochre);border-left:2px solid var(--ochre)}
+    .dial-corner.tr{top:5px;right:5px;border-top:2px solid var(--ochre);border-right:2px solid var(--ochre)}
+    .dial-corner.bl{bottom:5px;left:5px;border-bottom:2px solid var(--ochre);border-left:2px solid var(--ochre)}
+    .dial-corner.br{bottom:5px;right:5px;border-bottom:2px solid var(--ochre);border-right:2px solid var(--ochre)}
+    .dial-copy{grid-area:copy;position:relative}
+    .dial-eyebrow-row{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+    .dial-eyebrow-row .eyebrow{margin-bottom:0}
+    .dial-mark{font-family:var(--display);font-size:1.3rem;color:var(--ochre);opacity:.55}
+    .dial-copy h2{margin-top:16px;font-size:clamp(2.3rem,4.2vw,4.2rem);max-width:15ch}
     .dial-copy .section-copy{margin-top:28px}
-    .dial-pull{margin-top:30px;padding:25px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:1.18rem;font-style:italic;color:#5f4934}
+    .dial-pull{grid-area:pull;align-self:start;margin:0;padding:26px 0 0;border-top:1px solid var(--line);font-size:1.18rem;font-style:italic;color:#5f4934}
 
     /* Doorways */
     .doorways-section{background:var(--paper-light);overflow:hidden}
@@ -278,7 +277,8 @@
     .copyright{margin-top:28px;text-align:center;font-size:.82rem;color:rgba(36,27,20,.45)}
 
     @media(max-width:1000px){
-      .dial-grid,.gnosis-grid{grid-template-columns:1fr}
+      .dial-grid{grid-template-columns:1fr;grid-template-areas:"visual" "copy" "pull"}
+      .gnosis-grid{grid-template-columns:1fr}
       .door-grid{grid-template-columns:1fr 120px 1fr}
       .path-items{grid-template-columns:repeat(3,1fr)}
       .path-item:nth-child(even){transform:none}
@@ -314,7 +314,7 @@
       .threshold{height:64px}
       .threshold::before{height:100%;transform:rotate(90deg)}
       .door-quote{max-width:none}
-      .dial-stage{width:min(520px,100%);margin:0 auto}
+      .dial-frame{width:min(560px,100%);margin:0 auto}
       .path-items{grid-template-columns:1fr}
       .pathline svg{display:none}
       .doorways-head{margin-bottom:32px}
@@ -424,19 +424,38 @@
 
     <section class="section-pad dial-section" aria-labelledby="dialTitle">
       <div class="wrap dial-grid">
-        <div class="dial-stage text-reveal" aria-hidden="true">
-          <div class="dial-cross"></div><div class="dial-ring r1"></div><div class="dial-ring r2"></div><div class="dial-ring r3"></div><div class="dial-ring r4"></div><div class="dial-center">Infinite<br>Dial</div>
+        <div class="dial-visual text-reveal" aria-hidden="true">
+          <div class="dial-frame">
+            <div class="dial-stage">
+              <video
+                class="dial-video"
+                src="assets/media/dial-animation.mp4"
+                poster="assets/media/infinite-dial.png"
+                autoplay
+                muted
+                loop
+                playsinline
+                webkit-playsinline
+                preload="auto"
+                tabindex="-1"
+                disablepictureinpicture
+              ></video>
+            </div>
+            <span class="dial-corner tl"></span><span class="dial-corner tr"></span><span class="dial-corner bl"></span><span class="dial-corner br"></span>
+          </div>
         </div>
         <div class="dial-copy">
-          <span class="dial-index" aria-hidden="true">∞</span>
-          <span class="eyebrow text-reveal">Enlightenment Is An Infinite Dial</span>
-          <h2 id="dialTitle" class="text-reveal">There is always another layer.</h2>
+          <div class="dial-eyebrow-row text-reveal">
+            <span class="eyebrow">Enlightenment Is An Infinite Dial</span>
+            <span class="dial-mark" aria-hidden="true">∞</span>
+          </div>
+          <h2 id="dialTitle" class="text-reveal">There is always<br>another layer.</h2>
           <div class="section-copy text-reveal">
             <p>Enlightenment isn’t somewhere you arrive. It’s a state of being that can keep opening deeper and deeper. I think of it as an infinite dial.</p>
             <p>With every turn, the noise of the mind can fall further away. The boundaries of the self begin to dissolve. You feel more of the connection running through everything. And eventually, there are moments when there is no separation at all — only consciousness, love, and the direct experience of being part of the whole.</p>
           </div>
-          <p class="dial-pull text-reveal">What may begin as a rare or extraordinary state can become more familiar over time. The more often you return to these deeper states, the more familiar they become, and the more they begin to feel like your normal state of being.</p>
         </div>
+        <p class="dial-pull text-reveal">What may begin as a rare or extraordinary state can become more familiar over time. The more often you return to these deeper states, the more familiar they become, and the more they begin to feel like your normal state of being.</p>
       </div>
     </section>
 
@@ -564,7 +583,7 @@
         </div>
         <div class="closing-question text-reveal">So how deep does consciousness go?<br><span class="gold">I think that’s exactly what the Seeker is here to explore.</span></div>
       </div>
-      <div class="closing-panorama text-reveal"><img src="assets/media/seeker-hero.png" alt="A winding trail across a mountain ridge beneath a darkening dusk sky scattered with stars"><div class="closing-stamp">The path<br>remains<br>open</div></div>
+      <div class="closing-panorama text-reveal"><img src="assets/media/seeker-end.png" alt="A rocky mountain ridge trail disappearing into fog, beneath a storm-clouded night sky breaking open to a distant band of light on the horizon"><div class="closing-stamp">The path<br>remains<br>open</div></div>
     </section>
 
     <section class="exp-section exp-section--paper" id="blueprint" aria-labelledby="blueprintTitle" style="padding-left:0; padding-right:0; padding-bottom:0;">
