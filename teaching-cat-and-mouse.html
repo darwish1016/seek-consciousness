@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--
-  TEACHING / VIDEO PAGE TEMPLATE
+  TEACHING / VIDEO PAGE TEMPLATE — v2 (design refresh)
   ------------------------------------------------------------------
   This file is the example build for a per-video teaching page.
   Duplicate it for every new YouTube video and swap out the pieces
@@ -8,6 +8,18 @@
   Method" — is a real Mind Tool already referenced inside the
   Blueprint (see seeker.html#treeBlueprint, Trunk → Awareness),
   so this doubles as a working page, not just a mockup.
+
+  What changed in this pass (design only — no brand tokens, fonts,
+  header, footer, or Sit-With-This pattern were altered, so this
+  stays consistent with index.html / seeker.html / pathfinder.html):
+    - Added a thin scroll "thread" under the header (read progress)
+    - Hero now bookends with the site's existing ✦ ornament motif
+    - Chapters get a visible "currently selected" state
+    - Transcript timestamps are now clickable and seek the video too
+      (reuses the same seconds as the Chapters list — keep them synced)
+    - Main Ideas moved from a flat numbered list to a ledger-style
+      grid with a faint ghost numeral per card
+    - Added visible focus states for keyboard users
 
   Per-video things to replace when duplicating:
     1. <title> + meta description
@@ -19,7 +31,9 @@
     5. Main Ideas list
     6. Transcript text + chapter timestamps (timestamps below are
        estimated from the transcript's word count — replace with
-       real times once the video is published)
+       real times once the video is published). NOTE: the transcript's
+       inline timestamp buttons must use the SAME seconds as the
+       Chapters list — update both together.
     7. Reflection questions / practice
     8. Blueprint placement card (which branch/trunk/root this maps to)
     9. Related Teachings cards
@@ -76,6 +90,15 @@
     .text-reveal{opacity:0;transform:translateY(20px);transition:opacity .72s var(--ease),transform .72s var(--ease)}
     .text-reveal.is-visible{opacity:1;transform:none}
 
+    /* Visible keyboard focus everywhere — quality floor */
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:1px}
+
+    /* Reusable ✦ ornament — same mark already used in the Sit-With-This
+       pattern site-wide, reused here to bookend the page rather than
+       introduce a new motif */
+    .ink-divider{display:flex;align-items:center;justify-content:center;gap:16px;color:var(--ochre);font-size:.8rem}
+    .ink-divider::before,.ink-divider::after{content:'';width:56px;height:1px;background:var(--line-strong)}
+
     /* ===== Header / Footer — identical component to the rest of the site ===== */
     .site-header{position:fixed;inset:0 0 auto;z-index:100;height:var(--header-height);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(22px,6vw,92px);color:var(--ink);background:rgba(244,236,222,.9);border-bottom:1px solid var(--line);box-shadow:0 12px 30px rgba(36,27,20,.06);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
     .site-logo{display:block;line-height:0}
@@ -91,6 +114,10 @@
     .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
     .nav-toggle.open span:nth-child(2){opacity:0}
     .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+    /* Reading progress thread — sits just under the fixed header */
+    .read-progress{position:fixed;top:var(--header-height);left:0;right:0;height:2px;background:rgba(149,102,44,.14);z-index:99}
+    .read-progress span{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--ochre-soft),var(--ochre))}
 
     .site-footer{position:relative;padding:64px 6vw 30px;background:var(--paper-deep);color:rgba(36,27,20,.7);border-top:1px solid var(--line)}
     .site-footer::before{content:'';position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--ochre) 50%,transparent)}
@@ -114,6 +141,8 @@
     /* ===== Teaching hero ===== */
     .tv-hero{background:var(--paper-light);padding:calc(var(--header-height) + clamp(56px,8vw,100px)) 0 clamp(50px,6vw,70px)}
     .tv-hero .wrap{max-width:900px}
+    .tv-hero .ink-divider{justify-content:flex-start;margin-bottom:22px}
+    .tv-hero .ink-divider::before{width:0}
     .tv-breadcrumb{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:24px;font-family:var(--display);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
     .tv-breadcrumb a{position:relative;color:var(--muted);transition:color .25s ease}
     .tv-breadcrumb a:hover{color:var(--ink)}
@@ -139,25 +168,29 @@
     .tv-chapters{margin-top:38px}
     .tv-chapters-title{display:block;margin-bottom:14px;font-family:var(--display);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre)}
     .tv-chapter-list{border-top:1px solid var(--line)}
-    .tv-chapter{display:flex;align-items:baseline;gap:20px;width:100%;text-align:left;padding:15px 4px;border-bottom:1px solid var(--line);background:transparent;transition:background .25s ease}
+    .tv-chapter{display:flex;align-items:baseline;gap:20px;width:100%;text-align:left;padding:15px 4px 15px 12px;border-bottom:1px solid var(--line);border-left:2px solid transparent;background:transparent;transition:background .25s ease,border-color .25s ease,padding .25s ease}
     .tv-chapter:hover{background:rgba(149,102,44,.06)}
+    .tv-chapter.is-active{background:rgba(149,102,44,.09);border-left-color:var(--ochre)}
     .tv-chapter-time{flex:none;width:52px;font-family:var(--display);font-size:.72rem;letter-spacing:.03em;color:var(--ochre)}
     .tv-chapter-label{font-size:1.05rem;color:var(--ink)}
+    .tv-chapter.is-active .tv-chapter-label{font-weight:600}
     .tv-chapters-note{margin-top:14px;font-size:.9rem;font-style:italic;color:var(--muted)}
 
     /* ===== Overview ===== */
     .tv-overview{background:var(--paper-light)}
     .tv-overview .wrap{max-width:800px}
     .tv-overview .section-copy{margin-top:22px;max-width:none}
+    .tv-overview .section-copy p:first-of-type::first-letter{font-family:var(--display);font-size:3.2rem;line-height:.72;font-weight:600;float:left;padding:5px 9px 0 0;color:var(--ochre)}
 
-    /* ===== Main ideas ===== */
+    /* ===== Main ideas — ledger grid ===== */
     .tv-ideas{background:var(--paper-pale)}
-    .tv-ideas .wrap{max-width:900px}
-    .tv-idea-list{border-top:1px solid var(--line);margin-top:44px}
-    .tv-idea{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:28px 0;border-bottom:1px solid var(--line)}
-    .tv-idea-no{font-family:var(--display);font-size:.72rem;letter-spacing:.06em;color:var(--ochre)}
-    .tv-idea h3{font-size:clamp(1.18rem,1.7vw,1.46rem);margin-bottom:8px}
-    .tv-idea p{color:var(--muted);max-width:60ch}
+    .tv-ideas .wrap{max-width:980px}
+    .tv-idea-grid{display:grid;grid-template-columns:1fr 1fr;margin-top:44px;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+    .tv-idea-card{position:relative;overflow:hidden;padding:30px 28px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .tv-idea-ghost{position:absolute;top:-10px;right:14px;font-family:var(--display);font-size:4.6rem;line-height:1;font-weight:600;color:rgba(149,102,44,.07);pointer-events:none;user-select:none}
+    .tv-idea-no{position:relative;display:block;margin-bottom:10px;font-family:var(--display);font-size:.68rem;letter-spacing:.1em;color:var(--ochre)}
+    .tv-idea-card h3{position:relative;font-size:clamp(1.12rem,1.6vw,1.32rem);margin-bottom:8px}
+    .tv-idea-card p{position:relative;color:var(--muted);max-width:44ch}
 
     /* ===== Transcript ===== */
     .tv-transcript{background:var(--paper-light)}
@@ -169,7 +202,9 @@
     .tv-transcript-box[open] summary::after{transform:rotate(45deg)}
     .tv-transcript-body{padding:0 clamp(20px,3vw,32px) 30px;color:rgba(36,27,20,.84);font-size:1.08rem;line-height:1.75;border-top:1px solid var(--line)}
     .tv-transcript-body p{margin-top:22px}
-    .tv-transcript-time{display:inline-block;margin-right:10px;font-family:var(--display);font-size:.68rem;letter-spacing:.04em;color:var(--ochre)}
+    .tv-transcript-time{display:inline-block;margin-right:10px;min-width:40px;text-align:left;border:0;background:transparent;font-family:var(--display);font-size:.68rem;letter-spacing:.04em;color:var(--ochre);position:relative;padding-bottom:1px}
+    .tv-transcript-time::after{content:'';position:absolute;left:0;right:100%;bottom:-1px;height:1px;background:var(--ochre);transition:right .3s var(--ease)}
+    .tv-transcript-time:hover::after,.tv-transcript-time:focus-visible::after{right:0}
 
     /* ===== Reflection (identical pattern to seeker.html "Sit With This") ===== */
     .sit-section{background:var(--paper-pale);overflow:hidden}
@@ -193,6 +228,7 @@
 
     /* ===== Blueprint placement ===== */
     .tv-blueprint{background:var(--paper-light)}
+    .tv-blueprint .ink-divider{margin-bottom:34px}
     .tv-blueprint-card{width:min(880px,100%);margin:0 auto;position:relative;padding:clamp(36px,5vw,54px);border:1px solid var(--line-strong);background:var(--paper-pale);box-shadow:0 24px 60px rgba(63,38,17,.1)}
     .tv-blueprint-card::before{content:'';position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--ochre) 50%,transparent)}
     .tv-blueprint-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre);margin-bottom:18px}
@@ -239,6 +275,7 @@
 
     @media(max-width:1000px){
       .tv-related-grid{grid-template-columns:1fr}
+      .tv-idea-grid{grid-template-columns:1fr}
     }
     @media(max-width:760px){
       :root{--header-height:64px}
@@ -250,7 +287,6 @@
       .primary-nav.open{opacity:1;visibility:visible;transform:none}
       .primary-nav a{padding:13px 0;border-top:1px solid var(--line)}
       .tv-hero h1{font-size:clamp(2.1rem,9vw,3rem)}
-      .tv-idea{grid-template-columns:40px 1fr;gap:12px}
       .sit-question{grid-template-columns:26px 1fr}
       .site-footer{padding:48px 6vw 24px}
       .footer-inner{align-items:flex-start;flex-direction:column;gap:22px}
@@ -259,6 +295,8 @@
   </style>
 </head>
 <body>
+  <div class="read-progress" id="readProgress" aria-hidden="true"><span id="readProgressFill"></span></div>
+
   <header class="site-header" id="siteHeader">
     <a class="site-logo" href="index.html" aria-label="Seek Consciousness home"><img src="assets/media/seek-consciousness-logo.png" alt="Seek Consciousness"></a>
     <button class="nav-toggle" type="button" aria-controls="primaryNav" aria-expanded="false" aria-label="Open navigation">
@@ -284,6 +322,7 @@
           <span class="tv-breadcrumb-sep" aria-hidden="true">/</span>
           <span class="tv-breadcrumb-current" aria-current="page">The Cat and the Mouse Method</span>
         </nav>
+        <div class="ink-divider text-reveal" aria-hidden="true">✦</div>
         <span class="eyebrow text-reveal">A Mind Tool From The Trunk — Awareness</span>
         <h1 class="text-reveal">The Cat and the Mouse Method</h1>
         <p class="tv-hero-hook text-reveal">A simple way to quiet a mind that's running too many programs at once — and start choosing which thoughts actually deserve your attention.</p>
@@ -319,12 +358,12 @@
         <div class="tv-chapters text-reveal">
           <span class="tv-chapters-title">Chapters</span>
           <div class="tv-chapter-list" id="tvChapters">
-            <button type="button" class="tv-chapter" data-seek="0"><span class="tv-chapter-time">0:00</span><span class="tv-chapter-label">The Thought That Takes Over</span></button>
-            <button type="button" class="tv-chapter" data-seek="33"><span class="tv-chapter-time">0:33</span><span class="tv-chapter-label">Too Many Tabs Open</span></button>
-            <button type="button" class="tv-chapter" data-seek="65"><span class="tv-chapter-time">1:05</span><span class="tv-chapter-label">The Cat and the Mouse Method</span></button>
-            <button type="button" class="tv-chapter" data-seek="98"><span class="tv-chapter-time">1:38</span><span class="tv-chapter-label">Not Every Thought Needs to Be Solved</span></button>
-            <button type="button" class="tv-chapter" data-seek="132"><span class="tv-chapter-time">2:12</span><span class="tv-chapter-label">It's Cumulative — Closing the Tabs</span></button>
-            <button type="button" class="tv-chapter" data-seek="158"><span class="tv-chapter-time">2:38</span><span class="tv-chapter-label">Single Point Focus &amp; Kaizen</span></button>
+            <button type="button" class="tv-chapter js-seek is-active" data-seek="0"><span class="tv-chapter-time">0:00</span><span class="tv-chapter-label">The Thought That Takes Over</span></button>
+            <button type="button" class="tv-chapter js-seek" data-seek="33"><span class="tv-chapter-time">0:33</span><span class="tv-chapter-label">Too Many Tabs Open</span></button>
+            <button type="button" class="tv-chapter js-seek" data-seek="65"><span class="tv-chapter-time">1:05</span><span class="tv-chapter-label">The Cat and the Mouse Method</span></button>
+            <button type="button" class="tv-chapter js-seek" data-seek="98"><span class="tv-chapter-time">1:38</span><span class="tv-chapter-label">Not Every Thought Needs to Be Solved</span></button>
+            <button type="button" class="tv-chapter js-seek" data-seek="132"><span class="tv-chapter-time">2:12</span><span class="tv-chapter-label">It's Cumulative — Closing the Tabs</span></button>
+            <button type="button" class="tv-chapter js-seek" data-seek="158"><span class="tv-chapter-time">2:38</span><span class="tv-chapter-label">Single Point Focus &amp; Kaizen</span></button>
           </div>
           <p class="tv-chapters-note">Timestamps are estimated from the transcript — swap in the real times once the video is published.</p>
         </div>
@@ -348,30 +387,42 @@
       <div class="wrap">
         <span class="eyebrow text-reveal">Main Ideas</span>
         <h2 id="ideasTitle" class="section-title text-reveal">What this teaching is actually saying.</h2>
-        <div class="tv-idea-list">
-          <div class="tv-idea text-reveal">
+        <div class="tv-idea-grid">
+          <div class="tv-idea-card text-reveal">
+            <span class="tv-idea-ghost" aria-hidden="true">01</span>
             <span class="tv-idea-no">01</span>
-            <div><h3>Too many tabs open</h3><p>Like a computer running 10 or 20 background programs, a mind full of unattended thoughts has far less capacity left for the task — or person — in front of you.</p></div>
+            <h3>Too many tabs open</h3>
+            <p>Like a computer running 10 or 20 background programs, a mind full of unattended thoughts has far less capacity left for the task — or person — in front of you.</p>
           </div>
-          <div class="tv-idea text-reveal">
+          <div class="tv-idea-card text-reveal">
+            <span class="tv-idea-ghost" aria-hidden="true">02</span>
             <span class="tv-idea-no">02</span>
-            <div><h3>You're the cat, thoughts are the mice</h3><p>Picture your thoughts as mice appearing one at a time from a hole. You're the cat — you simply observe each one as it appears.</p></div>
+            <h3>You're the cat, thoughts are the mice</h3>
+            <p>Picture your thoughts as mice appearing one at a time from a hole. You're the cat — you simply observe each one as it appears.</p>
           </div>
-          <div class="tv-idea text-reveal">
+          <div class="tv-idea-card text-reveal">
+            <span class="tv-idea-ghost" aria-hidden="true">03</span>
             <span class="tv-idea-no">03</span>
-            <div><h3>Not every thought needs your energy</h3><p>Some thoughts can be let go immediately. Others are worth capturing to unpack later. The practice is choosing, moment to moment, which is which.</p></div>
+            <h3>Not every thought needs your energy</h3>
+            <p>Some thoughts can be let go immediately. Others are worth capturing to unpack later. The practice is choosing, moment to moment, which is which.</p>
           </div>
-          <div class="tv-idea text-reveal">
+          <div class="tv-idea-card text-reveal">
+            <span class="tv-idea-ghost" aria-hidden="true">04</span>
             <span class="tv-idea-no">04</span>
-            <div><h3>It's cumulative</h3><p>Every thought you release closes another tab. Do this consistently and the background noise thins out — clarity compounds over time.</p></div>
+            <h3>It's cumulative</h3>
+            <p>Every thought you release closes another tab. Do this consistently and the background noise thins out — clarity compounds over time.</p>
           </div>
-          <div class="tv-idea text-reveal">
+          <div class="tv-idea-card text-reveal">
+            <span class="tv-idea-ghost" aria-hidden="true">05</span>
             <span class="tv-idea-no">05</span>
-            <div><h3>Single point focus</h3><p>The state that emerges once enough noise clears: your attention fully available to whatever is actually in front of you.</p></div>
+            <h3>Single point focus</h3>
+            <p>The state that emerges once enough noise clears: your attention fully available to whatever is actually in front of you.</p>
           </div>
-          <div class="tv-idea text-reveal">
+          <div class="tv-idea-card text-reveal">
+            <span class="tv-idea-ghost" aria-hidden="true">06</span>
             <span class="tv-idea-no">06</span>
-            <div><h3>Kaizen — one thought at a time</h3><p>This isn't about controlling the mind all at once. It's continuous improvement: small releases, repeated, that compound.</p></div>
+            <h3>Kaizen — one thought at a time</h3>
+            <p>This isn't about controlling the mind all at once. It's continuous improvement: small releases, repeated, that compound.</p>
           </div>
         </div>
       </div>
@@ -385,12 +436,12 @@
         <details class="tv-transcript-box text-reveal">
           <summary>Expand the full transcript</summary>
           <div class="tv-transcript-body">
-            <p><span class="tv-transcript-time">0:00</span>Have you ever noticed how one thought can take over your entire mind? You're doing totally fine and then one thing pops up and suddenly you're caught in a loop replaying something, trying to figure something out or going over something that actually doesn't need your attention. And before you know it, you're not really here anymore. You're lost somewhere in your own mind.</p>
-            <p><span class="tv-transcript-time">0:33</span>What's happening is you've got too many things running at the same time. Let's think about this like a computer. If you have 10 or 20 programs open all running in the background, what happens? It greatly reduces the capacity you actually have left for the task in front of you. The same thing happens with your mind. The more thoughts running in the background, the less presence you actually have. And with less presence comes less clarity, less focus, and less connection to what's happening right now.</p>
-            <p><span class="tv-transcript-time">1:05</span>So, here's a simple way to start working with that. I call it the cat and the mouse method. Think of your thoughts like mice coming out of a hole one at a time. And you, you're the cat. Each time a thought appears, you observe it. And if it's not something you need to be focused on, working through, or intentionally giving your attention to, you let it go.</p>
-            <p><span class="tv-transcript-time">1:38</span>Not every thought needs your energy. Not every thought needs to be solved. Of course, some thoughts you may want to keep and unpack. Some you may want to explore later. You can capture them, write them down, or come back to them. But in the moment, you're choosing which stays and what goes.</p>
-            <p><span class="tv-transcript-time">2:12</span>This process is also cumulative. Every time you do it, you reduce some of the noise. You close another tab. And over time, your mind starts to become clear. You can begin to experience this beautiful state of being which I call single point focus where your attention is fully available to what's in front of you. And then what happens? Your clarity increases. Your decisions improve. You start operating from a deeper level of awareness.</p>
-            <p><span class="tv-transcript-time">2:38</span>This doesn't happen all at once. It happens one thought at a time. There's a Japanese concept called kaizen, which means continuous improvement. Small changes over time that compound. And that's what this is, too. You're not trying to control your mind. You're learning how to work with it, one thought at a time.</p>
+            <p><button type="button" class="tv-transcript-time js-seek" data-seek="0">0:00</button>Have you ever noticed how one thought can take over your entire mind? You're doing totally fine and then one thing pops up and suddenly you're caught in a loop replaying something, trying to figure something out or going over something that actually doesn't need your attention. And before you know it, you're not really here anymore. You're lost somewhere in your own mind.</p>
+            <p><button type="button" class="tv-transcript-time js-seek" data-seek="33">0:33</button>What's happening is you've got too many things running at the same time. Let's think about this like a computer. If you have 10 or 20 programs open all running in the background, what happens? It greatly reduces the capacity you actually have left for the task in front of you. The same thing happens with your mind. The more thoughts running in the background, the less presence you actually have. And with less presence comes less clarity, less focus, and less connection to what's happening right now.</p>
+            <p><button type="button" class="tv-transcript-time js-seek" data-seek="65">1:05</button>So, here's a simple way to start working with that. I call it the cat and the mouse method. Think of your thoughts like mice coming out of a hole one at a time. And you, you're the cat. Each time a thought appears, you observe it. And if it's not something you need to be focused on, working through, or intentionally giving your attention to, you let it go.</p>
+            <p><button type="button" class="tv-transcript-time js-seek" data-seek="98">1:38</button>Not every thought needs your energy. Not every thought needs to be solved. Of course, some thoughts you may want to keep and unpack. Some you may want to explore later. You can capture them, write them down, or come back to them. But in the moment, you're choosing which stays and what goes.</p>
+            <p><button type="button" class="tv-transcript-time js-seek" data-seek="132">2:12</button>This process is also cumulative. Every time you do it, you reduce some of the noise. You close another tab. And over time, your mind starts to become clear. You can begin to experience this beautiful state of being which I call single point focus where your attention is fully available to what's in front of you. And then what happens? Your clarity increases. Your decisions improve. You start operating from a deeper level of awareness.</p>
+            <p><button type="button" class="tv-transcript-time js-seek" data-seek="158">2:38</button>This doesn't happen all at once. It happens one thought at a time. There's a Japanese concept called kaizen, which means continuous improvement. Small changes over time that compound. And that's what this is, too. You're not trying to control your mind. You're learning how to work with it, one thought at a time.</p>
           </div>
         </details>
       </div>
@@ -431,6 +482,7 @@
     <!-- 8. BLUEPRINT PLACEMENT -->
     <section class="tv-blueprint section-pad" aria-labelledby="blueprintPlacementTitle">
       <div class="wrap">
+        <div class="ink-divider text-reveal" aria-hidden="true">✦</div>
         <div class="tv-blueprint-card text-reveal">
           <span class="tv-blueprint-tag">Where This Fits In The Blueprint</span>
           <h3 id="blueprintPlacementTitle">Trunk → Awareness → Five Mind Tools</h3>
@@ -544,14 +596,32 @@
       items.forEach(x=>io.observe(x));
     }
 
-    // Chapter timestamps: seek the embedded YouTube player via postMessage.
+    // Reading progress thread
+    const progressFill=document.getElementById('readProgressFill');
+    const updateProgress=()=>{
+      const doc=document.documentElement;
+      const scrollable=doc.scrollHeight-doc.clientHeight;
+      const pct=scrollable>0?Math.min(100,Math.max(0,(window.scrollY/scrollable)*100)):0;
+      if(progressFill) progressFill.style.width=pct+'%';
+    };
+    window.addEventListener('scroll',updateProgress,{passive:true});
+    window.addEventListener('resize',updateProgress);
+    updateProgress();
+
+    // Chapter timestamps + transcript timestamps: seek the embedded YouTube
+    // player via postMessage, and mark the active chapter.
     const videoFrame=document.getElementById('tvVideoFrame');
-    document.querySelectorAll('.tv-chapter').forEach(btn=>{
+    const chapterButtons=document.querySelectorAll('.tv-chapter');
+    document.querySelectorAll('.js-seek').forEach(btn=>{
       btn.addEventListener('click',()=>{
         const seconds=Number(btn.dataset.seek||0);
         if(videoFrame?.contentWindow){
           videoFrame.contentWindow.postMessage(JSON.stringify({event:'command',func:'seekTo',args:[seconds,true]}),'*');
           videoFrame.contentWindow.postMessage(JSON.stringify({event:'command',func:'playVideo',args:[]}),'*');
+        }
+        if(btn.classList.contains('tv-chapter')){
+          chapterButtons.forEach(c=>c.classList.remove('is-active'));
+          btn.classList.add('is-active');
         }
         document.querySelector('.tv-video-frame')?.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block:'center'});
       });
