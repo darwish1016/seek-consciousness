@@ -36,8 +36,13 @@
     5. Main Ideas list
     6. Transcript text + chapter timestamps — the transcript is an
        always-visible, scrollable panel beside the video (not a
-       separate section), but its timestamp buttons must still use
-       the SAME seconds as the Chapters list below the video.
+       separate section). Three things must all use the SAME
+       seconds and stay in the SAME order: the Chapters buttons'
+       data-seek, each transcript <p class="tv-transcript-line">'s
+       data-seek, and the <button class="tv-transcript-time"> inside
+       it. The sync-highlighting JS reads its segment list straight
+       off the Chapters buttons, so Chapters is the source of truth —
+       update it first, then match the transcript lines to it.
        Timestamps below are estimated from the transcript's word
        count — replace with real times once the video is published.
     7. Reflection questions / practice
@@ -622,6 +627,22 @@
     const chapterButtons=[...document.querySelectorAll('.tv-chapter')];
     const transcriptLines=[...document.querySelectorAll('.tv-transcript-line')];
     const SEGMENTS=chapterButtons.map(btn=>Number(btn.dataset.seek||0));
+
+    // YouTube's player only trusts postMessage commands (seekTo, and the
+    // state/time updates the sync-highlighting relies on) from an origin
+    // it recognizes — add one matching this page. NOTE: this can't be
+    // fixed when the page is opened as a local file:// — the sync
+    // highlighting (and possibly click-to-seek) needs the page to be
+    // served over http/https (a local server or the real hosting) to work.
+    if(videoFrame && window.location.protocol!=='file:'){
+      try{
+        const src=new URL(videoFrame.src, window.location.href);
+        if(!src.searchParams.has('origin')){
+          src.searchParams.set('origin', window.location.origin);
+          videoFrame.src=src.toString();
+        }
+      }catch(e){/* malformed URL — leave iframe src untouched */}
+    }
 
     const setActiveIndex=(index,{scrollTranscript=false}={})=>{
       chapterButtons.forEach((btn,i)=>btn.classList.toggle('is-active',i===index));
