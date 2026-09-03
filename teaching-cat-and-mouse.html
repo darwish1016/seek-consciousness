@@ -26,6 +26,7 @@
       grid with a faint ghost numeral per card
     - Added visible focus states for keyboard users
     - Overview uses an Open Book layout; Blueprint uses a clean split layout.
+    - Video section uses a 2-column layout (Left: Video, Right: Collapsible Transcript + Chapters).
 
   Per-video things to replace when duplicating:
     1. <title> + meta description
@@ -164,7 +165,7 @@
     .tv-meta-row strong{color:var(--ochre);font-weight:600}
     .tv-meta-sep{color:rgba(149,102,44,.4)}
 
-    /* ===== Video frame + chapters + transcript ===== */
+    /* ===== Video frame + collapsible transcript + chapters ===== */
     .tv-video-section{background:var(--paper-pale)}
     .tv-video-wrap{width:min(1420px,94vw);margin:0 auto;display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(40px, 5vw, 70px);align-items:start}
     .tv-video-col{min-width:0}
@@ -176,7 +177,32 @@
     .tv-corner.tr{top:6px;right:6px;border-top:2px solid var(--ochre);border-right:2px solid var(--ochre)}
     .tv-corner.bl{bottom:6px;left:6px;border-bottom:2px solid var(--ochre);border-left:2px solid var(--ochre)}
     .tv-corner.br{bottom:6px;right:6px;border-bottom:2px solid var(--ochre);border-right:2px solid var(--ochre)}
-    .tv-chapters{margin-top:42px}
+    
+    /* Transcript collapsible panel */
+    .tv-transcript-col{min-width:0;padding-top:10px}
+    .tv-transcript-eyebrow{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px;font-family:var(--display);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre)}
+    .tv-transcript-caption{font-size:.85rem;font-style:italic;color:var(--muted);text-transform:none;letter-spacing:0}
+    
+    .tv-transcript-wrapper{position:relative;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);background:var(--paper-pale)}
+    .tv-transcript-scroll{max-height:420px;overflow:hidden;transition:max-height 0.8s var(--ease)}
+    .tv-transcript-wrapper.is-expanded .tv-transcript-scroll{max-height:6000px}
+    
+    .tv-transcript-overlay{position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(to bottom, rgba(251,247,238,0) 0%, var(--paper-pale) 80%);display:flex;align-items:flex-end;justify-content:center;padding-bottom:24px;transition:opacity 0.4s ease}
+    .tv-transcript-wrapper.is-expanded .tv-transcript-overlay{opacity:0;pointer-events:none}
+    
+    .tv-transcript-toggle{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:1px solid var(--ochre);font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre);background:var(--paper-light);border-radius:2px;transition:all .3s var(--ease)}
+    .tv-transcript-toggle:hover{background:var(--ochre);color:#fff}
+
+    .tv-transcript-scroll-inner{padding:28px clamp(12px,1.5vw,20px) 32px;color:rgba(36,27,20,.84);font-size:1.1rem;line-height:1.7}
+    .tv-transcript-line{border-left:2px solid transparent;padding:4px 12px 4px 14px;margin:0 -12px 24px -16px;border-radius:2px;transition:background-color .35s ease,border-color .35s ease,box-shadow .35s ease}
+    .tv-transcript-line:last-child{margin-bottom:0}
+    .tv-transcript-line.is-active{background:rgba(149,102,44,.05);border-left-color:var(--ochre);box-shadow:0 1px 12px rgba(0,0,0,.02)}
+    .tv-transcript-time{display:inline-block;margin-right:12px;min-width:42px;text-align:left;border:0;background:transparent;font-family:var(--display);font-size:.68rem;letter-spacing:.04em;color:var(--ochre);position:relative;padding-bottom:1px}
+    .tv-transcript-time::after{content:'';position:absolute;left:0;right:100%;bottom:-1px;height:1px;background:var(--ochre);transition:right .3s var(--ease)}
+    .tv-transcript-time:hover::after,.tv-transcript-time:focus-visible::after{right:0}
+
+    /* Chapters moved below Transcript */
+    .tv-chapters{margin-top:48px}
     .tv-chapters-title{display:block;margin-bottom:16px;font-family:var(--display);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre)}
     .tv-chapter-list{border-top:1px solid var(--line)}
     .tv-chapter{display:flex;align-items:baseline;gap:20px;width:100%;text-align:left;padding:16px 4px 16px 12px;border-bottom:1px solid var(--line);border-left:2px solid transparent;background:transparent;transition:background .25s ease,border-color .25s ease,padding .25s ease}
@@ -185,19 +211,6 @@
     .tv-chapter-time{flex:none;width:52px;font-family:var(--display);font-size:.72rem;letter-spacing:.03em;color:var(--ochre)}
     .tv-chapter-label{font-size:1.08rem;color:var(--ink)}
     .tv-chapter.is-active .tv-chapter-label{font-weight:600}
-
-    /* Transcript panel */
-    .tv-transcript-col{min-width:0;padding-top:10px}
-    .tv-transcript-eyebrow{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px;font-family:var(--display);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre)}
-    .tv-transcript-caption{font-size:.85rem;font-style:italic;color:var(--muted);text-transform:none;letter-spacing:0}
-    .tv-transcript-scroll{max-height:680px;overflow-y:auto;overflow-x:hidden;scrollbar-gutter:stable;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong)}
-    .tv-transcript-scroll-inner{padding:28px clamp(12px,1.5vw,20px) 32px;color:rgba(36,27,20,.84);font-size:1.1rem;line-height:1.7}
-    .tv-transcript-line{border-left:2px solid transparent;padding:4px 12px 4px 14px;margin:0 -12px 24px -16px;border-radius:2px;transition:background-color .35s ease,border-color .35s ease,box-shadow .35s ease}
-    .tv-transcript-line:last-child{margin-bottom:0}
-    .tv-transcript-line.is-active{background:rgba(149,102,44,.05);border-left-color:var(--ochre);box-shadow:0 1px 12px rgba(0,0,0,.02)}
-    .tv-transcript-time{display:inline-block;margin-right:12px;min-width:42px;text-align:left;border:0;background:transparent;font-family:var(--display);font-size:.68rem;letter-spacing:.04em;color:var(--ochre);position:relative;padding-bottom:1px}
-    .tv-transcript-time::after{content:'';position:absolute;left:0;right:100%;bottom:-1px;height:1px;background:var(--ochre);transition:right .3s var(--ease)}
-    .tv-transcript-time:hover::after,.tv-transcript-time:focus-visible::after{right:0}
 
     /* ===== OPEN BOOK LAYOUT (Overview Only) ===== */
     .open-book {
@@ -453,7 +466,7 @@
       </div>
     </section>
 
-    <!-- 1, 5 & 6. VIDEO + CHAPTERS + TRANSCRIPT -->
+    <!-- 1, 5 & 6. VIDEO + COLLAPSIBLE TRANSCRIPT + CHAPTERS -->
     <section class="tv-video-section section-pad">
       <div class="tv-video-wrap">
         
@@ -472,6 +485,32 @@
             </div>
             <span class="tv-corner tl"></span><span class="tv-corner tr"></span><span class="tv-corner bl"></span><span class="tv-corner br"></span>
           </div>
+        </div>
+
+        <!-- TRANSCRIPT, beside the video -->
+        <div class="tv-transcript-col text-reveal">
+          <div class="tv-transcript-eyebrow">
+            <span>Full Transcript</span>
+            <span class="tv-transcript-caption">Click any line to jump</span>
+          </div>
+          
+          <div class="tv-transcript-wrapper" id="transcriptWrapper">
+            <div class="tv-transcript-scroll">
+              <div class="tv-transcript-scroll-inner">
+                <p class="tv-transcript-line is-active" data-seek="0"><button type="button" class="tv-transcript-time js-seek" data-seek="0">0:00</button>Have you ever noticed how one thought can take over your entire mind? You're doing totally fine and then one thing pops up and suddenly you're caught in a loop replaying something, trying to figure something out or going over something that actually doesn't need your attention. And before you know it, you're not really here anymore. You're lost somewhere in your own mind.</p>
+                <p class="tv-transcript-line" data-seek="29"><button type="button" class="tv-transcript-time js-seek" data-seek="29">0:29</button>What's happening is you've got too many things running at the same time. Let's think about this like a computer. If you have 10 or 20 programs open all running in the background, what happens? It greatly reduces the capacity you actually have left for the task in front of you. The same thing happens with your mind. The more thoughts running in the background, the less presence you actually have. And with less presence comes less clarity, less focus, and less connection to what's happening right now.</p>
+                <p class="tv-transcript-line" data-seek="61"><button type="button" class="tv-transcript-time js-seek" data-seek="61">1:01</button>So, here's a simple way to start working with that. I call it the cat and the mouse method. Think of your thoughts like mice coming out of a hole one at a time. And you, you're the cat. Each time a thought appears, you observe it. And if it's not something you need to be focused on, working through, or intentionally giving your attention to, you let it go.</p>
+                <p class="tv-transcript-line" data-seek="88"><button type="button" class="tv-transcript-time js-seek" data-seek="88">1:28</button>Not every thought needs your energy. Not every thought needs to be solved. Of course, some thoughts you may want to keep and unpack. Some you may want to explore later. You can capture them, write them down, or come back to them. But in the moment, you're choosing which stays and what goes.</p>
+                <p class="tv-transcript-line" data-seek="110"><button type="button" class="tv-transcript-time js-seek" data-seek="110">1:50</button>This process is also cumulative. Every time you do it, you reduce some of the noise. You close another tab. And over time, your mind starts to become clear.</p>
+                <p class="tv-transcript-line" data-seek="123"><button type="button" class="tv-transcript-time js-seek" data-seek="123">2:03</button>You can begin to experience this beautiful state of being which I call single point focus where your attention is fully available to what's in front of you. And then what happens? Your clarity increases. Your decisions improve. You start operating from a deeper level of awareness.</p>
+                <p class="tv-transcript-line" data-seek="144"><button type="button" class="tv-transcript-time js-seek" data-seek="144">2:24</button>This doesn't happen all at once. It happens one thought at a time.</p>
+                <p class="tv-transcript-line" data-seek="150"><button type="button" class="tv-transcript-time js-seek" data-seek="150">2:30</button>There's a Japanese concept called kaizen, which means continuous improvement. Small changes over time that compound. And that's what this is, too. You're not trying to control your mind. You're learning how to work with it, one thought at a time.</p>
+              </div>
+            </div>
+            <div class="tv-transcript-overlay">
+              <button type="button" class="tv-transcript-toggle" id="transcriptToggle">Read Full Transcript</button>
+            </div>
+          </div>
 
           <!-- TIMESTAMPS / CHAPTERS -->
           <div class="tv-chapters text-reveal">
@@ -487,26 +526,7 @@
               <button type="button" class="tv-chapter js-seek" data-seek="150"><span class="tv-chapter-time">2:30</span><span class="tv-chapter-label">Kaizen — Continuous Improvement</span></button>
             </div>
           </div>
-        </div>
 
-        <!-- TRANSCRIPT, beside the video -->
-        <div class="tv-transcript-col text-reveal">
-          <div class="tv-transcript-eyebrow">
-            <span>Full Transcript</span>
-            <span class="tv-transcript-caption">Click any line to jump</span>
-          </div>
-          <div class="tv-transcript-scroll">
-            <div class="tv-transcript-scroll-inner">
-              <p class="tv-transcript-line is-active" data-seek="0"><button type="button" class="tv-transcript-time js-seek" data-seek="0">0:00</button>Have you ever noticed how one thought can take over your entire mind? You're doing totally fine and then one thing pops up and suddenly you're caught in a loop replaying something, trying to figure something out or going over something that actually doesn't need your attention. And before you know it, you're not really here anymore. You're lost somewhere in your own mind.</p>
-              <p class="tv-transcript-line" data-seek="29"><button type="button" class="tv-transcript-time js-seek" data-seek="29">0:29</button>What's happening is you've got too many things running at the same time. Let's think about this like a computer. If you have 10 or 20 programs open all running in the background, what happens? It greatly reduces the capacity you actually have left for the task in front of you. The same thing happens with your mind. The more thoughts running in the background, the less presence you actually have. And with less presence comes less clarity, less focus, and less connection to what's happening right now.</p>
-              <p class="tv-transcript-line" data-seek="61"><button type="button" class="tv-transcript-time js-seek" data-seek="61">1:01</button>So, here's a simple way to start working with that. I call it the cat and the mouse method. Think of your thoughts like mice coming out of a hole one at a time. And you, you're the cat. Each time a thought appears, you observe it. And if it's not something you need to be focused on, working through, or intentionally giving your attention to, you let it go.</p>
-              <p class="tv-transcript-line" data-seek="88"><button type="button" class="tv-transcript-time js-seek" data-seek="88">1:28</button>Not every thought needs your energy. Not every thought needs to be solved. Of course, some thoughts you may want to keep and unpack. Some you may want to explore later. You can capture them, write them down, or come back to them. But in the moment, you're choosing which stays and what goes.</p>
-              <p class="tv-transcript-line" data-seek="110"><button type="button" class="tv-transcript-time js-seek" data-seek="110">1:50</button>This process is also cumulative. Every time you do it, you reduce some of the noise. You close another tab. And over time, your mind starts to become clear.</p>
-              <p class="tv-transcript-line" data-seek="123"><button type="button" class="tv-transcript-time js-seek" data-seek="123">2:03</button>You can begin to experience this beautiful state of being which I call single point focus where your attention is fully available to what's in front of you. And then what happens? Your clarity increases. Your decisions improve. You start operating from a deeper level of awareness.</p>
-              <p class="tv-transcript-line" data-seek="144"><button type="button" class="tv-transcript-time js-seek" data-seek="144">2:24</button>This doesn't happen all at once. It happens one thought at a time.</p>
-              <p class="tv-transcript-line" data-seek="150"><button type="button" class="tv-transcript-time js-seek" data-seek="150">2:30</button>There's a Japanese concept called kaizen, which means continuous improvement. Small changes over time that compound. And that's what this is, too. You're not trying to control your mind. You're learning how to work with it, one thought at a time.</p>
-            </div>
-          </div>
         </div>
 
       </div>
@@ -738,6 +758,15 @@
     window.addEventListener('resize',updateProgress);
     updateProgress();
 
+    // Collapsible Transcript Toggle
+    const transcriptWrapper = document.getElementById('transcriptWrapper');
+    const transcriptToggle = document.getElementById('transcriptToggle');
+    if(transcriptToggle && transcriptWrapper) {
+      transcriptToggle.addEventListener('click', () => {
+        transcriptWrapper.classList.add('is-expanded');
+      });
+    }
+
     // Chapters + transcript
     const videoFrame=document.getElementById('tvVideoFrame');
     const chapterButtons=[...document.querySelectorAll('.tv-chapter')];
@@ -757,7 +786,7 @@
     const setActiveIndex=(index,{scrollTranscript=false}={})=>{
       chapterButtons.forEach((btn,i)=>btn.classList.toggle('is-active',i===index));
       transcriptLines.forEach((line,i)=>line.classList.toggle('is-active',i===index));
-      if(scrollTranscript){
+      if(scrollTranscript && transcriptWrapper && transcriptWrapper.classList.contains('is-expanded')){
         transcriptLines[index]?.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block:'nearest'});
       }
     };
