@@ -28,6 +28,7 @@
     - Overview uses an Open Book layout; Blueprint uses a clean split layout.
     - Video section perfectly balanced: Sticky Video (Left), Collapsible Transcript (Right), Full-width Chapters (Bottom).
     - Transcript 'Read Full' button is static/grounded, not floating.
+    - Chapters layout refined (removed messy borders, improved spacing & hover states).
 
   Per-video things to replace when duplicating:
     1. <title> + meta description
@@ -221,25 +222,26 @@
     .tv-transcript-time::after{content:'';position:absolute;left:0;right:100%;bottom:-1px;height:1px;background:var(--ochre);transition:right .3s var(--ease)}
     .tv-transcript-time:hover::after,.tv-transcript-time:focus-visible::after{right:0}
 
-    /* Bottom Row: Full Width Chapters */
+    /* Bottom Row: Clean Full Width Chapters (Unboxed) */
     .tv-chapters-full {
         grid-column: 1 / -1; 
-        margin-top: 80px; 
-        padding-top: 20px;
+        margin-top: 60px; 
     }
-    .tv-chapters-title{display:block;margin-bottom:16px;font-family:var(--display);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre)}
+    .tv-chapters-title{display:block;margin-bottom:20px;font-family:var(--display);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre)}
     .tv-chapter-list{
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 0 60px;
-        border-top:1px solid var(--line)
+        gap: 8px 60px;
+        border-top:1px solid var(--line-strong);
+        padding-top: 24px;
     }
-    .tv-chapter{display:flex;align-items:baseline;gap:20px;width:100%;text-align:left;padding:16px 4px 16px 12px;border-bottom:1px solid var(--line);border-left:2px solid transparent;background:transparent;transition:background .25s ease,border-color .25s ease,padding .25s ease}
+    .tv-chapter{display:flex;align-items:center;gap:24px;width:100%;text-align:left;padding:14px 16px 14px 20px;border:none;border-left:2px solid transparent;background:transparent;border-radius:0 4px 4px 0;transition:all .25s ease}
     .tv-chapter:hover{background:rgba(149,102,44,.04)}
     .tv-chapter.is-active{background:rgba(149,102,44,.08);border-left-color:var(--ochre)}
-    .tv-chapter-time{flex:none;width:52px;font-family:var(--display);font-size:.72rem;letter-spacing:.03em;color:var(--ochre)}
-    .tv-chapter-label{font-size:1.08rem;color:var(--ink)}
-    .tv-chapter.is-active .tv-chapter-label{font-weight:600}
+    .tv-chapter-time{flex:none;width:45px;font-family:var(--display);font-size:.75rem;letter-spacing:.03em;color:var(--ochre); opacity: 0.8;}
+    .tv-chapter-label{font-size:1.1rem;color:var(--ink);transition:transform .2s ease;}
+    .tv-chapter.is-active .tv-chapter-label{font-weight:600; transform: translateX(4px);}
+    .tv-chapter:hover .tv-chapter-label{transform: translateX(4px);}
 
     /* ===== OPEN BOOK LAYOUT (Overview Only) ===== */
     .open-book {
