@@ -25,7 +25,7 @@
     - Main Ideas moved from a flat numbered list to a ledger-style
       grid with a faint ghost numeral per card
     - Added visible focus states for keyboard users
-    - Overview and Blueprint sections updated to a physical "Open Book" layout.
+    - Overview uses an Open Book layout; Blueprint uses a clean split layout.
 
   Per-video things to replace when duplicating:
     1. <title> + meta description
@@ -199,7 +199,7 @@
     .tv-transcript-time::after{content:'';position:absolute;left:0;right:100%;bottom:-1px;height:1px;background:var(--ochre);transition:right .3s var(--ease)}
     .tv-transcript-time:hover::after,.tv-transcript-time:focus-visible::after{right:0}
 
-    /* ===== OPEN BOOK LAYOUT (Overview & Blueprint) ===== */
+    /* ===== OPEN BOOK LAYOUT (Overview Only) ===== */
     .open-book {
         max-width: 1280px;
         margin: 0 auto;
@@ -208,31 +208,21 @@
         background: var(--paper-pale);
         border-radius: 3px;
         box-shadow: 
-            0 20px 50px rgba(63,38,17,.1), /* table shadow */
+            0 20px 50px rgba(63,38,17,.1),
             0 2px 10px rgba(63,38,17,.05), 
-            inset 0 0 0 1px var(--paper-deep); /* page edge */
+            inset 0 0 0 1px var(--paper-deep); 
         position: relative;
     }
-
-    /* The Spine Shadow - Balanced */
     .open-book::before {
         content: '';
         position: absolute;
         top: 0; bottom: 0; left: 50%;
         width: 60px;
         transform: translateX(-50%);
-        background: linear-gradient(90deg, 
-            transparent 0%, 
-            rgba(63,38,17, 0.02) 45%, 
-            rgba(63,38,17, 0.06) 50%, 
-            rgba(63,38,17, 0.02) 55%, 
-            transparent 100%
-        );
+        background: linear-gradient(90deg, transparent 0%, rgba(63,38,17, 0.02) 45%, rgba(63,38,17, 0.06) 50%, rgba(63,38,17, 0.02) 55%, transparent 100%);
         pointer-events: none;
         z-index: 2;
     }
-
-    /* The Spine Crease Line - Balanced */
     .open-book::after {
         content: '';
         position: absolute;
@@ -247,17 +237,11 @@
         padding: clamp(50px, 6vw, 100px) clamp(40px, 5vw, 80px);
         display: flex;
         flex-direction: column;
-        justify-content: center; /* Vertically Centers Everything */
+        justify-content: center;
         position: relative;
     }
-
-    /* Inner page shadow pulling into the spine - Balanced */
-    .book-page-left {
-        box-shadow: inset -12px 0 20px -12px rgba(63,38,17,0.04);
-    }
-    .book-page-right {
-        box-shadow: inset 12px 0 20px -12px rgba(63,38,17,0.04);
-    }
+    .book-page-left { box-shadow: inset -12px 0 20px -12px rgba(63,38,17,0.04); }
+    .book-page-right { box-shadow: inset 12px 0 20px -12px rgba(63,38,17,0.04); }
 
     .book-page-left h2 {
         font-size: clamp(2.6rem, 3.8vw, 4rem);
@@ -265,7 +249,6 @@
         margin-top: 16px;
     }
     
-    /* Overview specific adjustments */
     .tv-overview { background: var(--paper-light); border-bottom: 1px solid var(--line); }
     .tv-overview .section-copy { margin-top: 0; max-width: none; font-size: 1.2rem; }
     .tv-overview .section-copy p:first-of-type::first-letter {
@@ -278,7 +261,29 @@
         color: var(--ochre);
     }
 
-    /* Blueprint specific adjustments */
+    /* ===== CLEAN SPLIT LAYOUT (Blueprint Only) ===== */
+    .clean-split {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: clamp(40px, 8vw, 100px);
+        align-items: center; /* Vertically centered */
+    }
+    .clean-split-left {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .clean-split-right {
+        padding-top: 0;
+    }
+    .clean-split-left h2 {
+        font-size: clamp(2.8rem, 4vw, 4.2rem);
+        line-height: 1.1;
+        margin-top: 16px;
+    }
+
     .tv-blueprint { background: var(--paper-light); border-bottom: 1px solid var(--line); }
     .tv-blueprint-list {
         margin-top: 25px;
@@ -377,6 +382,9 @@
       .open-book::before, .open-book::after{display:none;}
       .book-page-left, .book-page-right{padding:20px 0;box-shadow:none;}
       
+      .clean-split{grid-template-columns:1fr;gap:30px;align-items:start;}
+      .clean-split-right{padding-top:1rem}
+
       .tv-idea-grid{grid-template-columns:repeat(2, 1fr)}
       .tv-video-wrap{grid-template-columns:1fr;gap:40px}
       .tv-transcript-scroll{max-height:500px}
@@ -596,17 +604,17 @@
       </div>
     </section>
 
-    <!-- 8. BLUEPRINT PLACEMENT (Open Book Layout) -->
+    <!-- 8. BLUEPRINT PLACEMENT (Clean Split Layout) -->
     <section class="tv-blueprint section-pad" aria-labelledby="blueprintPlacementTitle">
-      <div class="wrap open-book">
-        <div class="book-page-left text-reveal">
+      <div class="wrap clean-split">
+        <div class="clean-split-left text-reveal">
           <span class="eyebrow">Where This Fits In The Blueprint</span>
           <h2 id="blueprintPlacementTitle" class="section-title">Trunk → Awareness → Five Mind Tools</h2>
           <div class="exp-btn-row" style="margin-top: 35px;">
             <a class="exp-btn exp-btn--primary" href="seeker.html#treeBlueprint">See It In The Blueprint</a>
           </div>
         </div>
-        <div class="book-page-right text-reveal">
+        <div class="clean-split-right text-reveal">
           <p class="section-copy" style="max-width: 100%;">This teaching is the first of five Mind Tools that live in the Trunk, under Awareness — the practice of noticing what's happening in the mind and body clearly enough to choose a different relationship with it.</p>
           <ol class="tv-blueprint-list">
             <li><strong>Cat &amp; Mouse Method</strong> — noticing thoughts as they appear rather than remaining unconsciously captured by them.</li>
