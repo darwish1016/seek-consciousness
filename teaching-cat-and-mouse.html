@@ -214,32 +214,32 @@
         position: relative;
     }
 
-    /* The Spine Shadow */
+    /* The Spine Shadow - Balanced */
     .open-book::before {
         content: '';
         position: absolute;
         top: 0; bottom: 0; left: 50%;
-        width: 80px;
+        width: 60px;
         transform: translateX(-50%);
         background: linear-gradient(90deg, 
             transparent 0%, 
-            rgba(63,38,17, 0.04) 45%, 
-            rgba(63,38,17, 0.12) 50%, 
-            rgba(63,38,17, 0.04) 55%, 
+            rgba(63,38,17, 0.02) 45%, 
+            rgba(63,38,17, 0.06) 50%, 
+            rgba(63,38,17, 0.02) 55%, 
             transparent 100%
         );
         pointer-events: none;
         z-index: 2;
     }
 
-    /* The Spine Crease Line */
+    /* The Spine Crease Line - Balanced */
     .open-book::after {
         content: '';
         position: absolute;
-        top: 4%; bottom: 4%; left: 50%;
+        top: 6%; bottom: 6%; left: 50%;
         width: 1px;
         transform: translateX(-50%);
-        background: linear-gradient(180deg, transparent, rgba(149,102,44,.2), transparent);
+        background: linear-gradient(180deg, transparent, rgba(149,102,44,.12), transparent);
         z-index: 3;
     }
 
@@ -251,12 +251,12 @@
         position: relative;
     }
 
-    /* Inner page shadow pulling into the spine */
+    /* Inner page shadow pulling into the spine - Balanced */
     .book-page-left {
-        box-shadow: inset -20px 0 30px -20px rgba(63,38,17,0.06);
+        box-shadow: inset -12px 0 20px -12px rgba(63,38,17,0.04);
     }
     .book-page-right {
-        box-shadow: inset 20px 0 30px -20px rgba(63,38,17,0.06);
+        box-shadow: inset 12px 0 20px -12px rgba(63,38,17,0.04);
     }
 
     .book-page-left h2 {
