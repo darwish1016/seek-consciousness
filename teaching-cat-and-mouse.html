@@ -206,7 +206,7 @@
         display: grid;
         grid-template-columns: 1fr 1.2fr;
         gap: clamp(40px, 8vw, 100px);
-        align-items: start;
+        align-items: center; /* ALIGNED TO CENTER AS REQUESTED */
     }
     .split-layout-left {
         display: flex;
@@ -214,7 +214,7 @@
         align-items: flex-start;
     }
     .split-layout-right {
-        padding-top: 3.5rem; /* Aligns paragraph text with the main heading */
+        padding-top: 0; /* Reset top padding to ensure true vertical centering */
     }
     .split-layout-left h2 {
         font-size: clamp(2.8rem, 4vw, 4.2rem);
@@ -330,7 +330,7 @@
 
     /* ===== Responsive Adjustments ===== */
     @media(max-width:1050px){
-      .split-layout{grid-template-columns:1fr;gap:30px}
+      .split-layout{grid-template-columns:1fr;gap:30px;align-items:start;}
       .split-layout-right{padding-top:1rem}
       .tv-idea-grid{grid-template-columns:repeat(2, 1fr)}
       .tv-video-wrap{grid-template-columns:1fr;gap:40px}
