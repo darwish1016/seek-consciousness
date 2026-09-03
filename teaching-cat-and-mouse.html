@@ -29,7 +29,7 @@
     - Video section perfectly balanced: Sticky Video (Left), Collapsible Transcript (Right), Full-width Chapters (Bottom).
     - Transcript 'Read Full' button is static/grounded, not floating.
     - Chapters layout refined (removed messy borders, improved spacing & hover states).
-    - Related Teachings cards restructured to prevent text overlap with thumbnails and added central play buttons.
+    - Related Teachings cards perfectly match the split paper design with YT play buttons.
 
   Per-video things to replace when duplicating:
     1. <title> + meta description
@@ -387,29 +387,34 @@
     .sit-actions-sep{color:rgba(149,102,44,.4)}
     .sit-privacy{max-width:560px;margin:26px auto 0;text-align:center;font-size:.95rem;font-style:italic;color:var(--muted)}
 
-    /* ===== Related teachings (Split Card Layout) ===== */
-    .tv-related{background:var(--paper-pale)}
-    .tv-related-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;margin-top:44px}
+    /* ===== Related teachings (Split Paper Layout) ===== */
+    .tv-related{background:var(--paper-light)}
+    .tv-related-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;margin-top:54px}
     
-    .tv-related-card{display:flex;flex-direction:column;background:var(--paper-light);border:1px solid var(--line);border-radius:2px;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease}
+    .tv-related-card{display:flex;flex-direction:column;background:var(--paper-pale);border:1px solid var(--line);border-radius:2px;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease}
     .tv-related-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(36,27,20,.08)}
     
     .tv-related-img{position:relative;width:100%;aspect-ratio:16/9;background-size:cover;background-position:center;border-bottom:1px solid var(--line)}
-    .tv-related-img::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.15);transition:background .3s ease}
-    .tv-related-card:hover .tv-related-img::before{background:rgba(0,0,0,0.05)}
     
-    .tv-related-tag{position:absolute;top:16px;left:16px;font-family:var(--display);font-size:.66rem;letter-spacing:.12em;color:var(--paper-pale);background:rgba(36,27,20,0.85);padding:6px 10px;border:1px solid rgba(149,102,44,0.4);border-radius:2px;z-index:2;text-transform:uppercase}
+    /* YouTube Style Play Button */
+    .tv-yt-play{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);width:68px;height:48px;transition:transform 0.2s var(--ease)}
+    .tv-related-card:hover .tv-yt-play{transform:translate(-50%, -50%) scale(1.05)}
     
-    .tv-play-center{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%) scale(1);width:60px;height:60px;background:rgba(149,102,44,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;z-index:2;transition:transform 0.3s var(--ease),background 0.3s ease;box-shadow:0 4px 15px rgba(0,0,0,0.2);backdrop-filter:blur(2px)}
-    .tv-play-center svg{width:20px;height:20px;margin-left:4px}
-    .tv-related-card:hover .tv-play-center{transform:translate(-50%, -50%) scale(1.1);background:var(--ochre)}
+    .tv-related-content{padding:30px 30px 24px;display:flex;flex-direction:column;flex-grow:1}
     
-    .tv-related-content{padding:24px;display:flex;flex-direction:column;flex-grow:1}
-    .tv-related-content h3{font-size:1.25rem;color:var(--ink);margin-bottom:8px}
-    .tv-related-content p{font-size:.98rem;color:var(--muted);line-height:1.5;margin-bottom:16px}
+    .tv-related-tag{font-family:var(--display);font-size:.66rem;letter-spacing:.12em;color:var(--ochre);margin-bottom:16px;text-transform:uppercase;display:block}
     
-    .tv-related-play{margin-top:auto;display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre)}
-    .tv-related-play svg{width:11px;height:11px}
+    .tv-related-content h3{font-size:1.6rem;color:var(--ink);margin-bottom:16px;font-family:var(--display);text-transform:uppercase;line-height:1.2;letter-spacing:.02em}
+    
+    .tv-related-content p{font-size:1.05rem;color:var(--muted);line-height:1.6;margin-bottom:28px;font-family:var(--serif)}
+    
+    .tv-related-footer{margin-top:auto;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:20px}
+    
+    .tv-related-play{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);font-weight:600}
+    .tv-play-circle{width:28px;height:28px;border:1px solid var(--ochre);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ochre)}
+    .tv-play-circle svg{width:10px;height:10px;margin-left:2px;fill:currentColor}
+    
+    .tv-related-arrow{font-size:1.2rem;color:var(--ochre);font-family:var(--serif)}
 
     /* ===== Resources ===== */
     .tv-resources{background:var(--paper-light)}
@@ -690,7 +695,7 @@
       </div>
     </section>
 
-    <!-- 9. RELATED TEACHINGS -->
+    <!-- 9. RELATED TEACHINGS (Split Paper Layout) -->
     <section class="tv-related section-pad" aria-labelledby="relatedTitle">
       <div class="wrap">
         <span class="eyebrow text-reveal">Related Teachings</span>
@@ -701,49 +706,81 @@
           
           <a class="tv-related-card text-reveal" href="https://www.youtube.com/watch?v=0isBXHY7R6I" target="_blank" rel="noopener">
             <div class="tv-related-img" style="background-image:url('https://img.youtube.com/vi/0isBXHY7R6I/hqdefault.jpg')">
-               <span class="tv-related-tag">II — Higher Energy Wins</span>
-               <div class="tv-play-center"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+               <div class="tv-yt-play">
+                 <svg viewBox="0 0 68 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"></path>
+                   <path d="M 45,24 27,14 27,34" fill="#fff"></path>
+                 </svg>
+               </div>
             </div>
             <div class="tv-related-content">
+               <span class="tv-related-tag">II — Higher Energy Wins</span>
                <h3>Higher Energy Wins</h3>
                <p>Discover how consistently choosing gratitude over friction slowly changes your emotional baseline.</p>
-               <span class="tv-related-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch</span>
+               <div class="tv-related-footer">
+                 <span class="tv-related-play"><div class="tv-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div> WATCH NOW</span>
+                 <span class="tv-related-arrow">→</span>
+               </div>
             </div>
           </a>
           
           <a class="tv-related-card text-reveal" href="https://www.youtube.com/watch?v=0sZLafQc3xM" target="_blank" rel="noopener">
             <div class="tv-related-img" style="background-image:url('https://img.youtube.com/vi/0sZLafQc3xM/hqdefault.jpg')">
-               <span class="tv-related-tag">III — Undivided Attention</span>
-               <div class="tv-play-center"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+               <div class="tv-yt-play">
+                 <svg viewBox="0 0 68 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"></path>
+                   <path d="M 45,24 27,14 27,34" fill="#fff"></path>
+                 </svg>
+               </div>
             </div>
             <div class="tv-related-content">
+               <span class="tv-related-tag">III — Undivided Attention</span>
                <h3>Undivided Attention</h3>
                <p>A simple technique for bringing all of your attention to the one thing in front of you — and noticing how much clearer everything gets.</p>
-               <span class="tv-related-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch</span>
+               <div class="tv-related-footer">
+                 <span class="tv-related-play"><div class="tv-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div> WATCH NOW</span>
+                 <span class="tv-related-arrow">→</span>
+               </div>
             </div>
           </a>
           
           <a class="tv-related-card text-reveal" href="https://www.youtube.com/watch?v=LUgaGi08B8E" target="_blank" rel="noopener">
             <div class="tv-related-img" style="background-image:url('https://img.youtube.com/vi/LUgaGi08B8E/hqdefault.jpg')">
-               <span class="tv-related-tag">IV — Effortless, Not Forced</span>
-               <div class="tv-play-center"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+               <div class="tv-yt-play">
+                 <svg viewBox="0 0 68 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"></path>
+                   <path d="M 45,24 27,14 27,34" fill="#fff"></path>
+                 </svg>
+               </div>
             </div>
             <div class="tv-related-content">
+               <span class="tv-related-tag">IV — Effortless, Not Forced</span>
                <h3>Effortless, Not Forced</h3>
                <p>Learn what flow state really is, and why it's available in far more ordinary moments than you'd think.</p>
-               <span class="tv-related-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch</span>
+               <div class="tv-related-footer">
+                 <span class="tv-related-play"><div class="tv-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div> WATCH NOW</span>
+                 <span class="tv-related-arrow">→</span>
+               </div>
             </div>
           </a>
           
           <a class="tv-related-card text-reveal" href="https://www.youtube.com/watch?v=iYIyFlRidfI" target="_blank" rel="noopener">
             <div class="tv-related-img" style="background-image:url('https://img.youtube.com/vi/iYIyFlRidfI/hqdefault.jpg')">
-               <span class="tv-related-tag">V — The Moment It Breaks</span>
-               <div class="tv-play-center"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+               <div class="tv-yt-play">
+                 <svg viewBox="0 0 68 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#ff0000"></path>
+                   <path d="M 45,24 27,14 27,34" fill="#fff"></path>
+                 </svg>
+               </div>
             </div>
             <div class="tv-related-content">
+               <span class="tv-related-tag">V — The Moment It Breaks</span>
                <h3>The Moment It Breaks</h3>
                <p>Learn why flow breaks so easily, and the simple reset that brings it back faster than you'd expect.</p>
-               <span class="tv-related-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch</span>
+               <div class="tv-related-footer">
+                 <span class="tv-related-play"><div class="tv-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div> WATCH NOW</span>
+                 <span class="tv-related-arrow">→</span>
+               </div>
             </div>
           </a>
 
